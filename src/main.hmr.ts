@@ -1,12 +1,19 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
+import {
+  FastifyAdapter,
+  NestFastifyApplication,
+} from '@nestjs/platform-fastify';
 import { AppModule } from './modules/app/app.module';
 import { setupSwagger } from './swagger';
 
 declare const module: any;
 
 (async () => {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestFastifyApplication>(
+    AppModule,
+    new FastifyAdapter({ logger: console }),
+  );
   setupSwagger(app);
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
