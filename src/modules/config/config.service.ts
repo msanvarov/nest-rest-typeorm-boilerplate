@@ -29,7 +29,12 @@ export class ConfigService {
       }),
       WEBTOKEN_SECRET_KEY: joi.string().required(),
       WEBTOKEN_EXPIRATION_TIME: joi.number().default(1800),
-      DB_URL: joi.string().regex(/^mongodb/),
+      DB_TYPE: joi.string().default('mariadb'),
+      DB_USERNAME: joi.string().default('nest'),
+      DB_PASSWORD: joi.string().default('nest'),
+      DB_HOST: joi.string().default('localhost'),
+      DB_PORT: joi.number().default('3306'),
+      DB_DATABASE: joi.string().default('nest'),
     });
 
     const { error, value: validatedEnvConfig } = envVarsSchema.validate(
