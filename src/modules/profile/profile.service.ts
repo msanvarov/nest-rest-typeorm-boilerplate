@@ -18,7 +18,7 @@ export class ProfileService {
   }
 
   async getByUsername(username: string) {
-    return await this.profileRepository.find({
+    return await this.profileRepository.findOne({
       where: {
         username,
       },
@@ -27,7 +27,7 @@ export class ProfileService {
 
   async getByUsernameAndPass(username: string, password: string) {
     const hashedPass = crypto.createHmac('sha256', password).digest('hex');
-    return await this.profileRepository.find({
+    return await this.profileRepository.findOne({
       where: {
         username,
         password: hashedPass,
