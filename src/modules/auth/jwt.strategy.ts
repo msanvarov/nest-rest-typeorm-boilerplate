@@ -9,7 +9,7 @@ import { ProfileService } from '../profile/profile.service';
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     readonly configService: ConfigService,
-    private readonly accountService: ProfileService,
+    private readonly profileService: ProfileService,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -23,13 +23,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       throw new UnauthorizedException();
     }
 
-    const user = await this.accountService.get(id);
-    if (!user) {
+    const profile = await this.profileService.get(id);
+    if (!profile) {
       throw new UnauthorizedException();
     }
 
-    delete user.password;
-    done(null, user);
+    delete profile.password;
+    done(null, profile);
     return true;
   }
 }
