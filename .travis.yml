@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+    - ./node_modules
+services:
+  - "mysql"
+before_install:
+  - mysql -e 'CREATE DATABASE nest;'
+install:
+  - npm install
+before_script:
+  - "cp .env.example .env"
+script:
+  - "npm run test:e2e"
+branches:
+  only:
+    - master
