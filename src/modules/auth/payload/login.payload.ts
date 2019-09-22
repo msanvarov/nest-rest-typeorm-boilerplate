@@ -11,6 +11,6 @@ export class LoginPayload {
     required: true,
   })
   @IsNotEmpty()
-  @MinLength(5)
+  @MinLength(8)
   password: string;
 }
