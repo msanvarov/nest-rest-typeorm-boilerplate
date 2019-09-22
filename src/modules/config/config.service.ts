@@ -31,7 +31,10 @@ export class ConfigService {
       WEBTOKEN_EXPIRATION_TIME: joi.number().default(1800),
       DB_TYPE: joi.string().default('mariadb'),
       DB_USERNAME: joi.string().default('root'),
-      DB_PASSWORD: joi.string().default('root'),
+      DB_PASSWORD: joi
+        .string()
+        .allow('')
+        .default(''),
       DB_HOST: joi.string().default('localhost'),
       DB_PORT: joi.number().default('8889'),
       DB_DATABASE: joi.string().default('nest'),
