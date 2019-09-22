@@ -17,7 +17,7 @@ export class RegisterPayload {
   @ApiModelProperty({
     required: true,
   })
-  @IsAlpha()
+  @IsNotEmpty()
   name: string;
 
   @ApiModelProperty({
