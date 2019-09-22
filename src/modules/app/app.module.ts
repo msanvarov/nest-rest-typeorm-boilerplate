@@ -16,7 +16,6 @@ import { WinstonModule } from '../winston/winston.module';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
-        console.log('configService -> port', configService.get('DB_PORT'));
         return {
           type: configService.get('DB_TYPE'),
           host: configService.get('DB_HOST'),
