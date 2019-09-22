@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { AuthGuard } from '@nestjs/passport';
 
 @Injectable()
-export class AuthTokenGuard extends AuthGuard('jwt') {
+export class AuthenticationGuard extends AuthGuard('jwt') {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
