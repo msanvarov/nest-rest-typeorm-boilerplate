@@ -25,6 +25,7 @@ import { WinstonModule } from '../winston/winston.module';
           database: configService.get('DB_DATABASE'),
           entities: [__dirname + './../**/**.entity{.ts,.js}'],
           synchronize: configService.isEnv('dev'),
+          keepConnectionAlive: true,
         } as TypeOrmModuleAsyncOptions;
       },
     }),
