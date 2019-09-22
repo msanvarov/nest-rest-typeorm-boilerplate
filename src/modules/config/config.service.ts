@@ -1,4 +1,4 @@
-import * as dotenv from 'dotenv';
+import { parse } from 'dotenv';
 import * as joi from '@hapi/joi';
 import * as fs from 'fs';
 
@@ -10,7 +10,7 @@ export class ConfigService {
   private readonly envConfig: EnvConfig;
 
   constructor(filePath: string) {
-    const config = dotenv.parse(fs.readFileSync(filePath));
+    const config = parse(fs.readFileSync(filePath));
     this.envConfig = ConfigService.validateInput(config);
   }
 
@@ -23,17 +23,17 @@ export class ConfigService {
       APP_ENV: joi
         .string()
         .valid('dev', 'prod')
-        .default('dev'),
+        .required(),
       APP_URL: joi.string().uri({
         scheme: [/https?/],
       }),
       WEBTOKEN_SECRET_KEY: joi.string().required(),
       WEBTOKEN_EXPIRATION_TIME: joi.number().default(1800),
       DB_TYPE: joi.string().default('mariadb'),
-      DB_USERNAME: joi.string().default('nest'),
-      DB_PASSWORD: joi.string().default('nest'),
+      DB_USERNAME: joi.string().default('root'),
+      DB_PASSWORD: joi.string().default('root'),
       DB_HOST: joi.string().default('localhost'),
-      DB_PORT: joi.number().default('3306'),
+      DB_PORT: joi.number().default('8889'),
       DB_DATABASE: joi.string().default('nest'),
     });
 
