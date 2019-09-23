@@ -37,6 +37,7 @@
     "fastify-rate-limit": "^2.3.0",
     "fastify-swagger": "^2.4.0",
     "mysql": "^2.17.1",
+    "nest-access-control": "^2.0.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",
