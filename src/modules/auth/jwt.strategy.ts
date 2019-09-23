@@ -29,7 +29,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
 
     delete profile.password;
-    done(null, profile);
+    done(null, { ...profile, roles: profile.roles.map(role => role.role) });
     return true;
   }
 }
