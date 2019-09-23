@@ -6,7 +6,7 @@ import {
 import * as helmet from 'fastify-helmet';
 import * as fastifyRateLimit from 'fastify-rate-limit';
 import { AppModule } from './modules/app/app.module';
-import { setupSwagger } from './swagger';
+import { swaggerConfiguration } from './swagger';
 import { ValidationPipe } from '@nestjs/common';
 
 (async () => {
@@ -14,7 +14,7 @@ import { ValidationPipe } from '@nestjs/common';
     AppModule,
     new FastifyAdapter({ logger: console }),
   );
-  setupSwagger(app);
+  swaggerConfiguration(app);
   app.enableCors();
   app.register(helmet);
   app.register(fastifyRateLimit, {
