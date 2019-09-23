@@ -3,6 +3,7 @@ import { AppService } from './app.service';
 import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { ProfileService } from '../profile/profile.service';
+import { ACGuard, UseRoles } from 'nest-access-control';
 
 @ApiBearerAuth()
 @Controller()
@@ -18,6 +19,8 @@ export class AppController {
     return this.appService.root();
   }
 
+  // These routes can be moved to the profile module.
+
   @Get('/api/profile')
   @UseGuards(AuthGuard())
   @ApiResponse({ status: 200, description: 'Request Received' })
@@ -26,6 +29,12 @@ export class AppController {
     return req.user;
   }
 
+  @UseGuards(AuthGuard(), ACGuard)
+  @UseRoles({
+    resource: 'profiles',
+    action: 'delete',
+    possession: 'any',
+  })
   @Delete('/api/profile/:username')
   @ApiResponse({ status: 200, description: 'Request Received' })
   @ApiResponse({ status: 400, description: 'Request Failed' })
