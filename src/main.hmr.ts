@@ -5,7 +5,7 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { AppModule } from './modules/app/app.module';
-import { swaggerConfiguration } from './swagger';
+import { configureOpenAPI } from './swagger';
 
 declare const module: any;
 
@@ -14,7 +14,7 @@ declare const module: any;
     AppModule,
     new FastifyAdapter({ logger: console }),
   );
-  swaggerConfiguration(app);
+  configureOpenAPI(app);
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(9000);

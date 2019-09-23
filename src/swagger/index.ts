@@ -10,7 +10,7 @@ import {
   SWAGGER_API_SCHEMES,
 } from './constants';
 
-export const swaggerConfiguration = (app: INestApplication) => {
+export const configureOpenAPI = (app: INestApplication) => {
   const options = new DocumentBuilder()
     .setTitle(SWAGGER_API_NAME)
     .setDescription(SWAGGER_API_DESCRIPTION)
