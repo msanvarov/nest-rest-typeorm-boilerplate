@@ -13,21 +13,41 @@ export class AuthService {
     private readonly profileService: ProfileService,
   ) {}
 
-  async createToken(profile: Profile) {
+  async createToken({ id, username, name, email }: Profile) {
     return {
-      expiresIn: this.configService.get('JWT_EXPIRATION_TIME'),
-      accessToken: this.jwtService.sign({ id: profile.id }),
-      profile,
+      expires: this.configService.get('WEBTOKEN_EXPIRATION_TIME'),
+      expiresPrettyPrint: this.prettyPrintSeconds(
+        this.configService.get('WEBTOKEN_EXPIRATION_TIME'),
+      ),
+      token: this.jwtService.sign({
+        id,
+        username,
+        name,
+        email,
+      }),
     };
   }
 
-  async validateUser(payload: LoginPayload) {
+  private prettyPrintSeconds(time: string) {
+    const ntime = Number(time);
+    const hours = Math.floor(ntime / 3600);
+    const minutes = Math.floor((ntime % 3600) / 60);
+    const seconds = Math.floor((ntime % 3600) % 60);
+
+    return `${hours > 0 ? hours + (hours === 1 ? ' hour,' : ' hours,') : ''} ${
+      minutes > 0 ? minutes + (minutes === 1 ? ' minute' : ' minutes') : ''
+    } ${seconds > 0 ? seconds + (seconds === 1 ? ' second' : ' seconds') : ''}`;
+  }
+
+  async validateUser({ username, password }: LoginPayload) {
     const user = await this.profileService.getByUsernameAndPass(
-      payload.username,
-      payload.password,
+      username,
+      password,
     );
     if (!user) {
-      throw new UnauthorizedException('Wrong login combination!');
+      throw new UnauthorizedException(
+        'Could not authenticate. Please try again',
+      );
     }
     return user;
   }
