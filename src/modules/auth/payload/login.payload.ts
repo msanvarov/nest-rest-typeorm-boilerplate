@@ -1,11 +1,12 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { IsAlpha, IsNotEmpty, MinLength } from 'class-validator';
+import { IsAlphanumeric, IsNotEmpty, MinLength } from 'class-validator';
 
 export class LoginPayload {
   @ApiModelProperty({
     required: true,
   })
-  @IsAlpha()
+  @IsAlphanumeric()
+  @IsNotEmpty()
   username: string;
   @ApiModelProperty({
     required: true,
