@@ -1,11 +1,13 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
+import * as joi from '@hapi/joi';
+import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from '../src/modules/app/app.module';
-import { setupSwagger } from '../src/swagger';
 import { ValidationPipe } from '@nestjs/common';
 
 describe('AppController (e2e)', () => {
   let app;
+  let bearer;
+  let profileToDelete;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -13,40 +15,40 @@ describe('AppController (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    setupSwagger(app);
     app.enableCors();
     app.useGlobalPipes(new ValidationPipe());
     await app.init();
   });
 
-  it('/ (GET) Unauthorized Request', () => {
+  it('/ (GET) unauthorized get request', () => {
     return request(app.getHttpServer())
       .get('/')
       .expect(401)
       .expect({ statusCode: 401, error: 'Unauthorized' });
   });
 
-  it('/api/auth/login (POST) validate username is alpha', () => {
+  it('/api/auth/login (POST) validate username is alphanumeric', () => {
     return request(app.getHttpServer())
       .post('/api/auth/login')
       .send({
-        username: '123456789',
-        password: 'asdasd12321',
+        username: '@#!@@/$%%^)(*+_=',
+        password: 'test123456789',
       })
+      .expect(400)
       .expect({
         statusCode: 400,
         error: 'Bad Request',
         message: [
           {
             target: {
-              username: '123456789',
-              password: 'asdasd12321',
+              username: '@#!@@/$%%^)(*+_=',
+              password: 'test123456789',
             },
-            value: '123456789',
+            value: '@#!@@/$%%^)(*+_=',
             property: 'username',
             children: [],
             constraints: {
-              isAlpha: 'username must contain only letters (a-zA-Z)',
+              isAlphanumeric: 'username must contain only letters and numbers',
             },
           },
         ],
@@ -57,19 +59,20 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .post('/api/auth/login')
       .send({
-        username: 'asdasdsdads',
-        password: '213',
+        username: 'test',
+        password: '<8',
       })
+      .expect(400)
       .expect({
         statusCode: 400,
         error: 'Bad Request',
         message: [
           {
             target: {
-              username: 'asdasdsdads',
-              password: '213',
+              username: 'test',
+              password: '<8',
             },
-            value: '213',
+            value: '<8',
             property: 'password',
             children: [],
             constraints: {
@@ -85,14 +88,14 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .post('/api/auth/login')
       .send({
-        username: 'msanvarov',
-        password: 'SOMEFAKEPASS',
+        username: 'BeforeCreatedProfiles',
+        password: 'IDontExist?1234',
       })
       .expect(401)
       .expect({
         statusCode: 401,
         error: 'Unauthorized',
-        message: 'Wrong login combination!',
+        message: 'Could not authenticate. Please try again',
       });
   });
 
@@ -101,11 +104,21 @@ describe('AppController (e2e)', () => {
       .post('/api/auth/register')
       .send({
         username: 'test',
-        name: 'test sir',
+        name: 'Test Richard',
         email: 'test.test@gmail.com',
-        password: 'asdasd12321',
+        password: 'test123456789',
       })
-      .expect(201);
+      .expect(201)
+      .then(res => {
+        const { error } = joi
+          .object({
+            expires: joi.number(),
+            expiresPrettyPrint: joi.string(),
+            token: joi.string().min(1),
+          })
+          .validate(res.body);
+        return error ? false : true;
+      });
   });
 
   it('/api/auth/login (POST) login to created account', () => {
@@ -113,12 +126,40 @@ describe('AppController (e2e)', () => {
       .post('/api/auth/login')
       .send({
         username: 'test',
-        password: 'asdasd12321',
+        password: 'test123456789',
       })
-      .expect(201);
+      .expect(201)
+      .then(res => (bearer = res.body.token));
   });
 
-  it("/api/auth/register (POST) validate that the same account can't be created twice", () => {
+  it('/ (GET) fetch main route when authorized', () => {
+    return request(app.getHttpServer())
+      .get('/')
+      .set('Authorization', `Bearer ${bearer}`)
+      .expect(200)
+      .then(res => typeof res.body === 'string');
+  });
+
+  it('/api/profile (GET) get request user', () => {
+    return request(app.getHttpServer())
+      .get('/api/profile')
+      .set('Authorization', `Bearer ${bearer}`)
+      .expect(200)
+      .then(res => {
+        const { error } = joi
+          .object({
+            id: joi.number(),
+            username: joi.string(),
+            name: joi.string(),
+            email: joi.string(),
+            roles: joi.array().items(joi.string()),
+          })
+          .validate(res.body);
+        return error ? false : true;
+      });
+  });
+
+  it('/api/auth/register (POST) validate that the same account fails to register', () => {
     return request(app.getHttpServer())
       .post('/api/auth/register')
       .send({
@@ -136,10 +177,37 @@ describe('AppController (e2e)', () => {
       });
   });
 
-  it('teardown', () => {
+  it('/api/auth/register (POST) create an account to delete', () => {
+    profileToDelete = 'delete';
+    return request(app.getHttpServer())
+      .post('/api/auth/register')
+      .send({
+        username: profileToDelete,
+        name: 'to delete',
+        email: 'delete.test@gmail.com',
+        password: '123456789',
+      })
+      .expect(201);
+  });
+
+  it('/api/profile/{username} (DELETE) teardown created account to be deleted', () => {
+    return request(app.getHttpServer())
+      .delete('/api/profile/delete')
+      .set('Authorization', `Bearer ${bearer}`)
+      .expect(200)
+      .then(
+        res => res.body.message === `Deleted ${profileToDelete} from records`,
+      );
+  });
+
+  it('/api/profile/{username} (DELETE) teardown main account', () => {
     return request(app.getHttpServer())
       .delete('/api/profile/test')
-      .expect(200);
+      .set('Authorization', `Bearer ${bearer}`)
+      .expect(200)
+      .then(
+        res => res.body.message === `Deleted ${profileToDelete} from records`,
+      );
   });
 
   afterAll(async () => {
