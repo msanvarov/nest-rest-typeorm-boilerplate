@@ -7,7 +7,7 @@ export class Roles {
   @PrimaryGeneratedColumn()
   id: number;
 
-  //   beware this deafult app role will permit every profile to delete other profiles
+  //   beware this default app role will permit every created profile to delete other profiles
   @Column({
     type: 'enum',
     enum: AppRoles,
