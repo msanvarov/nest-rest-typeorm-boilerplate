@@ -9,33 +9,34 @@ import { Repository } from 'typeorm';
 
 import { Profile } from './profile.entity';
 import { RegisterPayload } from '../auth/payload/register.payload';
+import { Roles } from '../app/roles.entity';
 
 @Injectable()
 export class ProfileService {
   constructor(
     @InjectRepository(Profile)
     private readonly profileRepository: Repository<Profile>,
+    @InjectRepository(Roles)
+    private readonly rolesRepository: Repository<Roles>,
   ) {}
 
   async get(id: number) {
-    return this.profileRepository.findOne(id);
+    return this.profileRepository.findOne(id, { relations: ['roles'] });
   }
 
   async getByUsername(username: string) {
-    return await this.profileRepository
-      .createQueryBuilder('profiles')
-      .where('profiles.username = :username')
-      .setParameter('username', username)
-      .getOne();
+    return await this.profileRepository.findOne({ username });
   }
 
   async getByUsernameAndPass(username: string, password: string) {
-    const hashedPass = crypto.createHmac('sha256', password).digest('hex');
     return await this.profileRepository
       .createQueryBuilder('profiles')
       .where('profiles.username = :username and profiles.password = :password')
       .setParameter('username', username)
-      .setParameter('password', hashedPass)
+      .setParameter(
+        'password',
+        crypto.createHmac('sha256', password).digest('hex'),
+      )
       .getOne();
   }
 
@@ -48,8 +49,11 @@ export class ProfileService {
       );
     }
 
+    // keep making roles for a particular profile, these roles are defined from AppRoles enum.
+    const roles: Roles[] = [new Roles()];
+    await this.rolesRepository.save(roles);
     return await this.profileRepository.save(
-      this.profileRepository.create(payload),
+      this.profileRepository.create({ ...payload, roles }),
     );
   }
 
