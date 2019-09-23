@@ -1,6 +1,7 @@
 import { Exclude } from 'class-transformer';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { PasswordTransformer } from './password.transformer';
+import { Roles } from '../app/roles.entity';
 
 @Entity({
   name: 'profiles',
@@ -9,7 +10,7 @@ export class Profile {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   username: string;
 
   @Column()
@@ -17,6 +18,9 @@ export class Profile {
 
   @Column()
   email: string;
+
+  @OneToMany(type => Roles, role => role.profile)
+  roles: Roles[];
 
   @Column({
     name: 'password',
