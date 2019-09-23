@@ -9,6 +9,8 @@ import { ConfigService } from '../config/config.service';
 import { AuthModule } from '../auth/auth.module';
 import { ProfileModule } from '../profile/profile.module';
 import { WinstonModule } from '../winston/winston.module';
+import { AccessControlModule } from 'nest-access-control';
+import { roles } from './app.roles';
 
 @Module({
   imports: [
@@ -50,6 +52,7 @@ import { WinstonModule } from '../winston/winston.module';
         }),
       ],
     }),
+    AccessControlModule.forRoles(roles),
     ConfigModule,
     AuthModule,
     ProfileModule,
