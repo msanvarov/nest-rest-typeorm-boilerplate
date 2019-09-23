@@ -13,7 +13,7 @@ COPY . .
 COPY .env.example .env
 
 #Expose port and begin application
-EXPOSE 9001
+EXPOSE 9000
 
 # Start the app
 CMD [ "npm", "run", "start:dev"]
