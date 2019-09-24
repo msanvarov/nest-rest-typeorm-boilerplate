@@ -12,7 +12,7 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: Dockerfile-nginx
+      dockerfile: Dockerfile-Nginx
     container_name: nest-nginx
     depends_on:
       - nest
