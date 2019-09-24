@@ -83,7 +83,7 @@ By default the application comes with a config module that can inject the Config
 
 ### 🏗 Choosing a Web Framework
 
-By default this boilerplate comes with [Fastify](https://github.com/fastify/fastify) as its default web framework for [performance benefits](https://github.com/nestjs/nest/blob/master/benchmarks/all_output.txt). But can be changed to use [Express](https://expressjs.com/) instead. Please follow the steps below to change the web app from Fastify to Express.
+By default this boilerplate comes with [Fastify](https://github.com/fastify/fastify) as it offers [performance benefits](https://github.com/nestjs/nest/blob/master/benchmarks/all_output.txt) over Express. But can be changed to use [Express](https://expressjs.com/) instead. Please follow the steps below to change the web app from Fastify to Express.
 
 - Replace the following lines of code in the [main.ts file](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/main.ts)
 
