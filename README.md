@@ -195,7 +195,7 @@ $ npm run typedocs
 
 Out of the box, the web app comes with an [open api specification](https://swagger.io/specification/), that is used to describe RESTful APIs. Nest provides a [dedicated module to work with it](https://docs.nestjs.com/recipes/swagger).
 
-The configuration for Swagger can be found at this [location](https://github.com/msanvarov/nest-mongoose-boilerplate/tree/master/src/swagger).
+The configuration for Swagger can be found at this [location](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/tree/master/src/swagger).
 
 ---
 
@@ -209,7 +209,7 @@ The configuration for TypeORM can be found in the [app module](https://github.co
 
 ### 🔊 Logs
 
-This boilerplate comes with a Winston module for logging, the configurations for Winston can be found in the [app module](https://github.com/msanvarov/nest-mongoose-boilerplate/blob/master/src/modules/main/app.module.ts#L24).
+This boilerplate comes with a Winston module for logging, the configurations for Winston can be found in the [app module](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/modules/main/app.module.ts#L24).
 
 ---
 
