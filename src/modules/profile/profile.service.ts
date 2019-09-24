@@ -11,8 +11,16 @@ import { Profile } from './profile.entity';
 import { RegisterPayload } from '../auth/payload/register.payload';
 import { Roles } from '../app/roles.entity';
 
+/**
+ * Profile Service
+ */
 @Injectable()
 export class ProfileService {
+  /**
+   * Constructor
+   * @param {Repository<Profile>} profileRepository
+   * @param {Repository<Roles>} rolesRepository
+   */
   constructor(
     @InjectRepository(Profile)
     private readonly profileRepository: Repository<Profile>,
@@ -20,14 +28,27 @@ export class ProfileService {
     private readonly rolesRepository: Repository<Roles>,
   ) {}
 
+  /**
+   * Fetches profile from database by UUID
+   * @param {number} id
+   */
   async get(id: number) {
     return this.profileRepository.findOne(id, { relations: ['roles'] });
   }
 
+  /**
+   * Fetches profile from database by username
+   * @param {string} username
+   */
   async getByUsername(username: string) {
     return await this.profileRepository.findOne({ username });
   }
 
+  /**
+   * Fetches profile by username and hashed password
+   * @param {string} username
+   * @param {string} password
+   */
   async getByUsernameAndPass(username: string, password: string) {
     return await this.profileRepository
       .createQueryBuilder('profiles')
@@ -40,6 +61,10 @@ export class ProfileService {
       .getOne();
   }
 
+  /**
+   * Creates a profile
+   * @param {RegisterPayload} payload profile payload
+   */
   async create(payload: RegisterPayload) {
     const user = await this.getByUsername(payload.username);
 
@@ -57,6 +82,10 @@ export class ProfileService {
     );
   }
 
+  /**
+   * Deletes profile from provided username
+   * @param {string} username
+   */
   async delete(username: string) {
     const deleted = await this.profileRepository.delete({ username });
     if (deleted.affected === 1) {

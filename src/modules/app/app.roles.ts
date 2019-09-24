@@ -5,6 +5,9 @@ export enum AppRoles {
   ADMIN_DELETE_PROFILES = 'ADMIN_DELETE_PROFILES',
 }
 
+/**
+ * Roles Builder
+ */
 export const roles: RolesBuilder = new RolesBuilder();
 
 roles

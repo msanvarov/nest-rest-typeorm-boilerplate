@@ -5,14 +5,26 @@ import { AuthGuard } from '@nestjs/passport';
 import { ProfileService } from '../profile/profile.service';
 import { ACGuard, UseRoles } from 'nest-access-control';
 
+/**
+ * App Controller
+ */
 @ApiBearerAuth()
 @Controller()
 export class AppController {
+  /**
+   * Constructor
+   * @param appService
+   * @param profileService
+   */
   constructor(
     private readonly appService: AppService,
     private readonly profileService: ProfileService,
   ) {}
 
+  /**
+   * Main route
+   * @returns {string} the application environment url
+   */
   @Get()
   @UseGuards(AuthGuard())
   root(): string {
@@ -21,6 +33,10 @@ export class AppController {
 
   // These routes can be moved to the profile module.
 
+  /**
+   * Debug route
+   * @param{Req} req the request body
+   */
   @Get('/api/profile')
   @UseGuards(AuthGuard())
   @ApiResponse({ status: 200, description: 'Request Received' })
@@ -29,6 +45,10 @@ export class AppController {
     return req.user;
   }
 
+  /**
+   * Delete route to remove profiles from app
+   * @param {string} username the username to remove
+   */
   @UseGuards(AuthGuard(), ACGuard)
   @UseRoles({
     resource: 'profiles',

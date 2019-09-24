@@ -5,8 +5,16 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '../config/config.service';
 import { ProfileService } from '../profile/profile.service';
 
+/**
+ * Jwt Strategy Class
+ */
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
+  /**
+   * Constructor
+   * @param {ConfigService} configService
+   * @param {ProfileService} profileService
+   */
   constructor(
     readonly configService: ConfigService,
     private readonly profileService: ProfileService,
@@ -17,6 +25,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
+  /**
+   * Checks if the bearer token is a valid token
+   * @param {JwtPayload} jwtpayload validation method for jwt token
+   * @param {any} done callback to resolve the request user with
+   */
   async validate({ iat, exp, id }: JwtPayload, done) {
     const timeDiff = exp - iat;
     if (timeDiff <= 0) {

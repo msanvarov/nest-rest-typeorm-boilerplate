@@ -1,16 +1,23 @@
-import { DynamicModule, Global, Module } from "@nestjs/common";
+import { DynamicModule, Global, Module } from '@nestjs/common';
 import {
   WinstonModuleAsyncOptions,
   WinstonModuleOptions,
-} from "./winston.interfaces";
+} from './winston.interfaces';
 import {
   createWinstonAsyncProviders,
   createWinstonProviders,
-} from "./winston.providers";
+} from './winston.providers';
 
 @Global()
 @Module({})
+/**
+ * Represents a Winston Module
+ */
 export class WinstonModule {
+  /**
+   * Constructor for winson module
+   * @param options
+   */
   public static forRoot(options: WinstonModuleOptions): DynamicModule {
     const providers = createWinstonProviders(options);
 
@@ -21,6 +28,10 @@ export class WinstonModule {
     };
   }
 
+  /**
+   * Asynchronous constructor for winston module
+   * @param options
+   */
   public static forRootAsync(
     options: WinstonModuleAsyncOptions,
   ): DynamicModule {

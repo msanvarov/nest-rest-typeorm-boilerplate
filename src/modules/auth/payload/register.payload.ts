@@ -8,7 +8,13 @@ import {
   Matches,
 } from 'class-validator';
 
+/**
+ * Register Payload Class
+ */
 export class RegisterPayload {
+  /**
+   * Email field
+   */
   @ApiModelProperty({
     required: true,
   })
@@ -16,6 +22,9 @@ export class RegisterPayload {
   @IsNotEmpty()
   email: string;
 
+  /**
+   * Username field
+   */
   @ApiModelProperty({
     required: true,
   })
@@ -23,6 +32,9 @@ export class RegisterPayload {
   @IsNotEmpty()
   username: string;
 
+  /**
+   * Name field
+   */
   @ApiModelProperty({
     required: true,
   })
@@ -30,6 +42,9 @@ export class RegisterPayload {
   @IsNotEmpty()
   name: string;
 
+  /**
+   * Password field
+   */
   @ApiModelProperty({
     required: true,
   })

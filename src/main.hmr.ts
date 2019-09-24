@@ -7,6 +7,9 @@ import {
 import { AppModule } from './modules/app/app.module';
 import { configureOpenAPI } from './swagger';
 
+/**
+ * Represents the webpack meta data
+ */
 declare const module: any;
 
 (async () => {

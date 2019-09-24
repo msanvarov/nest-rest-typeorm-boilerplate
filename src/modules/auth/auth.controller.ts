@@ -5,14 +5,26 @@ import { LoginPayload } from './payload/login.payload';
 import { RegisterPayload } from './payload/register.payload';
 import { ProfileService } from '../profile/profile.service';
 
+/**
+ * Authentication Controller
+ */
 @Controller('api/auth')
 @ApiUseTags('authentication')
 export class AuthController {
+  /**
+   * Constructor
+   * @param {AuthService} authService authentication service
+   * @param {ProfileService} profileService profile service
+   */
   constructor(
     private readonly authService: AuthService,
     private readonly profileService: ProfileService,
   ) {}
 
+  /**
+   * Authentication route to login
+   * @param {LoginPayload} payload the login dto
+   */
   @Post('login')
   @ApiResponse({ status: 201, description: 'Login Completed' })
   @ApiResponse({ status: 400, description: 'Bad Request' })
@@ -22,6 +34,10 @@ export class AuthController {
     return await this.authService.createToken(profile);
   }
 
+  /**
+   * Authentication route to register
+   * @param {RegisterPayload} payload the registration dto
+   */
   @Post('register')
   @ApiResponse({ status: 201, description: 'Registration Completed' })
   @ApiResponse({ status: 400, description: 'Bad Request' })
