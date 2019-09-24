@@ -1,5 +1,4 @@
 import * as request from 'supertest';
-import * as joi from '@hapi/joi';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from '../src/modules/app/app.module';
 import { ValidationPipe } from '@nestjs/common';
@@ -7,7 +6,6 @@ import { ValidationPipe } from '@nestjs/common';
 describe('AppController (e2e)', () => {
   let app;
   let bearer;
-  let profileToDelete;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -108,17 +106,7 @@ describe('AppController (e2e)', () => {
         email: 'test.test@gmail.com',
         password: 'test123456789',
       })
-      .expect(201)
-      .then(res => {
-        const { error } = joi
-          .object({
-            expires: joi.number(),
-            expiresPrettyPrint: joi.string(),
-            token: joi.string().min(1),
-          })
-          .validate(res.body);
-        return error ? false : true;
-      });
+      .expect(201);
   });
 
   it('/api/auth/login (POST) login to created account', () => {
@@ -136,27 +124,14 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get('/')
       .set('Authorization', `Bearer ${bearer}`)
-      .expect(200)
-      .then(res => typeof res.body === 'string');
+      .expect(200);
   });
 
-  it('/api/profile (GET) get request user', () => {
+  it('/api/profile (GET) get request user object', () => {
     return request(app.getHttpServer())
       .get('/api/profile')
       .set('Authorization', `Bearer ${bearer}`)
-      .expect(200)
-      .then(res => {
-        const { error } = joi
-          .object({
-            id: joi.number(),
-            username: joi.string(),
-            name: joi.string(),
-            email: joi.string(),
-            roles: joi.array().items(joi.string()),
-          })
-          .validate(res.body);
-        return error ? false : true;
-      });
+      .expect(200);
   });
 
   it('/api/auth/register (POST) validate that the same account fails to register', () => {
@@ -178,11 +153,10 @@ describe('AppController (e2e)', () => {
   });
 
   it('/api/auth/register (POST) create an account to delete', () => {
-    profileToDelete = 'delete';
     return request(app.getHttpServer())
       .post('/api/auth/register')
       .send({
-        username: profileToDelete,
+        username: 'delete',
         name: 'to delete',
         email: 'delete.test@gmail.com',
         password: '123456789',
@@ -190,14 +164,14 @@ describe('AppController (e2e)', () => {
       .expect(201);
   });
 
-  it('/api/profile/{username} (DELETE) teardown created account to be deleted', () => {
+  it('/api/profile/{username} (DELETE) teardown created account', () => {
     return request(app.getHttpServer())
       .delete('/api/profile/delete')
       .set('Authorization', `Bearer ${bearer}`)
       .expect(200)
-      .then(
-        res => res.body.message === `Deleted ${profileToDelete} from records`,
-      );
+      .expect({
+        message: 'Deleted delete from records',
+      });
   });
 
   it('/api/profile/{username} (DELETE) teardown main account', () => {
@@ -205,9 +179,9 @@ describe('AppController (e2e)', () => {
       .delete('/api/profile/test')
       .set('Authorization', `Bearer ${bearer}`)
       .expect(200)
-      .then(
-        res => res.body.message === `Deleted ${profileToDelete} from records`,
-      );
+      .expect({
+        message: 'Deleted test from records',
+      });
   });
 
   afterAll(async () => {
