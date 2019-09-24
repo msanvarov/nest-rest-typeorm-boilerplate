@@ -44,51 +44,54 @@
 </p>
 
 <h3 id="📚-description">📚 Description</h3>
-<p>This boilerplate is made to quickly prototype backend applications. It comes with database, logging, security, and authentication features out of the box.</p>
+<p>This boilerplate is made to quickly prototype backend applications. It comes with authentication, logging, security, and database features out of the box.</p>
 <hr>
 <h3 id="🛠️-prerequisites">🛠️ Prerequisites</h3>
 <h4 id="non-docker">Non Docker</h4>
 <ul>
-<li>Please make sure to have MYSQL locally by utilizing a web server stack <a href="https://www.apachefriends.org/">XAMPP</a>. The control panel can start with MYSQL on localhost.</li>
+<li>Please make sure to have MYSQL locally by utilizing a web server stack <a href="https://www.apachefriends.org/">XAMPP</a>. The control panel can then trigger MYSQL to start on localhost.</li>
 </ul>
 <h4 id="docker-🐳">Docker 🐳</h4>
 <ul>
-<li>Please make sure to have docker desktop on the local machine of choice to quickly compose both mariadb and nginx. Then follow the docker procedure outlined below.</li>
+<li>Please make sure to have docker desktop on the operating system of choice to quickly compose both MariaDB and Nginx. Then follow the docker procedure outlined below.</li>
 </ul>
-<p><strong>Note</strong> Docker Desktop comes free on both Mac and Windows, but it only works with Windows 10 Pro. A work around is to get <a href="https://docs.docker.com/toolbox/toolbox_install_windows/">Docker Toolbox</a> which will run through a VM.</p>
+<p><strong>Note</strong>: Docker Desktop comes free on both Mac and Windows, but it only works with Windows 10 Pro. A workaround is to get <a href="https://docs.docker.com/toolbox/toolbox_install_windows/">Docker Toolbox</a> which will bypass the Windows 10 Pro prerequisite by executing in a VM.</p>
 <hr>
 <h3 id="🚀-setup">🚀 Setup</h3>
-<h4 id="manually-deploying-without-docker">Manually Deploying without Docker</h4>
+<h4 id="manual-deployment-without-docker">Manual Deployment without Docker</h4>
 <ul>
-<li>Create a .env file using the <code>cp .env.example .env</code> command and replace the existing env variables with the correct variables (username and password database)</li>
-<li>Install dependencies using <code>npm i</code> or <code>yarn</code></li>
-<li>Start the app for pre-production using <code>npm run start</code> or for development using <code>npm run start:dev</code> (the app will be exposed on the port 9000; not to conflict with React)</li>
+<li><p>Create a .env file using the <code>cp .env.example .env</code> command and replace the existing environment variables with personal configuration settings (username and password database).</p>
+</li>
+<li><p>Download dependencies using <code>npm i</code> or <code>yarn</code></p>
+</li>
+<li><p>Start the app for pre-production using <code>npm run start</code> or <code>npm run start:dev</code> for development (the app will be exposed on the port 9000; safe port that doesn&#39;t conflict with React, Angular, or Vue)</p>
+</li>
 </ul>
 <h4 id="deploying-with-docker-🐳">Deploying with Docker 🐳</h4>
 <ul>
-<li>Execute the following command in app directory:</li>
+<li>Execute the following command in-app directory:</li>
 </ul>
-<div><pre class="line-numbers"><code class="language-bash"># creates and loads the docker container with required configuration
+<div><pre class="line-numbers"><code class="language-bash"># creates and loads the docker container in detached mode with the required configuration
 $ docker-compose up -d</code></pre></div><ul>
-<li>The following command will setup the project for you (building the Docker images, starting docker-compose stack). The Web application and mongo will exposed on <a href="http://localhost:9000">http://localhost:9000</a> and <a href="http://localhost:80">http://localhost:80</a> respectively</li>
+<li>The following command will set up and run the docker project for quick use (building both Dockerfile and Dockerfile-Nginx). Then the web application, Nginx, and MariaDB will be exposed to <a href="http://localhost:9000">http://localhost:9000</a>, <a href="http://localhost:80">http://localhost:80</a>, and <a href="http://localhost:3306">http://localhost:3306</a> respectively.</li>
 </ul>
 <h3 id="🔒-environment-configuration">🔒 Environment Configuration</h3>
-<p>By default the application comes with a config module that can inject the ConfigService and read every environment variable from the .env. file.</p>
-<p><strong>APP_ENV</strong> - the application environment it will be executing as, either in development or production.</p>
-<p><strong>APP_URL</strong> - the base url for application.</p>
-<p><strong>WEBTOKEN_SECRET_KEY</strong> - the secret key to decrypt web tokens with. Make sure to generate a random alphanumeric string for this.</p>
-<p><strong>WEBTOKEN_EXPIRATION_TIME</strong> - the time in seconds on when the web token will expire; by default it&#39;s 1800 seconds which is 30 mins.</p>
+<p>By default, the application comes with a config module that will inject the <code>ConfigService</code> to read every environment variable from the <code>.env</code> file.</p>
+<p><strong>APP_ENV</strong> - the application environment it will be executing as, either in development or production. Determines the type of logging options to utilize. Options: <code>dev</code> or <code>prod</code>. </p>
+<p><strong>APP_URL</strong> - the base URL for the application. Made mainly to showcase the <code>ConfigService</code> and can be removed if not used.</p>
+<p><strong>WEBTOKEN_SECRET_KEY</strong> - the secret key to encrypt/decrypt web tokens with. Make sure to generate a random alphanumeric string for this. Not </p>
+<p><strong>WEBTOKEN_EXPIRATION_TIME</strong> - <strong>the time in seconds</strong> indicating when the web token will expire; by default, it&#39;s 2400 seconds which is 40 mins.</p>
 <p><strong>DB_TYPE</strong> - the type of <a href="https://github.com/typeorm/typeorm/blob/master/docs/connection-options.md">database connection to use</a>.</p>
-<p><strong>DB_USERNAME</strong> - username for authenticating against database.</p>
-<p><strong>DB_PASSWORD</strong> - password for authenticating against database, can be empty.</p>
+<p><strong>DB_USERNAME</strong> - username for authenticating against the database.</p>
+<p><strong>DB_PASSWORD</strong> - password for authenticating against the database, can be left empty if a password is not needed (not recommended).</p>
 <p><strong>DB_HOST</strong> - the endpoint where this database sits (usually localhost but can be a static address).</p>
 <p><strong>DB_PORT</strong> - default ports for different types of database connections.</p>
-<p><strong>DB_DATABASE</strong> - the actual database to mutate.</p>
+<p><strong>DB_DATABASE</strong> - the actual database name to perform operations on.</p>
 <hr>
 <h3 id="🏗-choosing-a-web-framework">🏗 Choosing a Web Framework</h3>
-<p>By default this boilerplate comes with <a href="https://github.com/fastify/fastify">Fastify</a> as its default web framework for <a href="https://github.com/nestjs/nest/blob/master/benchmarks/all_output.txt">performance benefits</a>. But can be changed to use <a href="https://expressjs.com/">Express</a> instead. Please follow the steps below to change the web app from Fastify to Express.</p>
+<p>This boilerplate comes with <a href="https://github.com/fastify/fastify">Fastify</a> out of the box as it offers <a href="https://github.com/nestjs/nest/blob/master/benchmarks/all_output.txt">performance benefits</a> over Express. But this can be changed to use <a href="https://expressjs.com/">Express</a> framework instead of Fastify. Please proceed the steps below to change between the two.</p>
 <ul>
-<li>Replace the following lines of code in the <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/main.ts">main.ts file</a></li>
+<li>Replace the following lines of code in the <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/main.ts">main.ts file</a> with the ones detailed below.</li>
 </ul>
 <div><pre class="line-numbers"><code class="language-ts">// from (fastify):
 import {
@@ -119,16 +122,15 @@ app.use(
     windowMs: 60, // 1 minutes
     max: 100, // limit each IP to 100 requests per windowMs
   }),
-);</code></pre></div><p><strong>Note</strong> If you decided to use Fastify or Express over the other, please remove the extra Express/Fastify dependencies not used.</p>
-<p>If you choose to <strong>use Fastify</strong>, this command will <strong>purge the project of all Express dependencies</strong>:</p>
+);</code></pre></div><p><strong>Note</strong>: The <code>package.json</code>comes with dependencies for both Express and Fastify to support moving between two. But this can leave the project bloated especially when only one web framework is being used. Thus it is recommended that when deploying to production, a purger of unused dependencies occurs. </p>
+<p>If you choose to <strong>use Fastify</strong>, this command will <strong>purge all of the Express dependencies</strong>:</p>
 <div><pre class="line-numbers"><code class="language-bash"># removing Express dependencies
-$ npm rm &#64;nestjs/platform-express express-rate-limit helmet swagger-ui-express &#64;types/express --save</code></pre></div><p>If you choose to <strong>use Express</strong>, this command will <strong>purge the project of all Fastify dependencies</strong>:</p>
+$ npm rm &#64;nestjs/platform-express express-rate-limit helmet swagger-ui-express &#64;types/express --save</code></pre></div><p>If you choose to <strong>use Express</strong>, this command will <strong>purge all of the Fastify dependencies</strong>:</p>
 <div><pre class="line-numbers"><code class="language-bash"># removing Fastify dependencies
 $ npm rm &#64;nestjs/platform-fastify fastify-helmet fastify-rate-limit fastify-swagger --save</code></pre></div><hr>
 <h3 id="🖴-choosing-a-database">🖴 Choosing a Database</h3>
-<p>By default <strong>MYSQL</strong> is the database of choice but support for other database types like sqlite, postgres, mongodb, and mssql. To use the any of these, either change the configuration in the <code>.env</code> file, or download the corresponding wrapper library, like <a href="https://www.npmjs.com/package/sqlite3">sqlite3</a>.</p>
-<p>The configuration portion involves replicating the settings required for the database type of choice.</p>
-<p><strong>For MongoDB, TypeORM is not a feature rich as Mongoose. Therefore I created another boilerplate for <a href="https://github.com/msanvarov/nest-rest-mongo-boilerplate">Mongoose</a></strong>.</p>
+<p>By default <strong>MYSQL/MariaDB</strong> are the database of choice but support for other database types like SQLite, Postgres, MongoDB, and MSSQL exist. To use anything other than MYSQL/MariaDB, change the configuration in the <code>.env</code> file, and download the corresponding wrapper library, like <a href="https://www.npmjs.com/package/sqlite3">sqlite3</a> if necessary.</p>
+<p><strong>Note: For MongoDB, TypeORM is not a feature-rich as Mongoose. Therefore I created another boilerplate for Nest and <a href="https://github.com/msanvarov/nest-rest-mongo-boilerplate">Mongoose</a></strong>.</p>
 <hr>
 <h3 id="✅-testing">✅ Testing</h3>
 <h4 id="docker-🐳-1">Docker 🐳</h4>
@@ -149,19 +151,20 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov</code></pre></div><hr>
 <h3 id="💡-typedocs">💡 TypeDocs</h3>
-<p>The documentation can be generated by typing in <code>npm run typedocs</code>. This will produce a <strong>docs</strong> folder with the required files.</p>
+<p>The documentation for this boilerplate can be found <a href="https://msanvarov.github.io/nest-rest-typeorm-boilerplate/">on Github pages</a>.</p>
+<p>The docs can be generated on-demand, simply, by typing <code>npm run typedocs</code>. This will produce a <strong>docs</strong> folder with the required front-end files and <strong>start hosting on localhost port 8080</strong>.</p>
 <div><pre class="line-numbers"><code class="language-bash"># generate docs for code
 $ npm run typedocs</code></pre></div><hr>
 <h3 id="📝-open-api">📝 Open API</h3>
-<p>Out of the box, the web app comes with an <a href="https://swagger.io/specification/">open api specification</a>, that is used to describe RESTful APIs. Nest provides a dedicated module to work with it.</p>
+<p>Out of the box, the web app comes with an <a href="https://swagger.io/specification/">open api specification</a>, that is used to describe RESTful APIs. Nest provides a <a href="https://docs.nestjs.com/recipes/swagger">dedicated module to work with it</a>.</p>
 <p>The configuration for Swagger can be found at this <a href="https://github.com/msanvarov/nest-mongoose-boilerplate/tree/master/src/swagger">location</a>.</p>
 <hr>
 <h3 id="✨-typeorm">✨ TypeORM</h3>
-<p>TypeORM is a Object-relational mapping that creates an abstraction layer over operations on databases. Please view the <a href="https://typeorm.io/#/">documentation</a> for further details.</p>
+<p>TypeORM is an object-relational mapping that acts as an abstraction layer over operations on databases. Please view the <a href="https://typeorm.io/#/">documentation</a> for further details.</p>
 <p>The configuration for TypeORM can be found in the <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/modules/app/app.module.ts#L17">app module</a>.</p>
 <hr>
 <h3 id="🔊-logs">🔊 Logs</h3>
-<p>This boilerplate comes with a winston module for logging, the configurations for winston can be found in the <a href="https://github.com/msanvarov/nest-mongoose-boilerplate/blob/master/src/modules/main/app.module.ts#L24">app module</a>.</p>
+<p>This boilerplate comes with a Winston module for logging, the configurations for Winston can be found in the <a href="https://github.com/msanvarov/nest-mongoose-boilerplate/blob/master/src/modules/main/app.module.ts#L24">app module</a>.</p>
 <hr>
 <h3 id="👥-support">👥 Support</h3>
 <p>Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you&#39;d like to join them, please <a href="https://docs.nestjs.com/support">read more here</a>.</p>
