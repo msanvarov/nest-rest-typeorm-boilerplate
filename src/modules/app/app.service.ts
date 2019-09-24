@@ -13,7 +13,7 @@ export class AppService {
    * @param {Logger} logger logger service
    */
   constructor(
-    private config: ConfigService,
+    private readonly config: ConfigService,
     @Inject('winston') private readonly logger: Logger,
   ) {}
 

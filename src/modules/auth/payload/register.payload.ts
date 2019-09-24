@@ -1,6 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 import {
-  IsAlpha,
   IsEmail,
   IsNotEmpty,
   MinLength,

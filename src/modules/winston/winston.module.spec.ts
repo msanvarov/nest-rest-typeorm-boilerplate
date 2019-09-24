@@ -1,25 +1,26 @@
-import { Injectable, Module } from "@nestjs/common";
-import { Test } from "@nestjs/testing";
-import { expect } from "chai";
-import { WINSTON_MODULE_PROVIDER } from "./winston.constants";
-import { WinstonModule } from "./winston.module";
+import { Injectable, Module } from '@nestjs/common';
+import { Test } from '@nestjs/testing';
+import { expect } from 'chai';
+import { WINSTON_MODULE_PROVIDER } from './winston.constants';
+import { WinstonModule } from './winston.module';
 
-describe("Winston module", () => {
-  it("boots successfully", async () => {
+describe('Winston Module', () => {
+  it('boots successfully', async () => {
     const rootModule = await Test.createTestingModule({
       imports: [WinstonModule.forRoot({})],
     }).compile();
 
-    expect(rootModule.get(WINSTON_MODULE_PROVIDER)).to.be.an("object");
+    expect(rootModule.get(WINSTON_MODULE_PROVIDER)).to.be.an('object');
   });
 
-  it("boots successfully asynchronously", async () => {
+  it('boots successfully asynchronously', async () => {
     @Injectable()
     // @ts-ignore
     class ConfigService {
       public loggerOptions = {};
     }
 
+    // tslint:disable-next-line: max-classes-per-file
     @Module({
       providers: [ConfigService],
       exports: [ConfigService],
@@ -40,6 +41,6 @@ describe("Winston module", () => {
     const app = rootModule.createNestApplication();
     await app.init();
 
-    expect(rootModule.get(WINSTON_MODULE_PROVIDER)).to.be.an("object");
+    expect(rootModule.get(WINSTON_MODULE_PROVIDER)).to.be.an('object');
   });
 });
