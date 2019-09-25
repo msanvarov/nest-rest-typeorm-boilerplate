@@ -20,7 +20,7 @@ export class Roles {
   @Column({
     type: 'enum',
     enum: AppRoles,
-    default: AppRoles.ADMIN_DELETE_PROFILES,
+    default: AppRoles.ADMIN,
   })
   role: AppRoles;
 
