@@ -1,4 +1,5 @@
 import * as crypto from 'crypto';
+import { url } from 'gravatar';
 import {
   BadRequestException,
   Injectable,
@@ -10,6 +11,7 @@ import { Repository } from 'typeorm';
 import { Profile } from './profile.entity';
 import { RegisterPayload } from '../auth/payload/register.payload';
 import { Roles } from '../app/roles.entity';
+import { PatchProfilePayload } from './payload/patch.profile.payload';
 
 /**
  * Profile Service
@@ -32,7 +34,7 @@ export class ProfileService {
    * Fetches profile from database by UUID
    * @param {number} id
    */
-  async get(id: number) {
+  get(id: number) {
     return this.profileRepository.findOne(id, { relations: ['roles'] });
   }
 
@@ -40,8 +42,8 @@ export class ProfileService {
    * Fetches profile from database by username
    * @param {string} username
    */
-  async getByUsername(username: string) {
-    return await this.profileRepository.findOne({ username });
+  getByUsername(username: string) {
+    return this.profileRepository.findOne({ username });
   }
 
   /**
@@ -49,8 +51,8 @@ export class ProfileService {
    * @param {string} username
    * @param {string} password
    */
-  async getByUsernameAndPass(username: string, password: string) {
-    return await this.profileRepository
+  getByUsernameAndPass(username: string, password: string) {
+    return this.profileRepository
       .createQueryBuilder('profiles')
       .where('profiles.username = :username and profiles.password = :password')
       .setParameter('username', username)
@@ -66,9 +68,9 @@ export class ProfileService {
    * @param {RegisterPayload} payload profile payload
    */
   async create(payload: RegisterPayload) {
-    const user = await this.getByUsername(payload.username);
+    const profile = await this.getByUsername(payload.username);
 
-    if (user) {
+    if (profile) {
       throw new NotAcceptableException(
         'The account with the provided username currently exists. Please choose another one.',
       );
@@ -77,11 +79,37 @@ export class ProfileService {
     // keep making roles for a particular profile, these roles are defined from AppRoles enum.
     const roles: Roles[] = [new Roles()];
     await this.rolesRepository.save(roles);
-    return await this.profileRepository.save(
-      this.profileRepository.create({ ...payload, roles }),
+    return this.profileRepository.save(
+      this.profileRepository.create({
+        ...payload,
+        roles,
+        avatar: url(payload.email, {
+          protocol: 'http',
+          s: '200',
+          r: 'pg',
+          d: '404',
+        }),
+      }),
     );
   }
 
+  async edit(payload: PatchProfilePayload) {
+    const { username } = payload;
+    const profile = await this.getByUsername(username);
+    if (profile) {
+      Object.keys(payload).forEach(key => {
+        if (key === 'password') {
+          key = crypto.createHmac('sha256', key).digest('hex');
+        }
+        profile[key] = payload[key];
+      });
+      return this.profileRepository.save(profile);
+    } else {
+      throw new BadRequestException(
+        'The profile with that username does not exist in the system. Please try another username.',
+      );
+    }
+  }
   /**
    * Deletes profile from provided username
    * @param {string} username
