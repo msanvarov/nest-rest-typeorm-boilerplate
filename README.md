@@ -140,7 +140,7 @@ $ npm rm @nestjs/platform-fastify fastify-helmet fastify-rate-limit fastify-swag
 
 ---
 
-### 🖴 Choosing a Database
+### 💾 Choosing a Database
 
 By default **MYSQL/MariaDB** are the database of choice but support for other database types like SQLite, Postgres, MongoDB, and MSSQL exist. To use anything other than MYSQL/MariaDB, change the configuration in the `.env` file, and download the corresponding wrapper library, like [sqlite3](https://www.npmjs.com/package/sqlite3) if necessary.
 
