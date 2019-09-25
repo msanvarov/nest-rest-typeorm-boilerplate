@@ -35,6 +35,12 @@ export class Profile {
   email: string;
 
   /**
+   * Avatar column (gravatar url)
+   */
+  @Column()
+  avatar: string;
+
+  /**
    * Column to represent a one to many relationship with the roles entity
    */
   @OneToMany(type => Roles, role => role.profile)
