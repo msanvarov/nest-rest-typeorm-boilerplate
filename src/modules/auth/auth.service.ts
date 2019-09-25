@@ -19,7 +19,7 @@ export class AuthService {
   /**
    * Constructor
    * @param {JwtService} jwtService jwt service
-   * @param {ConfigService} config configuration service
+   * @param {ConfigService} configService configuration service
    * @param {ProfileService} profileService profile service
    */
   constructor(
