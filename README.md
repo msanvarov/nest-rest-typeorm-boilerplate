@@ -144,7 +144,7 @@ $ npm rm @nestjs/platform-fastify fastify-helmet fastify-rate-limit fastify-swag
 
 By default **MYSQL/MariaDB** are the database of choice but support for other database types like SQLite, Postgres, MongoDB, and MSSQL exist. To use anything other than MYSQL/MariaDB, change the configuration in the `.env` file, and download the corresponding wrapper library, like [sqlite3](https://www.npmjs.com/package/sqlite3) if necessary.
 
-**Note: For MongoDB, TypeORM is not a feature-rich as Mongoose. Therefore I created another boilerplate for Nest and [Mongoose](https://github.com/msanvarov/nest-rest-mongo-boilerplate)**.
+**Note: For MongoDB, TypeORM is not as feature-rich as Mongoose. Therefore I created another boilerplate for [Nest and Mongoose](https://github.com/msanvarov/nest-rest-mongo-boilerplate)**.
 
 ---
 
