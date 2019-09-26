@@ -204,7 +204,7 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Main application method</p>
+                    <div class="io-description"><p>Fetches and logs the APP_URL environment variable from the configuration file.</p>
 </div>
 
                     <div>
@@ -242,12 +242,12 @@ export class AppService {
    * @param {Logger} logger logger service
    */
   constructor(
-    private config: ConfigService,
+    private readonly config: ConfigService,
     @Inject(&#x27;winston&#x27;) private readonly logger: Logger,
   ) {}
 
   /**
-   * Main application method
+   * Fetches and logs the APP_URL environment variable from the configuration file.
    * @returns {string} the application url
    */
   root(): string {

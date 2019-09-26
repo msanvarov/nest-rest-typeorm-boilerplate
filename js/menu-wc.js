@@ -126,15 +126,30 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="modules/ProfileModule.html" data-type="entity-link">ProfileModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                            'data-target="#controllers-links-module-ProfileModule-a0fb998903548f528247fa51ab21646a"' : 'data-target="#xs-controllers-links-module-ProfileModule-a0fb998903548f528247fa51ab21646a"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-ProfileModule-a0fb998903548f528247fa51ab21646a"' :
+                                            'id="xs-controllers-links-module-ProfileModule-a0fb998903548f528247fa51ab21646a"' }>
+                                            <li class="link">
+                                                <a href="controllers/ProfileController.html"
+                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">ProfileController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                        'data-target="#injectables-links-module-ProfileModule-bb45866b71cdb6e7f34b648b452a92a0"' : 'data-target="#xs-injectables-links-module-ProfileModule-bb45866b71cdb6e7f34b648b452a92a0"' }>
+                                        'data-target="#injectables-links-module-ProfileModule-a0fb998903548f528247fa51ab21646a"' : 'data-target="#xs-injectables-links-module-ProfileModule-a0fb998903548f528247fa51ab21646a"' }>
                                         <span class="icon ion-md-arrow-round-down"></span>
                                         <span>Injectables</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-ProfileModule-bb45866b71cdb6e7f34b648b452a92a0"' :
-                                        'id="xs-injectables-links-module-ProfileModule-bb45866b71cdb6e7f34b648b452a92a0"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-ProfileModule-a0fb998903548f528247fa51ab21646a"' :
+                                        'id="xs-injectables-links-module-ProfileModule-a0fb998903548f528247fa51ab21646a"' }>
                                         <li class="link">
                                             <a href="injectables/ProfileService.html"
                                                 data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>ProfileService</a>
@@ -165,6 +180,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="classes/PasswordTransformer.html" data-type="entity-link">PasswordTransformer</a>
                             </li>
                             <li class="link">
+                                <a href="classes/PatchProfilePayload.html" data-type="entity-link">PatchProfilePayload</a>
+                            </li>
+                            <li class="link">
                                 <a href="classes/Profile.html" data-type="entity-link">Profile</a>
                             </li>
                             <li class="link">
@@ -185,6 +203,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
                             <li class="link">
                                 <a href="interfaces/EnvConfig.html" data-type="entity-link">EnvConfig</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/IGenericMessageBody.html" data-type="entity-link">IGenericMessageBody</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/ITokenReturnBody.html" data-type="entity-link">ITokenReturnBody</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/WinstonModuleAsyncOptions.html" data-type="entity-link">WinstonModuleAsyncOptions</a>

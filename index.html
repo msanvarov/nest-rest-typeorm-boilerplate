@@ -128,9 +128,9 @@ app.use(
 $ npm rm &#64;nestjs/platform-express express-rate-limit helmet swagger-ui-express &#64;types/express --save</code></pre></div><p>If you choose to <strong>use Express</strong>, this command will <strong>purge all of the Fastify dependencies</strong>:</p>
 <div><pre class="line-numbers"><code class="language-bash"># removing Fastify dependencies
 $ npm rm &#64;nestjs/platform-fastify fastify-helmet fastify-rate-limit fastify-swagger --save</code></pre></div><hr>
-<h3 id="🖴-choosing-a-database">🖴 Choosing a Database</h3>
+<h3 id="💾-choosing-a-database">💾 Choosing a Database</h3>
 <p>By default <strong>MYSQL/MariaDB</strong> are the database of choice but support for other database types like SQLite, Postgres, MongoDB, and MSSQL exist. To use anything other than MYSQL/MariaDB, change the configuration in the <code>.env</code> file, and download the corresponding wrapper library, like <a href="https://www.npmjs.com/package/sqlite3">sqlite3</a> if necessary.</p>
-<p><strong>Note: For MongoDB, TypeORM is not a feature-rich as Mongoose. Therefore I created another boilerplate for Nest and <a href="https://github.com/msanvarov/nest-rest-mongo-boilerplate">Mongoose</a></strong>.</p>
+<p><strong>Note: For MongoDB, TypeORM is not as feature-rich as Mongoose. Therefore I created another boilerplate for <a href="https://github.com/msanvarov/nest-rest-mongo-boilerplate">Nest and Mongoose</a></strong>.</p>
 <hr>
 <h3 id="✅-testing">✅ Testing</h3>
 <h4 id="docker-🐳-1">Docker 🐳</h4>
@@ -157,14 +157,14 @@ $ npm run test:cov</code></pre></div><hr>
 $ npm run typedocs</code></pre></div><hr>
 <h3 id="📝-open-api">📝 Open API</h3>
 <p>Out of the box, the web app comes with an <a href="https://swagger.io/specification/">open api specification</a>, that is used to describe RESTful APIs. Nest provides a <a href="https://docs.nestjs.com/recipes/swagger">dedicated module to work with it</a>.</p>
-<p>The configuration for Swagger can be found at this <a href="https://github.com/msanvarov/nest-mongoose-boilerplate/tree/master/src/swagger">location</a>.</p>
+<p>The configuration for Swagger can be found at this <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/tree/master/src/swagger">location</a>.</p>
 <hr>
 <h3 id="✨-typeorm">✨ TypeORM</h3>
 <p>TypeORM is an object-relational mapping that acts as an abstraction layer over operations on databases. Please view the <a href="https://typeorm.io/#/">documentation</a> for further details.</p>
 <p>The configuration for TypeORM can be found in the <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/modules/app/app.module.ts#L17">app module</a>.</p>
 <hr>
 <h3 id="🔊-logs">🔊 Logs</h3>
-<p>This boilerplate comes with a Winston module for logging, the configurations for Winston can be found in the <a href="https://github.com/msanvarov/nest-mongoose-boilerplate/blob/master/src/modules/main/app.module.ts#L24">app module</a>.</p>
+<p>This boilerplate comes with a Winston module for logging, the configurations for Winston can be found in the <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/modules/main/app.module.ts#L24">app module</a>.</p>
 <hr>
 <h3 id="👥-support">👥 Support</h3>
 <p>Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you&#39;d like to join them, please <a href="https://docs.nestjs.com/support">read more here</a>.</p>

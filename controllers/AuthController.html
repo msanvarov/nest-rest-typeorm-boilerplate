@@ -152,7 +152,7 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Authentication route to login</p>
+                    <div class="io-description"><p>Login route to validate and create tokens for users</p>
 </div>
 
                     <div class="io-description">
@@ -189,7 +189,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>{}</code>
+                        <b>Returns : </b>        <code><a href="../interfaces/ITokenReturnBody.html" target="_self" >Promise&lt;ITokenReturnBody&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -291,7 +291,7 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Post } from &#x27;@nestjs/common&#x27;;
 import { ApiResponse, ApiUseTags } from &#x27;@nestjs/swagger&#x27;;
-import { AuthService } from &#x27;./auth.service&#x27;;
+import { AuthService, ITokenReturnBody } from &#x27;./auth.service&#x27;;
 import { LoginPayload } from &#x27;./payload/login.payload&#x27;;
 import { RegisterPayload } from &#x27;./payload/register.payload&#x27;;
 import { ProfileService } from &#x27;../profile/profile.service&#x27;;
@@ -299,8 +299,8 @@ import { ProfileService } from &#x27;../profile/profile.service&#x27;;
 /**
  * Authentication Controller
  */
-@Controller(&#x27;api/auth&#x27;)
 @ApiUseTags(&#x27;authentication&#x27;)
+@Controller(&#x27;api/auth&#x27;)
 export class AuthController {
   /**
    * Constructor
@@ -313,14 +313,14 @@ export class AuthController {
   ) {}
 
   /**
-   * Authentication route to login
+   * Login route to validate and create tokens for users
    * @param {LoginPayload} payload the login dto
    */
   @Post(&#x27;login&#x27;)
   @ApiResponse({ status: 201, description: &#x27;Login Completed&#x27; })
   @ApiResponse({ status: 400, description: &#x27;Bad Request&#x27; })
   @ApiResponse({ status: 401, description: &#x27;Unauthorized&#x27; })
-  async login(@Body() payload: LoginPayload) {
+  async login(@Body() payload: LoginPayload): Promise&lt;ITokenReturnBody&gt; {
     const profile &#x3D; await this.authService.validateUser(payload);
     return await this.authService.createToken(profile);
   }
