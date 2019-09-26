@@ -20,7 +20,7 @@ export class AppController {
    * @returns {string} the application environment url
    */
   @Get()
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @ApiResponse({ status: 200, description: 'Request Received' })
   @ApiResponse({ status: 400, description: 'Request Failed' })
   root(): string {
@@ -33,7 +33,7 @@ export class AppController {
    * @returns {Partial<Request>} the request user populated from the passport module
    */
   @Get('request/user')
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @ApiResponse({ status: 200, description: 'Request Received' })
   @ApiResponse({ status: 400, description: 'Request Failed' })
   getRequestUser(@Req() req): Partial<Request> {

@@ -7,10 +7,7 @@ import { ProfileController } from './profile.controller';
 import { PassportModule } from '@nestjs/passport';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Profile, Roles]),
-    PassportModule.register({ defaultStrategy: 'jwt' }),
-  ],
+  imports: [TypeOrmModule.forFeature([Profile, Roles])],
   providers: [ProfileService],
   exports: [ProfileService],
   controllers: [ProfileController],

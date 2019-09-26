@@ -15,6 +15,9 @@ import { ProfileService, IGenericMessageBody } from './profile.service';
 import { PatchProfilePayload } from './payload/patch.profile.payload';
 import { Profile } from './profile.entity';
 
+/**
+ * Profile Controller
+ */
 @ApiBearerAuth()
 @ApiUseTags('profile')
 @Controller('api/profile')
@@ -26,12 +29,12 @@ export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
 
   /**
-   * Get a particular profile
+   * Retrieves a particular profile
    * @param username the profile given username to fetch
    * @returns {Promise<Profile>} queried profile data
    */
   @Get(':username')
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @ApiResponse({ status: 200, description: 'Fetch Profile Request Received' })
   @ApiResponse({ status: 400, description: 'Fetch Profile Request Failed' })
   async getProfile(@Param('username') username: string): Promise<Profile> {
@@ -50,7 +53,7 @@ export class ProfileController {
    * @returns {Promise<Profile>} mutated profile data
    */
   @Patch()
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @UseRoles({
     resource: 'profiles',
     action: 'update',
@@ -68,7 +71,7 @@ export class ProfileController {
    * @returns {Promise<IGenericMessageBody>} whether or not the profile has been deleted
    */
   @Delete(':username')
-  @UseGuards(AuthGuard(), ACGuard)
+  @UseGuards(AuthGuard('jwt'), ACGuard)
   @UseRoles({
     resource: 'profiles',
     action: 'delete',
