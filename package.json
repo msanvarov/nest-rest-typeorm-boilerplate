@@ -12,7 +12,6 @@
     "start:debug": "nodemon --config nodemon-debug.json",
     "start:prod": "node dist/main.js",
     "typedocs": "npx compodoc -p tsconfig.json -s -d docs",
-    "webpack": "webpack --config webpack.config.js",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -73,10 +72,7 @@
     "tsc-watch": "4.0.0",
     "tsconfig-paths": "3.9.0",
     "tslint": "5.20.0",
-    "typescript": "3.6.3",
-    "webpack": "4.41.0",
-    "webpack-cli": "3.3.9",
-    "webpack-node-externals": "1.7.2"
+    "typescript": "3.6.3"
   },
   "jest": {
     "moduleFileExtensions": [
