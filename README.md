@@ -36,7 +36,7 @@ This boilerplate is made to quickly prototype backend applications. It comes wit
 
 ---
 
-### 🚀 Setup
+### 🚀 Deployment
 
 #### Manual Deployment without Docker
 
