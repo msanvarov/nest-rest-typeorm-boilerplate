@@ -14,6 +14,13 @@ import { Roles } from '../app/roles.entity';
 import { PatchProfilePayload } from './payload/patch.profile.payload';
 
 /**
+ * Models a typical response for a crud operation
+ */
+export interface IGenericMessageBody {
+  message: string;
+}
+
+/**
  * Profile Service
  */
 @Injectable()
@@ -33,16 +40,18 @@ export class ProfileService {
   /**
    * Fetches profile from database by UUID
    * @param {number} id
+   * @returns {Promise<Profile>} queried profile data
    */
-  get(id: number) {
+  get(id: number): Promise<Profile> {
     return this.profileRepository.findOne(id, { relations: ['roles'] });
   }
 
   /**
    * Fetches profile from database by username
    * @param {string} username
+   * @returns {Promise<Profile>} queried profile data
    */
-  getByUsername(username: string) {
+  getByUsername(username: string): Promise<Profile> {
     return this.profileRepository.findOne({ username });
   }
 
@@ -50,8 +59,9 @@ export class ProfileService {
    * Fetches profile by username and hashed password
    * @param {string} username
    * @param {string} password
+   * @returns {Promise<Profile>} queried profile data
    */
-  getByUsernameAndPass(username: string, password: string) {
+  getByUsernameAndPass(username: string, password: string): Promise<Profile> {
     return this.profileRepository
       .createQueryBuilder('profiles')
       .where('profiles.username = :username and profiles.password = :password')
@@ -64,10 +74,11 @@ export class ProfileService {
   }
 
   /**
-   * Creates a profile
+   * Create a profile with RegisterPayload fields
    * @param {RegisterPayload} payload profile payload
+   * @returns {Promise<Profile>} created profile data
    */
-  async create(payload: RegisterPayload) {
+  async create(payload: RegisterPayload): Promise<Profile> {
     const profile = await this.getByUsername(payload.username);
 
     if (profile) {
@@ -93,7 +104,12 @@ export class ProfileService {
     );
   }
 
-  async edit(payload: PatchProfilePayload) {
+  /**
+   * Edit profile data
+   * @param {PatchProfilePayload} payload
+   * @returns {Promise<Profile>} mutated profile data
+   */
+  async edit(payload: PatchProfilePayload): Promise<Profile> {
     const { username } = payload;
     const profile = await this.getByUsername(username);
     if (profile) {
@@ -110,11 +126,13 @@ export class ProfileService {
       );
     }
   }
+
   /**
-   * Deletes profile from provided username
+   * Delete profile given a username
    * @param {string} username
+   * @returns {Promise<IGenericMessageBody>} whether or not the crud operation was completed
    */
-  async delete(username: string) {
+  async delete(username: string): Promise<IGenericMessageBody> {
     const deleted = await this.profileRepository.delete({ username });
     if (deleted.affected === 1) {
       return { message: `Deleted ${username} from records` };

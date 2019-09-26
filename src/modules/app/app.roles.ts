@@ -10,7 +10,7 @@ export enum AppRoles {
  */
 export const roles: RolesBuilder = new RolesBuilder();
 
-// The user app role doesn't have readAny(profiles) because the profile returned provides a password.
+// The default app role doesn't have readAny(profiles) because the profile returned provides a password.
 // To mutate the return body of mongoose queries try editing the ProfileService
 roles
   .grant(AppRoles.DEFAULT)

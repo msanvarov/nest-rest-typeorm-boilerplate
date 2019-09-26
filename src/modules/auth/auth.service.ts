@@ -6,6 +6,15 @@ import { Profile } from '../profile/profile.entity';
 import { LoginPayload } from './payload/login.payload';
 
 /**
+ * Models a typical Login/Register route return body
+ */
+export interface ITokenReturnBody {
+  expires: string;
+  expiresPrettyPrint: string;
+  token: string;
+}
+
+/**
  * Authentication Service
  */
 @Injectable()
@@ -31,10 +40,16 @@ export class AuthService {
   }
 
   /**
-   * Creates a signed jwt token based on payload
+   * Creates a signed jwt token based on IProfile payload
    * @param {Profile} param dto to generate token from
+   * @returns {Promise<ITokenReturnBody>} token body
    */
-  async createToken({ id, username, name, email }: Profile) {
+  async createToken({
+    id,
+    username,
+    name,
+    email,
+  }: Profile): Promise<ITokenReturnBody> {
     return {
       expires: this.expiration,
       expiresPrettyPrint: this.prettyPrintSeconds(this.expiration),
@@ -50,8 +65,9 @@ export class AuthService {
   /**
    * Formats the time in seconds into human-readable format
    * @param {string} time
+   * @returns {string} hrf time
    */
-  private prettyPrintSeconds(time: string) {
+  private prettyPrintSeconds(time: string): string {
     const ntime = Number(time);
     const hours = Math.floor(ntime / 3600);
     const minutes = Math.floor((ntime % 3600) / 60);
@@ -65,8 +81,9 @@ export class AuthService {
   /**
    * Validates whether or not the profile exists in the database
    * @param {LoginPayload} param login payload to authenticate with
+   * @returns {Promise<Profile>} registered profile
    */
-  async validateUser({ username, password }: LoginPayload) {
+  async validateUser({ username, password }: LoginPayload): Promise<Profile> {
     const user = await this.profileService.getByUsernameAndPass(
       username,
       password,

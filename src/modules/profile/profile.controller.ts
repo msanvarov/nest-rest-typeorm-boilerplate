@@ -6,14 +6,14 @@ import {
   Get,
   Param,
   Patch,
-  Req,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ACGuard, UseRoles } from 'nest-access-control';
 import { ApiBearerAuth, ApiResponse, ApiUseTags } from '@nestjs/swagger';
-import { ProfileService } from './profile.service';
+import { ProfileService, IGenericMessageBody } from './profile.service';
 import { PatchProfilePayload } from './payload/patch.profile.payload';
+import { Profile } from './profile.entity';
 
 @ApiBearerAuth()
 @ApiUseTags('profile')
@@ -28,12 +28,13 @@ export class ProfileController {
   /**
    * Get a particular profile
    * @param username the profile given username to fetch
+   * @returns {Promise<Profile>} queried profile data
    */
   @Get(':username')
   @UseGuards(AuthGuard())
   @ApiResponse({ status: 200, description: 'Fetch Profile Request Received' })
   @ApiResponse({ status: 400, description: 'Fetch Profile Request Failed' })
-  async getProfile(@Param('username') username: string) {
+  async getProfile(@Param('username') username: string): Promise<Profile> {
     const profile = await this.profileService.getByUsername(username);
     if (!profile) {
       throw new BadRequestException(
@@ -44,8 +45,9 @@ export class ProfileController {
   }
 
   /**
-   * Edit profile information
+   * Edit a profile
    * @param {RegisterPayload} payload
+   * @returns {Promise<Profile>} mutated profile data
    */
   @Patch()
   @UseGuards(AuthGuard())
@@ -56,13 +58,14 @@ export class ProfileController {
   })
   @ApiResponse({ status: 200, description: 'Patch Profile Request Received' })
   @ApiResponse({ status: 400, description: 'Patch Profile Request Failed' })
-  async patchProfile(@Body() payload: PatchProfilePayload) {
+  async patchProfile(@Body() payload: PatchProfilePayload): Promise<Profile> {
     return await this.profileService.edit(payload);
   }
 
   /**
-   * Delete route to remove profiles from app
+   * Removes a profile from the database
    * @param {string} username the username to remove
+   * @returns {Promise<IGenericMessageBody>} whether or not the profile has been deleted
    */
   @Delete(':username')
   @UseGuards(AuthGuard(), ACGuard)
@@ -73,7 +76,9 @@ export class ProfileController {
   })
   @ApiResponse({ status: 200, description: 'Delete Profile Request Received' })
   @ApiResponse({ status: 400, description: 'Delete Profile Request Failed' })
-  async delete(@Param('username') username: string) {
+  async delete(
+    @Param('username') username: string,
+  ): Promise<IGenericMessageBody> {
     return await this.profileService.delete(username);
   }
 }
