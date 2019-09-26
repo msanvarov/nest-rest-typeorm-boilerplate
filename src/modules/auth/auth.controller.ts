@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiResponse, ApiUseTags } from '@nestjs/swagger';
-import { AuthService } from './auth.service';
+import { AuthService, ITokenReturnBody } from './auth.service';
 import { LoginPayload } from './payload/login.payload';
 import { RegisterPayload } from './payload/register.payload';
 import { ProfileService } from '../profile/profile.service';
