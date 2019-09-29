@@ -85,7 +85,7 @@ By default, the application comes with a config module that will inject the `Con
 
 ### 🏗 Choosing a Web Framework
 
-This boilerplate comes with [Fastify](https://github.com/fastify/fastify) out of the box as it offers [performance benefits](https://github.com/nestjs/nest/blob/master/benchmarks/all_output.txt) over Express. But this can be changed to use [Express](https://expressjs.com/) framework instead of Fastify. Please proceed the steps below to change between the two.
+This boilerplate comes with [Fastify](https://github.com/fastify/fastify) out of the box as it offers [performance benefits](https://github.com/nestjs/nest/blob/master/benchmarks/all_output.txt) over Express. But this can be changed to use [Express](https://expressjs.com/) framework instead of Fastify. Please proceed with the steps below to change between the two.
 
 - Replace the following lines of code in the [main.ts file](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/main.ts) with the ones detailed below.
 
@@ -144,7 +144,7 @@ $ npm rm @nestjs/platform-fastify fastify-helmet fastify-rate-limit fastify-swag
 
 By default **MYSQL/MariaDB** are the database of choice but support for other database types like SQLite, Postgres, MongoDB, and MSSQL exist. To use anything other than MYSQL/MariaDB, change the configuration in the `.env` file, and download the corresponding wrapper library, like [sqlite3](https://www.npmjs.com/package/sqlite3) if necessary.
 
-**Note: For MongoDB, TypeORM is not as feature-rich as Mongoose. Therefore I created another boilerplate for [Nest and Mongoose](https://github.com/msanvarov/nest-rest-mongo-boilerplate)**.
+<!-- **Note: For MongoDB, TypeORM is not as feature-rich as Mongoose. Therefore I created another boilerplate for [Nest and Mongoose](https://github.com/msanvarov/nest-rest-mongo-boilerplate)**. -->
 
 ---
 
