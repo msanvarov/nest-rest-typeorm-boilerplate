@@ -1,8 +1,8 @@
 {
   "name": "nest-rest-typeorm-boilerplate",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "nest typeorm boilerplate",
+  "author": "msanvarov",
   "license": "MIT",
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.build.json",
