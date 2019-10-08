@@ -57,7 +57,7 @@
 </ul>
 <p><strong>Note</strong>: Docker Desktop comes free on both Mac and Windows, but it only works with Windows 10 Pro. A workaround is to get <a href="https://docs.docker.com/toolbox/toolbox_install_windows/">Docker Toolbox</a> which will bypass the Windows 10 Pro prerequisite by executing in a VM.</p>
 <hr>
-<h3 id="🚀-setup">🚀 Setup</h3>
+<h3 id="🚀-deployment">🚀 Deployment</h3>
 <h4 id="manual-deployment-without-docker">Manual Deployment without Docker</h4>
 <ul>
 <li><p>Create a .env file using the <code>cp .env.example .env</code> command and replace the existing environment variables with personal configuration settings (username and password database).</p>
@@ -89,7 +89,7 @@ $ docker-compose up -d</code></pre></div><ul>
 <p><strong>DB_DATABASE</strong> - the actual database name to perform operations on.</p>
 <hr>
 <h3 id="🏗-choosing-a-web-framework">🏗 Choosing a Web Framework</h3>
-<p>This boilerplate comes with <a href="https://github.com/fastify/fastify">Fastify</a> out of the box as it offers <a href="https://github.com/nestjs/nest/blob/master/benchmarks/all_output.txt">performance benefits</a> over Express. But this can be changed to use <a href="https://expressjs.com/">Express</a> framework instead of Fastify. Please proceed the steps below to change between the two.</p>
+<p>This boilerplate comes with <a href="https://github.com/fastify/fastify">Fastify</a> out of the box as it offers <a href="https://github.com/nestjs/nest/blob/master/benchmarks/all_output.txt">performance benefits</a> over Express. But this can be changed to use <a href="https://expressjs.com/">Express</a> framework instead of Fastify. Please proceed with the steps below to change between the two.</p>
 <ul>
 <li>Replace the following lines of code in the <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/main.ts">main.ts file</a> with the ones detailed below.</li>
 </ul>
@@ -130,7 +130,8 @@ $ npm rm &#64;nestjs/platform-express express-rate-limit helmet swagger-ui-expre
 $ npm rm &#64;nestjs/platform-fastify fastify-helmet fastify-rate-limit fastify-swagger --save</code></pre></div><hr>
 <h3 id="💾-choosing-a-database">💾 Choosing a Database</h3>
 <p>By default <strong>MYSQL/MariaDB</strong> are the database of choice but support for other database types like SQLite, Postgres, MongoDB, and MSSQL exist. To use anything other than MYSQL/MariaDB, change the configuration in the <code>.env</code> file, and download the corresponding wrapper library, like <a href="https://www.npmjs.com/package/sqlite3">sqlite3</a> if necessary.</p>
-<p><strong>Note: For MongoDB, TypeORM is not as feature-rich as Mongoose. Therefore I created another boilerplate for <a href="https://github.com/msanvarov/nest-rest-mongo-boilerplate">Nest and Mongoose</a></strong>.</p>
+<!-- **Note: For MongoDB, TypeORM is not as feature-rich as Mongoose. Therefore I created another boilerplate for [Nest and Mongoose](https://github.com/msanvarov/nest-rest-mongo-boilerplate)**. -->
+
 <hr>
 <h3 id="✅-testing">✅ Testing</h3>
 <h4 id="docker-🐳-1">Docker 🐳</h4>
