@@ -1,4 +1,4 @@
-import { ExtractJwt, Strategy, JwtPayload } from 'passport-jwt';
+import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 
@@ -28,11 +28,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   /**
    * Checks if the bearer token is a valid token
-   * @param {JwtPayload} jwtPayload validation method for jwt token
-   * @param {any} done callback to resolve the request user with
-   * @returns {Promise<boolean>} whether or not to validate the jwt token
+   * @param {any} jwtPayload validation method for jwt token
+   * @returns {Promise<object>} a object to be signed
    */
-  async validate({ iat, exp, id }: JwtPayload, done): Promise<boolean> {
+  async validate({ iat, exp, id }: any): Promise<object> {
     const timeDiff = exp - iat;
     if (timeDiff <= 0) {
       throw new UnauthorizedException();
@@ -44,7 +43,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
 
     delete profile.password;
-    done(null, { ...profile, roles: profile.roles.map(role => role.role) });
-    return true;
+    return { ...profile, roles: profile.roles.map(role => role.role) };
   }
 }
