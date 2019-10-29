@@ -11,7 +11,7 @@ import { AuthGuard } from '@nestjs/passport';
 export class AppController {
   /**
    * Constructor
-   * @param appService
+   * @param {AppService} appService app service
    */
   constructor(private readonly appService: AppService) {}
 
@@ -21,8 +21,8 @@ export class AppController {
    */
   @Get()
   @UseGuards(AuthGuard('jwt'))
-  @ApiResponse({ status: 200, description: 'Request Received' })
-  @ApiResponse({ status: 400, description: 'Request Failed' })
+  @ApiResponse({ status: 200, description: 'Root Request Completed' })
+  @ApiResponse({ status: 400, description: 'Root Request Failed' })
   root(): string {
     return this.appService.root();
   }
@@ -34,8 +34,8 @@ export class AppController {
    */
   @Get('request/user')
   @UseGuards(AuthGuard('jwt'))
-  @ApiResponse({ status: 200, description: 'Request Received' })
-  @ApiResponse({ status: 400, description: 'Request Failed' })
+  @ApiResponse({ status: 200, description: 'User Metadata Request Completed' })
+  @ApiResponse({ status: 400, description: 'User Metadata Request Failed' })
   getRequestUser(@Req() req): Partial<Request> {
     return req.user;
   }

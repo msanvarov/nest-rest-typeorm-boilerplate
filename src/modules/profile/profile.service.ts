@@ -43,7 +43,7 @@ export class ProfileService {
   /**
    * Fetches profile from database by UUID
    * @param {number} id
-   * @returns {Promise<Profile>} queried profile data
+   * @returns {Promise<Profile>} data from queried profile
    */
   get(id: number): Promise<Profile> {
     return this.profileRepository.findOne(id, { relations: ['roles'] });
@@ -52,7 +52,7 @@ export class ProfileService {
   /**
    * Fetches profile from database by username
    * @param {string} username
-   * @returns {Promise<Profile>} queried profile data
+   * @returns {Promise<Profile>} data from queried profile
    */
   getByUsername(username: string): Promise<Profile> {
     return this.profileRepository.findOne({ username });
@@ -62,7 +62,7 @@ export class ProfileService {
    * Fetches profile by username and hashed password
    * @param {string} username
    * @param {string} password
-   * @returns {Promise<Profile>} queried profile data
+   * @returns {Promise<Profile>} data from queried profile
    */
   getByUsernameAndPass(username: string, password: string): Promise<Profile> {
     return this.profileRepository
@@ -79,7 +79,7 @@ export class ProfileService {
   /**
    * Create a profile with RegisterPayload fields
    * @param {RegisterPayload} payload profile payload
-   * @returns {Promise<Profile>} created profile data
+   * @returns {Promise<Profile>} data from the created profile
    */
   async create(payload: RegisterPayload): Promise<Profile> {
     const profile = await this.getByUsername(payload.username);
@@ -90,7 +90,7 @@ export class ProfileService {
       );
     }
 
-    // keep making roles for a particular profile, these roles are defined from AppRoles enum.
+    // keep making default roles for every created profile, these roles are defined from AppRoles enum.
     const roles: Roles[] = [new Roles()];
     await this.rolesRepository.save(roles);
     return this.profileRepository.save(
@@ -133,7 +133,7 @@ export class ProfileService {
   /**
    * Delete profile given a username
    * @param {string} username
-   * @returns {Promise<IGenericMessageBody>} whether or not the crud operation was completed
+   * @returns {Promise<IGenericMessageBody>} whether or not the delete operation was completed
    */
   async delete(username: string): Promise<IGenericMessageBody> {
     const deleted = await this.profileRepository.delete({ username });

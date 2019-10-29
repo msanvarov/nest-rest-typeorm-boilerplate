@@ -10,7 +10,7 @@ export class AppService {
   /**
    * Constructor
    * @param {ConfigService} config configuration service
-   * @param {Logger} logger logger service
+   * @param {Logger} logger logging service
    */
   constructor(
     private readonly config: ConfigService,
@@ -18,7 +18,7 @@ export class AppService {
   ) {}
 
   /**
-   * Fetches and logs the APP_URL environment variable from the configuration file.
+   * Fetches and logs the APP_URL environment variable from a configuration file.
    * @returns {string} the application url
    */
   root(): string {
