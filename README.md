@@ -145,9 +145,10 @@ $ npm rm @nestjs/platform-fastify fastify-helmet fastify-rate-limit fastify-swag
 
 ### 💾 Choosing a Database
 
-By default **MYSQL/MariaDB** are the database of choice but TypeORM supports other database types like SQLite, Postgres, MongoDB, and MSSQL. To use anything other than MYSQL/MariaDB, change the configuration in the `.env` file, and download the corresponding wrapper library, like [SQLite3](https://www.npmjs.com/package/sqlite3) if necessary.
+By default **MYSQL/MariaDB** are the database of choice but TypeORM supports other database types like SQLite, Postgres, MongoDB, and MSSQL. To use anything other than MYSQL/MariaDB, change the configuration in the `.env` file, and download the corresponding wrapper library, like [SQLite3](https://www.npmjs.com/package/sqlite3) if necessary. Of course that is assuming a proper 
+setup of the database has been completed on a local machine.
 
-<!-- **Note: For MongoDB, TypeORM is not as feature-rich as Mongoose. Therefore I created another boilerplate for [Nest and Mongoose](https://github.com/msanvarov/nest-rest-mongo-boilerplate)**. -->
+**Note: For MongoDB, TypeORM is not as feature-rich as Mongoose. Therefore I created another boilerplate only for [Nest and Mongoose](https://github.com/msanvarov/nest-rest-mongo-boilerplate)**.
 
 ---
 
@@ -198,7 +199,7 @@ $ npm run typedocs
 
 Out of the box, the web app comes with Swagger; an  [open api specification](https://swagger.io/specification/), that is used to describe RESTful APIs. Nest provides a  [dedicated module to work with it](https://docs.nestjs.com/recipes/swagger).
 
-The configuration for Swagger can be found at this [location](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/tree/master/src/swagger).
+The configuration for Swagger can be found at this [location](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/main.ts#L12-L61).
 
 ---
 
@@ -206,13 +207,13 @@ The configuration for Swagger can be found at this [location](https://github.com
 
 TypeORM is an object-relational mapping that acts as an abstraction layer over operations on databases. Please view the [documentation](https://typeorm.io/#/) for further details.
 
-The configuration for TypeORM can be found in the [app module](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/modules/app/app.module.ts#L17).
+The configuration for TypeORM can be found in the [app module](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/modules/app/app.module.ts#L17-L33).
 
 ---
 
 ### 🔊 Logs
 
-This boilerplate comes with a Winston module for logging, the configurations for Winston can be found in the [app module](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/modules/main/app.module.ts#L24).
+This boilerplate comes with a Winston module for logging, the configurations for Winston can be found in the [app module](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/modules/app/app.module.ts#L34-L71).
 
 ---
 
@@ -227,7 +228,9 @@ This boilerplate comes with a Winston module for logging, the configurations for
 
 ### 👥 Support
 
-Nest has been able to grown because of sponsors and support from backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+PR are appreciated, I fully rely on the goodness ❤️ of the people.
+Nest is an MIT-licensed open source project with its ongoing development made possible thanks to the support by the community. This framework is a result of the long road, full of sleepless nights, working after hours, and busy weekends.
+
 
 ---
 
