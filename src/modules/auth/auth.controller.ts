@@ -1,5 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { ApiResponse, ApiUseTags } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthService, ITokenReturnBody } from './auth.service';
 import { LoginPayload } from './payload/login.payload';
 import { RegisterPayload } from './payload/register.payload';
@@ -8,7 +8,7 @@ import { ProfileService } from '../profile/profile.service';
 /**
  * Authentication Controller
  */
-@ApiUseTags('authentication')
+@ApiTags('authentication')
 @Controller('api/auth')
 export class AuthController {
   /**
