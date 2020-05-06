@@ -39,7 +39,6 @@ export const SWAGGER_API_CURRENT_VERSION = '1.0';
     .setTitle(SWAGGER_API_NAME)
     .setDescription(SWAGGER_API_DESCRIPTION)
     .setVersion(SWAGGER_API_CURRENT_VERSION)
-    .addServer(process.env.NODE_ENV === 'production' ? 'https' : 'http')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
