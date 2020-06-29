@@ -61,7 +61,7 @@
     "@types/jest": "26.0.3",
     "@types/node": "13.13.5",
     "@types/passport-jwt": "3.0.3",
-    "@types/supertest": "2.0.9",
+    "@types/supertest": "2.0.10",
     "chai": "4.2.0",
     "jest": "26.1.0",
     "nodemon": "2.0.4",
