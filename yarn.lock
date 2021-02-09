@@ -3184,10 +3184,10 @@ fastify-static@^3.3.0:
     readable-stream "^3.4.0"
     send "^0.17.1"
 
-fastify-swagger@4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/fastify-swagger/-/fastify-swagger-4.2.0.tgz#841cae609c7a3003d1ce3e53157d1871b69bded1"
-  integrity sha512-fQ0tHi1yW49vtVwzQ70q5JtzO3VOQvtCkCveGu5q1++9txKK4MQtjImVF3jRFGPgQoI2kvacWfUcEYfJJIwiiw==
+fastify-swagger@4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/fastify-swagger/-/fastify-swagger-4.3.0.tgz#9f9822ed702460f8867328921f2ac3c85ade01ff"
+  integrity sha512-r1KQ7zH5qMCTxTBiNp2p7azldDVzillxpdi7cNIp00WdufaH2zzzov98SNJ0b8ecgh+4ysbxRw3x60Z+Ri54kg==
   dependencies:
     fastify-plugin "^3.0.0"
     fastify-static "^3.3.0"
