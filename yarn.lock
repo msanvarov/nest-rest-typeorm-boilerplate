@@ -708,10 +708,10 @@
     path-to-regexp "3.2.0"
     tslib "2.1.0"
 
-"@nestjs/swagger@4.7.13":
-  version "4.7.13"
-  resolved "https://registry.yarnpkg.com/@nestjs/swagger/-/swagger-4.7.13.tgz#2640c8f5e30e98dda5072f12255d481f71faa6ce"
-  integrity sha512-KqFjkx6NOhRVRU4EBu42es/SjopqDwnAfgBCUPer+rKoMUCDMp/hF6dRoH7Z874whPho9pzGcAXBNMxo4/AGdg==
+"@nestjs/swagger@4.7.15":
+  version "4.7.15"
+  resolved "https://registry.yarnpkg.com/@nestjs/swagger/-/swagger-4.7.15.tgz#72baa08c246903006da0a4ef3803aa01749bd585"
+  integrity sha512-Nfj/s3Rp+pk4bzLWjDCkYF0rrp8g+KTfSjP5w6hxnIYV2nSuQuD0joJFVnSj91wyTeMULvCQ4/FEUzxP8Qmi1Q==
   dependencies:
     "@nestjs/mapped-types" "0.3.0"
     lodash "4.17.20"
