@@ -2179,7 +2179,7 @@ consola@^2.15.0:
   resolved "https://registry.yarnpkg.com/consola/-/consola-2.15.0.tgz#40fc4eefa4d2f8ef2e2806147f056ea207fcc0e9"
   integrity sha512-vlcSGgdYS26mPf7qNi+dCisbhiyDnrN1zaRbw3CSuc2wGOMEGGPsp46PdRG5gqXwgtJfjxDkxRNAgRPr1B77vQ==
 
-content-disposition@0.5.3:
+content-disposition@0.5.3, content-disposition@^0.5.3:
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/content-disposition/-/content-disposition-0.5.3.tgz#e130caf7e7279087c5616c2007d0485698984fbd"
   integrity sha512-ExO0774ikEObIAEV9kDo50o+79VCUdEB6n6lzKgGwupcVeRlhrj3qGAfwq8G6uBJjkqLrhT0qEYFcWng8z1z0g==
@@ -3192,23 +3192,24 @@ fastify-rate-limit@5.4.1:
     ms "^2.1.1"
     tiny-lru "^7.0.0"
 
-fastify-static@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/fastify-static/-/fastify-static-3.3.0.tgz#33b639f1fa6fde703326a9ef353d6b1469146f46"
-  integrity sha512-NaaeGWz25TmCYTGR8z90rhpfCuQqxDJauMC7fUTaswtxkM5CUmGGpwInm5/A55qfn9MbUQbPOWtWwSvhY73xHg==
+fastify-static@^4.0.0:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/fastify-static/-/fastify-static-4.0.1.tgz#28947728b2b4c9360eeea8a92ae7b36a0e38b273"
+  integrity sha512-Mjt0My8Gf/nzJqIDai9rz3HsxH4RAJeMGMIPmf40lGMFKAv4SbRiKJ2cmteXoKHrFGPeGxwMq0gXfixwueV8wA==
   dependencies:
+    content-disposition "^0.5.3"
     fastify-plugin "^3.0.0"
     glob "^7.1.4"
     readable-stream "^3.4.0"
     send "^0.17.1"
 
-fastify-swagger@4.3.1:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/fastify-swagger/-/fastify-swagger-4.3.1.tgz#e0ff12a61c7c867544608bb40bb4e989fd418113"
-  integrity sha512-oB8BXr1Dl7bu3hBd+0v41N0x55FR++G21/pe/WCmK5mjHAjTqHqxkXDg4UWW1+cD7/d+Ve7Rv2rsSUQhgTzqyQ==
+fastify-swagger@4.3.2:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/fastify-swagger/-/fastify-swagger-4.3.2.tgz#94e0cc7134c1eb16b9c7d94542f46327ddb4786a"
+  integrity sha512-GdnLsgIwLyaG+10w9XvfdpepZQOnnkHpWqizBYldLBELtNx+txVgVWBf1RnzLgEACthG1fSq7/sR/8M+SG33Mw==
   dependencies:
     fastify-plugin "^3.0.0"
-    fastify-static "^3.3.0"
+    fastify-static "^4.0.0"
     js-yaml "^4.0.0"
     json-schema-resolver "^1.2.0"
     openapi-types "^7.2.3"
