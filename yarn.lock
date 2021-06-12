@@ -1113,10 +1113,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/gravatar@1.8.1":
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/@types/gravatar/-/gravatar-1.8.1.tgz#28a7718338b4d56a1c1e5d8c60fdc6b1f5262f2e"
-  integrity sha512-j9yLS2opf24/ba3AwAdR3FuvCOuZfhwnLiKT6qhlwDI+aHMHKLuvW6K1rwkQ0JgPZVb56HSAY3l4APJdBxdKEQ==
+"@types/gravatar@1.8.2":
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/@types/gravatar/-/gravatar-1.8.2.tgz#91a3c2b1eff2f5a779dc95f8644892fc800e64a1"
+  integrity sha512-uh841nlXT1GBu2fzgFXe06s2b2ybX/ZMgOofS7DNMiw6l3FpFJJOt8dtUgGylKQK5mcdQinrU4PNiQnXD8KIOw==
 
 "@types/hapi__joi@17.1.6":
   version "17.1.6"
