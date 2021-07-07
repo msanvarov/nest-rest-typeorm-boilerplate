@@ -902,12 +902,12 @@
     optional "0.1.4"
     tslib "2.3.0"
 
-"@nestjs/typeorm@7.1.5":
-  version "7.1.5"
-  resolved "https://registry.yarnpkg.com/@nestjs/typeorm/-/typeorm-7.1.5.tgz#50e3bf85ff8cf78d47d8dd19210c5f02b488f5e3"
-  integrity sha512-utE1FkYM/gyCXUqw3zKYYS0YZ3DfkAnzsCx4T48cNnSDTCeWS+u3yt0FMDFjwSiQSaLrzpiSff/FaxJQvRlYow==
+"@nestjs/typeorm@8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@nestjs/typeorm/-/typeorm-8.0.0.tgz#974fd83933e44b4ecf7321fa06ed91c36da99c82"
+  integrity sha512-KbiGzkoNM+wdrJfqUZ+eJFeyNMR/HeMpE+uleHAnggt+bNqRzPWuiwY0B/ris3TpU9iUYmD4RJYvky13XD4s8w==
   dependencies:
-    uuid "8.3.1"
+    uuid "8.3.2"
 
 "@nodelib/fs.stat@^1.1.2":
   version "1.1.3"
@@ -7600,11 +7600,6 @@ utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
-
-uuid@8.3.1:
-  version "8.3.1"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.1.tgz#2ba2e6ca000da60fce5a196954ab241131e05a31"
-  integrity sha512-FOmRr+FmWEIG8uhZv6C2bTgEVXsHk08kE7mPlrBbEe+c3r9pjceVPgupIfNIhc4yx55H69OXANrUaSuu9eInKg==
 
 uuid@8.3.2:
   version "8.3.2"
