@@ -2004,10 +2004,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/gravatar@1.8.2":
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/@types/gravatar/-/gravatar-1.8.2.tgz#91a3c2b1eff2f5a779dc95f8644892fc800e64a1"
-  integrity sha512-uh841nlXT1GBu2fzgFXe06s2b2ybX/ZMgOofS7DNMiw6l3FpFJJOt8dtUgGylKQK5mcdQinrU4PNiQnXD8KIOw==
+"@types/gravatar@1.8.3":
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/@types/gravatar/-/gravatar-1.8.3.tgz#a7d9175d96e0ac54e3ea2dd02a3ed83785ba1c19"
+  integrity sha512-F4Ij02yEI2+hr7aMCrM8syaU9pN16cSJIxnFf/ccVNQ+HrKzgVz8Kn0ZJhWzCJM+UnELHO/OGKTW0O646vk/HA==
 
 "@types/hapi__joi@17.1.7":
   version "17.1.7"
