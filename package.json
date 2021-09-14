@@ -59,7 +59,7 @@
     "@types/gravatar": "1.8.3",
     "@types/hapi__joi": "17.1.7",
     "@types/jest": "27.0.1",
-    "@types/node": "14.17.15",
+    "@types/node": "14.17.16",
     "@types/passport-jwt": "3.0.6",
     "@types/supertest": "2.0.11",
     "chai": "4.3.4",
