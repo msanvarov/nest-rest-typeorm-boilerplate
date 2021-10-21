@@ -1958,10 +1958,10 @@
     path-to-regexp "3.2.0"
     tslib "2.3.1"
 
-"@nestjs/swagger@5.1.1":
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/@nestjs/swagger/-/swagger-5.1.1.tgz#c5ab24f01758fbfa50e686cd7f2912659402cdb6"
-  integrity sha512-vdfTv/gpibGNwG9gmryG5zdVXR65ia6myteWju9FPpZaoICphzAUZotV23dF75JzpwV2Zv+CGkXOxUiqsjxCdg==
+"@nestjs/swagger@5.1.2":
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/@nestjs/swagger/-/swagger-5.1.2.tgz#1a3ee0c43f626241397c413ddca97d5e0d71e1e1"
+  integrity sha512-epeHumqjoeo3UwM9/DtzhqGD8ItM+GM2+qupYfq5CpwcmCBMkA382q2p+aklQYULS4cikDbQauuOO4q/ubJxCw==
   dependencies:
     "@nestjs/mapped-types" "1.0.0"
     lodash "4.17.21"
