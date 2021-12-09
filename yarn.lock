@@ -6075,10 +6075,10 @@ neo-async@^2.6.0:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
 
-nest-access-control@2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/nest-access-control/-/nest-access-control-2.0.2.tgz#6006204352306e33f576bbce749379b3043b5df8"
-  integrity sha512-PBDygolc0ThNdCDAP/0ipp21itGDO3yxbAMh/egb1k+bRPxl7/Iuz65jnTKwNhmEBRMupkaX+zY7vxTAcsbsuQ==
+nest-access-control@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/nest-access-control/-/nest-access-control-2.0.3.tgz#c1e81355e3e406bfa308435b5ee61652e6c47174"
+  integrity sha512-oRMhSrMdvSLuAXYokWmLSafvOf+dVGOgRYgelWWGLZZYXxj3DbgGua9DwXRiqp3hbmoT8dP5HZVoa5UPbBqrdg==
   dependencies:
     accesscontrol "^2.2.1"
 
