@@ -63,7 +63,7 @@
     "@types/passport-jwt": "3.0.6",
     "@types/supertest": "2.0.12",
     "chai": "4.3.6",
-    "jest": "28.0.1",
+    "jest": "28.0.2",
     "nodemon": "2.0.15",
     "prettier": "2.6.2",
     "supertest": "6.2.3",
