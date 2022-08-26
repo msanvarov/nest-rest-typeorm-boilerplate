@@ -1,12 +1,8 @@
-import helmet from '@fastify/helmet';
-import fastifyRateLimiter from '@fastify/rate-limit';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import {
-  FastifyAdapter,
-  NestFastifyApplication,
-} from '@nestjs/platform-fastify';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import expressRateLimiter from 'express-rate-limit';
+import headers from 'helmet';
 
 import { AppModule } from './app.module';
 
@@ -32,31 +28,23 @@ export const OPEN_API_DESCRIPTION = 'API Description';
 export const OPEN_API_CURRENT_VERSION = '1.0';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestFastifyApplication>(
-    AppModule,
-    new FastifyAdapter({ logger: true }),
-  );
+  const app = await NestFactory.create(AppModule, { logger: console });
 
   const options = new DocumentBuilder()
     .setTitle(OPEN_API_NAME)
-    .setBasePath('api')
     .setDescription(OPEN_API_DESCRIPTION)
     .setVersion(OPEN_API_CURRENT_VERSION)
     .addBearerAuth()
     .build();
 
   app.enableCors();
-  app.register(helmet, {
-    contentSecurityPolicy: {
-      directives: {
-        'script-src-attr': ["'unsafe-inline'"],
-      },
-    },
-  });
-  app.register(fastifyRateLimiter, {
-    max: 100,
-    timeWindow: '1 minute',
-  });
+  app.use(headers());
+  app.use(
+    expressRateLimiter({
+      max: 100,
+      windowMs: 60 * 1000, // 1 minute,
+    }),
+  );
   app.useGlobalPipes(new ValidationPipe());
 
   const globalPrefix = 'api';
