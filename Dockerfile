@@ -16,4 +16,4 @@ COPY .env.example .env
 EXPOSE 9000
 
 # Start the app
-CMD [ "npm", "run", "start:dev"]
+CMD [ "npm", "run", "start"]
