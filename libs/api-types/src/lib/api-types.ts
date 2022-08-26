@@ -1,4 +1,4 @@
-export interface Message {
+export interface IMessage {
   message: string;
 }
 
@@ -9,7 +9,7 @@ export interface ITokenReturnBody {
   /**
    * When the token is to expire in seconds
    */
-  expiresIn: string;
+  expiresIn: number;
   /**
    * A human-readable format of expires
    */

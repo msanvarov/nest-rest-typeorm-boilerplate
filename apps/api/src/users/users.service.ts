@@ -58,8 +58,8 @@ export class UsersService {
    */
   getByUsernameAndPass(username: string, password: string): Promise<User> {
     return this.userRepository
-      .createQueryBuilder('profiles')
-      .where('profiles.username = :username and profiles.password = :password')
+      .createQueryBuilder('users')
+      .where('users.username = :username and users.password = :password')
       .setParameter('username', username)
       .setParameter(
         'password',

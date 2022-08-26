@@ -16,9 +16,9 @@ import { LoginDto } from './dto/login.dto';
 export class AuthService {
   /**
    * Time in seconds when the token is to expire
-   * @type {string}
+   * @type {number}
    */
-  private readonly expiration: string;
+  private readonly expiration: number;
 
   /**
    * Constructor
@@ -45,7 +45,6 @@ export class AuthService {
     roles,
     email,
   }: User): Promise<ITokenReturnBody> {
-    console.log(this.expiration);
     return {
       expiresIn: this.expiration,
       expiresInFormatted: moment()
@@ -71,6 +70,7 @@ export class AuthService {
       username,
       password,
     );
+
     if (!user) {
       throw new UnauthorizedException(
         'Could not authenticate. Please try again',
