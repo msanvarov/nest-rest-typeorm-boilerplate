@@ -23,7 +23,7 @@ Table of Contents:
 [Choosing a Web Framework](#-choosing-a-web-framework) |
 [Choosing a Database](#-choosing-a-database) |
 [Testing](#-testing) |
-[TypeDocs](#-typedocs) |  
+[TypeDocs](#-typedocs) |
 [Logs](#-logs)
 
 🔎 This repo was created with [Nx](https://nx.dev/).
@@ -77,21 +77,19 @@ $ docker-compose up -d
 
 By default, the application comes with a config module that can read in every environment variable from the `.env` file.
 
-**APP_ENV** - the application environment to execute as, either in development or production. Determines the type of logging options to utilize. Options: `dev` or `prod`.
-
-**APP_URL** - the base URL for the application. Made mainly to showcase the power of `ConfigService` and can be removed as it doesn't serve any other purpose
+**APP_ENV** - the application environment to execute as, either in development or production. Determines the type of logging options to utilize. Options: `development` or `production`.
 
 **WEBTOKEN_ENCRYPTION_KEY** - the key to encrypt/decrypt web tokens with. Make sure to generate a random alphanumeric string for this.
 
-**WEBTOKEN_EXPIRATION_TIME** - **the time in seconds** indicating when the web token will expire; by default, it's 2400 seconds which is 40 mins.
+**WEBTOKEN_EXPIRATION_TIME** - **the time in seconds** when the web token will expire; by default, it's 2400 seconds which is 40 mins.
 
 **DB_TYPE** - the type of [database connection to use](https://github.com/typeorm/typeorm/blob/master/docs/connection-options.md).
 
 **DB_USERNAME** - username for authenticating against the database.
 
-**DB_PASSWORD** - password for authenticating against the database, can be left empty if a password is not needed (not recommended).
+**DB_PASSWORD** - password for authenticating against the database, can be left empty if a password is not needed (**not safe**).
 
-**DB_HOST** - the endpoint where this database sits (usually localhost but can be a static address).
+**DB_HOST** - the endpoint where this database sits (default is localhost but can be set explicitly).
 
 **DB_PORT** - default ports for different types of database connections.
 
@@ -120,27 +118,19 @@ By default **MYSQL/MariaDB** are the database of choice but TypeORM supports oth
 #### Docker 🐳
 
 ```bash
+# Start the docker container if it's not running
+$ docker start nest-rest-typeorm-api
+
 # unit tests
-$ docker exec -it nest yarn test
+$ docker exec -it nest-rest-typeorm-api npm run test
 
-# e2e tests
-$ docker exec -it nest yarn test:e2e
-
-# test coverage
-$ docker exec -it nest yarn test:cov
 ```
 
 #### Non-Docker
 
 ```bash
-# unit tests
+# execute test
 $ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
 ---
@@ -149,11 +139,13 @@ $ npm run test:cov
 
 The documentation for this boilerplate can be found [on Github pages](https://msanvarov.github.io/nest-rest-typeorm-boilerplate/).
 
-The docs can be generated on-demand, simply, by typing `npm run typedocs`. This will produce a **docs** folder with the required front-end files and **start hosting on [localhost](http://localhost:8080/)**.
+The docs can be generated on-demand, by typing `npm run typedocs:api:start`. This will produce a **docs/api** folder with the required front-end files and **start hosting on [localhost](http://localhost:8080/)**.
+
+> Remark: The docs for the ui are generated on-demand, by typing `npm run typedocs:ui:start`. This will produce a **docs/ui** folder with the required front-end files and **start hosting on [localhost](http://localhost:8080/)**.
 
 ```bash
-# generate docs for code
-$ npm run typedocs
+# generate docs for api code
+$ npm run typedocs:api:start
 ```
 
 ---

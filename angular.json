@@ -4,7 +4,7 @@
   "projects": {
     "api": "apps/api",
     "api-types": "libs/api-types",
-    "starter": "apps/starter",
-    "starter-e2e": "apps/starter-e2e"
+    "ui": "apps/ui",
+    "ui-e2e": "apps/ui-e2e"
   }
 }
