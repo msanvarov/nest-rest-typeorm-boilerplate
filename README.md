@@ -19,9 +19,12 @@ Table of Contents:
 [Description](#-description) |
 [Prerequisites](#%EF%B8%8F-prerequisites) |
 [Deployment](#-deployment) |
+[Environment Configuration](#-environment-configuration) |
+[Choosing a Web Framework](#-choosing-a-web-framework) |
+[Choosing a Database](#-choosing-a-database) |
 [Testing](#-testing) |
-[TypeDocs](#-typedocs) |
-[Progress](#-progress)
+[TypeDocs](#-typedocs) |  
+[Logs](#-logs)
 
 🔎 This repo was created with [Nx](https://nx.dev/).
 
@@ -55,7 +58,7 @@ This boilerplate is made to quickly prototype backend applications. It comes wit
 
 - Create a **.env file** via the `cp .env.example .env` command and replace the existing environment variable placeholders with valid responses.
 
-- Start the app in development mode by using `npm run start` (the app will be exposed on the [port 4200](http://localhost:4200); not to conflict with React, Angular, or Vue ports).
+- Start the app in development mode by using `npm run start` (the app will be exposed on http://localhost:4200; not to conflict with React, Angular, or Vue ports).
 
 #### Deploying with Docker 🐳
 
@@ -67,6 +70,8 @@ $ docker-compose up -d
 ```
 
 - The following command will download dependencies and execute the web application on http://localhost:4200.
+
+---
 
 ### 🔒 Environment Configuration
 
@@ -96,74 +101,17 @@ By default, the application comes with a config module that can read in every en
 
 ### 🏗 Choosing a Web Framework
 
-This boilerplate comes with [Fastify](https://github.com/fastify/fastify) out of the box as it offers [performance benefits](https://github.com/nestjs/nest/blob/master/benchmarks/all_output.txt) over Express. But this boilerplate is modular enough to use the [Express](https://expressjs.com/) framework instead of Fastify.
-
-Replace the following lines of code in the [main.ts file](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/main.ts) with the ones detailed below:
-
-Fastify:
-
-```ts
-// to fastify:
-import {
-  FastifyAdapter,
-  NestFastifyApplication,
-} from '@nestjs/platform-fastify';
-import * as headers from 'fastify-helmet';
-import * as fastifyRateLimiter from 'fastify-rate-limit';
-
-const app = await NestFactory.create<NestFastifyApplication>(
-  AppModule,
-  new FastifyAdapter({ logger: console }),
-);
-app.register(headers);
-app.register(fastifyRateLimiter, {
-  max: 100,
-  timeWindow: '1 minute',
-});
-```
-
-Express:
-
-```ts
-// to express:
-import * as rateLimiter from 'express-rate-limit';
-import * as headers from 'helmet';
-
-const app = await NestFactory.create(AppModule, {
-  logger: console,
-});
-app.use(headers());
-app.use(
-  rateLimiter({
-    windowMs: 60, // 1 minutes
-    max: 100, // limit each IP to 100 requests per windowMs
-  }),
-);
-```
-
-> Remark: The boilerplate comes with production dependencies for both Express and Fastify to enable migrating between the two. But this leaves it in a bloated state when only **one web framework is deployed**. Thus, **it is highly encouraged that when deploying to production, unused dependencies are purged.**
-
-If you choose to **use Fastify**, this command will **purge all of the Express dependencies**:
-
-```bash
-# removing Express dependencies
-$ npm rm @nestjs/platform-express express-rate-limit helmet swagger-ui-express @types/express --save
-```
-
-If you choose to **use Express**, this command will **purge all of the Fastify dependencies**:
-
-```bash
-# removing Fastify dependencies
-$ npm rm @nestjs/platform-fastify fastify-helmet fastify-rate-limit fastify-swagger --save
-```
+This boilerplate comes with [Fastify](https://github.com/fastify/fastify) out of the box as it offers [performance benefits](https://github.com/nestjs/nest/blob/master/benchmarks/all_output.txt) over Express. But the Express version is still accessible on a [different branch](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/tree/express).
 
 ---
 
 ### 💾 Choosing a Database
 
-By default **MYSQL/MariaDB** are the database of choice but TypeORM supports other database types like SQLite, Postgres, MongoDB, and MSSQL. To use anything other than MYSQL/MariaDB, change the configuration in the `.env` file, and download the corresponding wrapper library, like [SQLite3](https://www.npmjs.com/package/sqlite3) if necessary.
+By default **MYSQL/MariaDB** are the database of choice but TypeORM supports other database types like SQLite, Postgres, MongoDB, and MSSQL. To use anything other than MYSQL/MariaDB, change the configuration in the `.env` file, and download the corresponding wrapper library, like [SQLite3](https://www.npmjs.com/package/sqlite3).
 
-**Note: For MongoDB, TypeORM is not as feature-rich as Mongoose. Therefore I created another boilerplate for [Nest and Mongoose](https://github.com/msanvarov/nest-rest-mongo-boilerplate)**.
+> Check https://typeorm.io/ for supported database types.
+
+**Remark: For MongoDB, TypeORM is not as feature-rich as Mongoose. Therefore I created another boilerplate for [Nest and Mongoose](https://github.com/msanvarov/nest-rest-mongo-boilerplate)**.
 
 ---
 
@@ -212,9 +160,9 @@ $ npm run typedocs
 
 ### 📝 Open API
 
-Out of the box, the web app comes with Swagger; an [open api specification](https://swagger.io/specification/), that is used to describe RESTful APIs. Nest provides a [dedicated module to work with it](https://docs.nestjs.com/recipes/swagger).
+Out of the box, the web app comes with Swagger; an [open api specification](https://swagger.io/specification/), that is used to describe RESTful APIs. Nest provides a [dedicated module to work with it](https://docs.nestjs.com/openapi/introduction).
 
-The configuration for Swagger can be found at this [location](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/tree/master/src/swagger).
+The configuration for Swagger can be found at this [location](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/apps/api/src/main.ts).
 
 ---
 
@@ -222,22 +170,24 @@ The configuration for Swagger can be found at this [location](https://github.com
 
 TypeORM is an object-relational mapping that acts as an abstraction layer over operations on databases. Please view the [documentation](https://typeorm.io/#/) for further details.
 
-The configuration for TypeORM can be found in the [app module](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/modules/app/app.module.ts#L17).
+The configuration for TypeORM can be found in the [app module](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/apps/api/src/app.module.ts#L33-L51).
 
 ---
 
 ### 🔊 Logs
 
-This boilerplate comes with a Winston module for logging, the configurations for Winston can be found in the [app module](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/modules/main/app.module.ts#L24).
+This boilerplate comes with a Winston module for **extensive logging**, the configurations for Winston can be found in the [app module](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/apps/api/src/app.module.ts#L52-L89).
 
 ---
 
 ### 🏗️ Progress
 
-|                                                         Branches | Status |
-| ---------------------------------------------------------------: | :----- |
-|             [main](https://github.com/msanvarov/fitness-manager) | ✅     |
-| [feat/\*](https://github.com/msanvarov/fitness-manager/branches) | 🚧     |
+|                                                                       Branches | Status |
+| -----------------------------------------------------------------------------: | :----- |
+|             [main](https://github.com/msanvarov/nest-rest-typeorm-boilerplate) | ✅     |
+| [feat/\*](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/branches) | 🚧     |
+
+<!-- > Remark: This template was employed to create a [Real World example app](https://github.com/gothinkster/realworld) on [Github](). -->
 
 ---
 
