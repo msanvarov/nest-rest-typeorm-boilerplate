@@ -15,4 +15,4 @@ RUN npm run build
 #Expose port and begin application
 EXPOSE 3333
 
-CMD [ "node", "dist/apps/api/main.js" ]
+CMD ["node", "dist/apps/api/main.js"]
