@@ -69,7 +69,7 @@ This boilerplate is made to quickly prototype backend applications. It comes wit
 $ docker-compose up -d
 ```
 
-- The following command will download dependencies and execute the web application on http://localhost:4200.
+- The following command will download dependencies and execute the web application on http://localhost:80 (deployed behind a Nginx reverse proxy).
 
 ---
 

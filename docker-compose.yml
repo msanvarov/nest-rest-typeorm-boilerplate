@@ -1,37 +1,44 @@
 version: '3'
 services:
-  nest:
+  api:
     build: .
-    container_name: nest
+    container_name: nest-rest-typeorm-api
     depends_on:
       - db
-    volumes:
-      - ./src:/app/src
-      - .env:/app/.env
-
+    environment:
+      APP_ENV: development
+      WEBTOKEN_ENCRYPTION_KEY: uAsBw6WxqD
+      WEBTOKEN_EXPIRATION_TIME: 2400
+      DB_TYPE: mysql
+      DB_USERNAME: root
+      DB_PASSWORD: password
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: nest
+    links:
+      - db
   nginx:
     build:
       context: .
       dockerfile: Dockerfile-Nginx
-    container_name: nest-nginx
+    container_name: nest-rest-typeorm-api-nginx
     depends_on:
-      - nest
+      - api
     environment:
-      - NGINX_SERVER_NAME=localhost
-      - NEST_HOST=nest
-      - NEST_PORT=9001
-      - NGINX_MAX_BODY=100M
+      NEST_HOST: api
+      NGINX_SERVER_NAME: localhost
+      NEST_PORT: 3333
+      NGINX_MAX_BODY: 100M
     ports:
       - 80:80
-
+    links:
+      - api
   db:
-    image: mariadb:10
+    image: mysql:5-oracle
     container_name: nest-db
     environment:
       MYSQL_DATABASE: nest
-      MYSQL_USER: root
-      MYSQL_PASSWORD:
-      MYSQL_ROOT_PASSWORD:
+      MYSQL_ROOT_PASSWORD: password
     ports:
       - 3306:3306
     volumes:
