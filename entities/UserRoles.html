@@ -28,16 +28,17 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content controller">
+               <div class="content entity">
                    <div class="content-data">
 
 
 
 
 
+
 <ol class="breadcrumb">
-  <li>Controllers</li>
-  <li >AppController</li>
+  <li>Entities</li>
+  <li >UserRoles</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -55,41 +56,44 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>apps/api/src/app.controller.ts</code>
+            <code>apps/api/src/users/user-role.entity.ts</code>
         </p>
-
 
 
             <p class="comment">
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>App Controller</p>
+                <p>User Roles Entity Class</p>
 
             </p>
-
-
 
 
             <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-
                 <tr>
                     <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
+                        <h6><b>Properties</b></h6>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getStartingMessage" >getStartingMessage</a>
+                                <a href="#id" >id</a>
+                            </li>
+                            <li>
+                                <a href="#role" >role</a>
+                            </li>
+                            <li>
+                                <a href="#user" >user</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
+
 
 
 
@@ -101,101 +105,177 @@
 
             <section>
     
-    <h3 id="methods">
-        Methods
+    <h3 id="inputs">
+        Properties
     </h3>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getStartingMessage"></a>
+                    <a name="id"></a>
                     <span class="name">
-                        <span ><b>getStartingMessage</b></span>
-                        <a href="#getStartingMessage"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>id</b></span>
+                        <a href="#id"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getStartingMessage()</code>
-                </td>
-            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @PrimaryGeneratedColumn()<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">apps/api/src/users/user-role.entity.ts:16</a></div>
+                        </td>
+                    </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Public()<br />@Get(&#x27;/&#x27;)<br />@ApiResponse({status: 200, description: &#x27;Root Request Completed&#x27;})<br />@ApiResponse({status: 400, description: &#x27;Root Request Failed&#x27;})<br /></code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="29"
-                            class="link-to-prism">apps/api/src/app.controller.ts:29</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Returns a welcome message</p>
+                    <div class="io-description"><p>UUID column</p>
 </div>
-
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>IMessage</code>
-
-                    </div>
-                    <div class="io-description">
-                        <p>a welcome message</p>
-
-                    </div>
                 </td>
             </tr>
+
         </tbody>
     </table>
-</section>    </div>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="role"></a>
+                    <span class="name">
+                        <span ><b>role</b></span>
+                        <a href="#role"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>UserRolesEnum</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Column({type: &#x27;enum&#x27;, enum: UserRolesEnum, default: undefined})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">apps/api/src/users/user-role.entity.ts:27</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Column for role based access
+Beware this default app role will permit every created profile to delete other profiles</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="user"></a>
+                    <span class="name">
+                        <span ><b>user</b></span>
+                        <a href="#user"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../entitys/User.html" target="_self" >User</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ManyToOne(undefined, user &#x3D;&gt; user.roles, {onDelete: &#x27;CASCADE&#x27;})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">apps/api/src/users/user-role.entity.ts:35</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Column to represent a many to one relationship with the profile entity</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Controller, Get } from &#x27;@nestjs/common&#x27;;
-import { ApiBearerAuth, ApiResponse } from &#x27;@nestjs/swagger&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from &#x27;typeorm&#x27;;
 
-import { IMessage } from &#x27;@starter/api-types&#x27;;
+import { UserRolesEnum } from &#x27;@starter/api-types&#x27;;
 
-import { AppService } from &#x27;./app.service&#x27;;
-import { Public } from &#x27;./auth/public.decorator&#x27;;
+import { User } from &#x27;./user.entity&#x27;;
 
 /**
- * App Controller
+ * User Roles Entity Class
  */
-@ApiBearerAuth()
-@Controller()
-export class AppController {
+@Entity()
+export class UserRoles {
   /**
-   * Constructor
-   * @param {AppService} appService app service
+   * UUID column
    */
-  constructor(private readonly appService: AppService) {}
+  @PrimaryGeneratedColumn()
+  id: number;
 
   /**
-   * Returns a welcome message
-   * @returns {string} a welcome message
+   * Column for role based access
+   * Beware this default app role will permit every created profile to delete other profiles
    */
-  @Public()
-  @Get(&#x27;/&#x27;)
-  @ApiResponse({ status: 200, description: &#x27;Root Request Completed&#x27; })
-  @ApiResponse({ status: 400, description: &#x27;Root Request Failed&#x27; })
-  getStartingMessage(): IMessage {
-    return this.appService.startingMessage();
-  }
+  @Column({
+    type: &#x27;enum&#x27;,
+    enum: UserRolesEnum,
+    default: UserRolesEnum.SUDO,
+  })
+  role: UserRolesEnum;
+
+  /**
+   * Column to represent a many to one relationship with the profile entity
+   */
+  @ManyToOne(() &#x3D;&gt; User, (user) &#x3D;&gt; user.roles, {
+    onDelete: &#x27;CASCADE&#x27;,
+  })
+  user: User;
 }
 </code></pre>
     </div>
 </div>
-
 
 
 
@@ -236,8 +316,8 @@ export class AppController {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'controller';
-            var COMPODOC_CURRENT_PAGE_URL = 'AppController.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'entity';
+            var COMPODOC_CURRENT_PAGE_URL = 'UserRoles.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
