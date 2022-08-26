@@ -1,3 +1,4 @@
+<h1 align="center">API Starter</h1>
 
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
@@ -13,9 +14,20 @@
 	<a href="https://twitter.com/nestframework"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
 </p>
 
+Table of Contents:
+
+[Description](#-description) |
+[Prerequisites](#%EF%B8%8F-prerequisites) |
+[Deployment](#-deployment) |
+[Testing](#-testing) |
+[TypeDocs](#-typedocs) |
+[Progress](#-progress)
+
+🔎 This repo was created with [Nx](https://nx.dev/).
+
 ### 📚 Description
 
-This boilerplate is made to quickly prototype backend applications. It comes with authentication, logging, security, and database features out of the box.
+This boilerplate is made to quickly prototype backend applications. It comes with authentication/authorization, logging, crud features and database persistence out of the box.
 
 ---
 
@@ -23,13 +35,13 @@ This boilerplate is made to quickly prototype backend applications. It comes wit
 
 #### Non Docker
 
-- Please make sure to have MYSQL locally by utilizing a web server stack [XAMPP](https://www.apachefriends.org/). The control panel can then trigger MYSQL to start on localhost. MYSQL can be downloaded independently using `brew`, `choco`, or `apt-get`.  
-	
+- Please make sure to have [Node.js](https://nodejs.org/en/download/) (16+) locally by downloading the Javascript runtime via `brew`, `choco`, or `apt-get`.
+
+- Please make sure to have MYSQL locally by deploying a web server stack like [XAMPP](https://www.apachefriends.org/). The control panel can then trigger MYSQL to start on localhost. MYSQL can be downloaded standalone via `brew`, `choco`, or `apt-get`.
+
 #### Docker 🐳
 
-- Please make sure to have docker desktop setup on any preferred operating system to quickly compose the required dependencies. Then follow the docker procedure outlined below.
-
-**Note**: Docker Desktop comes free on both Mac and Windows, but it only works with Windows 10 Pro. A workaround is to get [Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/) which will bypass the Windows 10 Pro prerequisite by executing in a VM.
+- Please make sure to have [Docker Desktop](https://www.docker.com/products/docker-desktop/) operational to quickly compose the required dependencies. Then follow the docker procedure outlined below.
 
 ---
 
@@ -37,11 +49,13 @@ This boilerplate is made to quickly prototype backend applications. It comes wit
 
 #### Manual Deployment without Docker
 
-- Create a .env file using the `cp .env.example .env` command and replace the existing environment variables with personal configuration settings (username and password database).
+- Clone the repo via `git clone https://github.com/msanvarov/nest-rest-typeorm-boilerplate`.
 
-- Download dependencies using `npm i` or `yarn`
+- Download dependencies via `npm i` or `yarn`.
 
-- Start the app in pre-production mode by using `npm run start` or `npm run start:dev` for development (the app will be exposed on the port 9000; not to conflict with React, Angular, or Vue)
+- Create a **.env file** via the `cp .env.example .env` command and replace the existing environment variable placeholders with valid responses.
+
+- Start the app in development mode by using `npm run start` (the app will be exposed on the [port 4200](http://localhost:4200); not to conflict with React, Angular, or Vue ports).
 
 #### Deploying with Docker 🐳
 
@@ -52,19 +66,19 @@ This boilerplate is made to quickly prototype backend applications. It comes wit
 $ docker-compose up -d
 ```
 
-- The following command will set up and run the docker project for quick use. Then the web application, Nginx, and MYSQL will be exposed to http://localhost:9000, http://localhost:80, and http://localhost:3306 respectively.
+- The following command will download dependencies and execute the web application on http://localhost:4200.
 
 ### 🔒 Environment Configuration
 
 By default, the application comes with a config module that can read in every environment variable from the `.env` file.
 
-**APP_ENV**  - the application environment to execute as, either in development or production. Determines the type of logging options to utilize. Options:  `dev`  or  `prod`.
+**APP_ENV** - the application environment to execute as, either in development or production. Determines the type of logging options to utilize. Options: `dev` or `prod`.
 
-**APP_URL**  - the base URL for the application. Made mainly to showcase the power of  `ConfigService`  and can be removed as it doesn't serve any other purpose
+**APP_URL** - the base URL for the application. Made mainly to showcase the power of `ConfigService` and can be removed as it doesn't serve any other purpose
 
-**WEBTOKEN_SECRET_KEY**  - the secret key to encrypt/decrypt web tokens with. Make sure to generate a random alphanumeric string for this.
+**WEBTOKEN_ENCRYPTION_KEY** - the key to encrypt/decrypt web tokens with. Make sure to generate a random alphanumeric string for this.
 
-**WEBTOKEN_EXPIRATION_TIME**  -  **the time in seconds**  indicating when the web token will expire; by default, it's 2400 seconds which is 40 mins.
+**WEBTOKEN_EXPIRATION_TIME** - **the time in seconds** indicating when the web token will expire; by default, it's 2400 seconds which is 40 mins.
 
 **DB_TYPE** - the type of [database connection to use](https://github.com/typeorm/typeorm/blob/master/docs/connection-options.md).
 
@@ -82,9 +96,9 @@ By default, the application comes with a config module that can read in every en
 
 ### 🏗 Choosing a Web Framework
 
-This boilerplate comes with [Fastify](https://github.com/fastify/fastify) out of the box as it offers [performance benefits](https://github.com/nestjs/nest/blob/master/benchmarks/all_output.txt) over Express. But this can be changed to use [Express](https://expressjs.com/) framework instead of Fastify. Please proceed with the steps below to change between the two.
+This boilerplate comes with [Fastify](https://github.com/fastify/fastify) out of the box as it offers [performance benefits](https://github.com/nestjs/nest/blob/master/benchmarks/all_output.txt) over Express. But this boilerplate is modular enough to use the [Express](https://expressjs.com/) framework instead of Fastify.
 
-- Replace the following lines of code in the [main.ts file](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/main.ts) with the ones detailed below.
+Replace the following lines of code in the [main.ts file](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/main.ts) with the ones detailed below:
 
 Fastify:
 
@@ -96,6 +110,7 @@ import {
 } from '@nestjs/platform-fastify';
 import * as headers from 'fastify-helmet';
 import * as fastifyRateLimiter from 'fastify-rate-limit';
+
 const app = await NestFactory.create<NestFastifyApplication>(
   AppModule,
   new FastifyAdapter({ logger: console }),
@@ -111,8 +126,9 @@ Express:
 
 ```ts
 // to express:
-import * as headers from 'helmet';
 import * as rateLimiter from 'express-rate-limit';
+import * as headers from 'helmet';
+
 const app = await NestFactory.create(AppModule, {
   logger: console,
 });
@@ -125,7 +141,7 @@ app.use(
 );
 ```
 
-**Note**: The boilerplate comes with production dependencies for both Express and Fastify to support moving between two. But this is going to leave it bloated especially when only **one web framework is used at a time**. Thus, **it is recommended that when deploying to production, unused dependencies are purged.**
+> Remark: The boilerplate comes with production dependencies for both Express and Fastify to enable migrating between the two. But this leaves it in a bloated state when only **one web framework is deployed**. Thus, **it is highly encouraged that when deploying to production, unused dependencies are purged.**
 
 If you choose to **use Fastify**, this command will **purge all of the Express dependencies**:
 
@@ -145,10 +161,9 @@ $ npm rm @nestjs/platform-fastify fastify-helmet fastify-rate-limit fastify-swag
 
 ### 💾 Choosing a Database
 
-By default **MYSQL/MariaDB** are the database of choice but TypeORM supports other database types like SQLite, Postgres, MongoDB, and MSSQL. To use anything other than MYSQL/MariaDB, change the configuration in the `.env` file, and download the corresponding wrapper library, like [SQLite3](https://www.npmjs.com/package/sqlite3) if necessary. Of course that is assuming a proper 
-setup of the database has been completed on a local machine.
+By default **MYSQL/MariaDB** are the database of choice but TypeORM supports other database types like SQLite, Postgres, MongoDB, and MSSQL. To use anything other than MYSQL/MariaDB, change the configuration in the `.env` file, and download the corresponding wrapper library, like [SQLite3](https://www.npmjs.com/package/sqlite3) if necessary.
 
-**Note: For MongoDB, TypeORM is not as feature-rich as Mongoose. Therefore I created another boilerplate only for [Nest and Mongoose](https://github.com/msanvarov/nest-rest-mongo-boilerplate)**.
+**Note: For MongoDB, TypeORM is not as feature-rich as Mongoose. Therefore I created another boilerplate for [Nest and Mongoose](https://github.com/msanvarov/nest-rest-mongo-boilerplate)**.
 
 ---
 
@@ -186,7 +201,7 @@ $ npm run test:cov
 
 The documentation for this boilerplate can be found [on Github pages](https://msanvarov.github.io/nest-rest-typeorm-boilerplate/).
 
-The docs can be generated on-demand, simply, by typing `npm run typedocs`. This will produce a **docs** folder with the required front-end files and **start hosting on  [localhost](http://localhost:8080/)**.
+The docs can be generated on-demand, simply, by typing `npm run typedocs`. This will produce a **docs** folder with the required front-end files and **start hosting on [localhost](http://localhost:8080/)**.
 
 ```bash
 # generate docs for code
@@ -197,9 +212,9 @@ $ npm run typedocs
 
 ### 📝 Open API
 
-Out of the box, the web app comes with Swagger; an  [open api specification](https://swagger.io/specification/), that is used to describe RESTful APIs. Nest provides a  [dedicated module to work with it](https://docs.nestjs.com/recipes/swagger).
+Out of the box, the web app comes with Swagger; an [open api specification](https://swagger.io/specification/), that is used to describe RESTful APIs. Nest provides a [dedicated module to work with it](https://docs.nestjs.com/recipes/swagger).
 
-The configuration for Swagger can be found at this [location](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/main.ts#L12-L61).
+The configuration for Swagger can be found at this [location](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/tree/master/src/swagger).
 
 ---
 
@@ -207,35 +222,33 @@ The configuration for Swagger can be found at this [location](https://github.com
 
 TypeORM is an object-relational mapping that acts as an abstraction layer over operations on databases. Please view the [documentation](https://typeorm.io/#/) for further details.
 
-The configuration for TypeORM can be found in the [app module](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/modules/app/app.module.ts#L17-L33).
+The configuration for TypeORM can be found in the [app module](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/modules/app/app.module.ts#L17).
 
 ---
 
 ### 🔊 Logs
 
-This boilerplate comes with a Winston module for logging, the configurations for Winston can be found in the [app module](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/modules/app/app.module.ts#L34-L71).
+This boilerplate comes with a Winston module for logging, the configurations for Winston can be found in the [app module](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/src/modules/main/app.module.ts#L24).
 
 ---
 
-## Progress
+### 🏗️ Progress
 
-| Branches | Status |
-| ----------------------------------------------------------------------------: | :------ |
-| [Master](https://github.com/msanvarov/nest-rest-typeorm-boilerplate)          | ✅      |
-| [RXJS](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/tree/rxjs)  | 🚧      |
+|                                                         Branches | Status |
+| ---------------------------------------------------------------: | :----- |
+|             [main](https://github.com/msanvarov/fitness-manager) | ✅     |
+| [feat/\*](https://github.com/msanvarov/fitness-manager/branches) | 🚧     |
 
 ---
 
 ### 👥 Support
 
-PR are appreciated, I fully rely on the goodness ❤️ of the people.
-Nest is an MIT-licensed open source project with its ongoing development made possible thanks to the support by the community. This framework is a result of the long road, full of sleepless nights, working after hours, and busy weekends.
-
+PRs are appreciated, I fully rely on the passion ❤️ of the OS developers.
 
 ---
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+This starter API is [MIT licensed](LICENSE).
 
-[Author](https://msanvarov.github.io/personal-portfolio/)
+[Author](https://sal-anvarov.tech/)

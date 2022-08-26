@@ -1,4 +1,10 @@
 {
+  "printWidth": 80,
+  "trailingComma": "all",
   "singleQuote": true,
-  "trailingComma": "all"
+  "semi": true,
+  "importOrderParserPlugins": ["typescript", "decorators-legacy"],
+  "importOrder": ["^@starter/(.*)$", "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }
