@@ -1,4 +1,4 @@
-# api-types
+# Reusable API Types
 
 This library was generated with [Nx](https://nx.dev).
 
