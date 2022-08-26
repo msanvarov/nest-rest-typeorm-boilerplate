@@ -23,7 +23,7 @@ Table of Contents:
 [Choosing a Web Framework](#-choosing-a-web-framework) |
 [Choosing a Database](#-choosing-a-database) |
 [Testing](#-testing) |
-[TypeDocs](#-typedocs) |  
+[TypeDocs](#-typedocs) |
 [Logs](#-logs)
 
 🔎 This repo was created with [Nx](https://nx.dev/).

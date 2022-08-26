@@ -1,18 +1,18 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/starter-e2e/src",
+  "sourceRoot": "apps/ui-e2e/src",
   "projectType": "application",
   "targets": {
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/starter-e2e/cypress.config.ts",
-        "devServerTarget": "starter:serve:development",
+        "cypressConfig": "apps/ui-e2e/cypress.config.ts",
+        "devServerTarget": "ui:serve:development",
         "testingType": "e2e"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "starter:serve:production"
+          "devServerTarget": "ui:serve:production"
         }
       }
     },
@@ -20,10 +20,10 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/starter-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": ["apps/ui-e2e/**/*.{js,ts}"]
       }
     }
   },
   "tags": [],
-  "implicitDependencies": ["starter"]
+  "implicitDependencies": ["ui"]
 }
