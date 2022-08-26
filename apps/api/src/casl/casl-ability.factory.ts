@@ -20,7 +20,7 @@ export type AppAbility = Ability<[UserActionsEnum, Subjects]>;
 export class CaslAbilityFactory {
   createForUser(user: User) {
     // Remark: the user is coming from the req.user.
-    const { can, cannot, build } = new AbilityBuilder<
+    const { can, build } = new AbilityBuilder<
       Ability<[UserActionsEnum, Subjects]>
     >(Ability as AbilityClass<AppAbility>);
 

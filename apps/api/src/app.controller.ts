@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 
-import { Message } from '@starter/api-types';
+import { IMessage } from '@starter/api-types';
 
 import { AppService } from './app.service';
 import { Public } from './auth/public.decorator';
@@ -26,7 +26,7 @@ export class AppController {
   @Get('/')
   @ApiResponse({ status: 200, description: 'Root Request Completed' })
   @ApiResponse({ status: 400, description: 'Root Request Failed' })
-  getWelcomeMessage(): Message {
-    return this.appService.welcomeMessage();
+  getStartingMessage(): IMessage {
+    return this.appService.startingMessage();
   }
 }

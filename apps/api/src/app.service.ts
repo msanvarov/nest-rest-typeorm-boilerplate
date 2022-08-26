@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
 
-import { Message } from '@starter/api-types';
+import { IMessage } from '@starter/api-types';
 
 /**
  * Application Service
@@ -21,7 +21,7 @@ export class AppService {
    * Returns a welcome message.
    * @returns {string} welcome message
    */
-  welcomeMessage(): Message {
+  startingMessage(): IMessage {
     this.logger.info('Calling welcomeMessage -> ', AppService.name);
 
     return {
