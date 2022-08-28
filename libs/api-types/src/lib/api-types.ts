@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export interface IMessage {
   message: string;
 }
@@ -5,7 +8,7 @@ export interface IMessage {
 /**
  * Models a typical Login/Register route return body
  */
-export interface ITokenReturnBody {
+export interface IJWTResponseBody {
   /**
    * When the token is to expire in seconds
    */
@@ -41,4 +44,14 @@ export enum UserActionsEnum {
   Read = 'read',
   Update = 'update',
   Delete = 'delete',
+}
+
+export interface IUser {
+  username: string;
+  gravatar: string;
+  roles: {
+    role: UserRolesEnum;
+  }[];
+  name: string;
+  authenticated: boolean;
 }

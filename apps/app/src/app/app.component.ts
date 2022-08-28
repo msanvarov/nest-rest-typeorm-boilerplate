@@ -11,4 +11,10 @@ import { IMessage } from '@starter/api-types';
 export class AppComponent {
   hello$ = this.http.get<IMessage>('/api/hello');
   constructor(private http: HttpClient) {}
+
+  public isAuthenticated = false;
+
+  public logout(): void {
+    // todo
+  }
 }

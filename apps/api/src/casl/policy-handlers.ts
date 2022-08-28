@@ -1,7 +1,7 @@
 import { UserActionsEnum } from '@starter/api-types';
 
 import { User } from '../users/user.entity';
-import { AppAbility } from './casl-ability.factory';
+import { AppAbility } from './casl.factory';
 
 interface IPolicyHandler {
   handle(ability: AppAbility): boolean;

@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@starter/api-types": ["libs/api-types/src/index.ts"]
+      "@starter/api-types": ["libs/api-types/src/index.ts"],
+      "@starter/store": ["libs/store/src/index.ts"],
+      "@starter/ui": ["libs/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
