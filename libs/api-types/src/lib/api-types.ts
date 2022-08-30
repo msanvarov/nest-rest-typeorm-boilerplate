@@ -12,11 +12,11 @@ export interface IJWTResponseBody {
   /**
    * When the token is to expire in seconds
    */
-  expiresIn: number;
+  expiration: number;
   /**
    * A human-readable format of expires
    */
-  expiresInFormatted: string;
+  expirationFormatted: string;
   /**
    * The Bearer token
    */
@@ -48,10 +48,29 @@ export enum UserActionsEnum {
 
 export interface IUser {
   username: string;
-  gravatar: string;
-  roles: {
+  gravatar?: string;
+  roles?: {
     role: UserRolesEnum;
   }[];
-  name: string;
+  name?: string;
   authenticated: boolean;
+  token: string;
+}
+
+export enum ApiAuthRoutesEnum {
+  LOGIN = '/api/v1/auth/login',
+  REGISTER = '/api/v1/auth/register',
+}
+
+export enum ApiUsersRoutesEnum {
+  GET_USER = '/api/v1/users/user',
+  // username is the token to be replaced with a username
+  GET_USER_BY_USERNAME = '/api/v1/users/{{username}}',
+}
+
+export interface IAuthRegisterPayload {
+  email: string;
+  username: string;
+  name: string;
+  password: string;
 }

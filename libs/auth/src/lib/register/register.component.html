@@ -1,0 +1,65 @@
+<mat-card>
+  <mat-card-content>
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+      <h2>Register</h2>
+      <mat-error *ngIf="!isRegisterFormValid">
+        Couldn't complete registration. Please try again!
+      </mat-error>
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          placeholder="Name"
+          [(ngModel)]="name"
+          name="name"
+          required
+        />
+        <mat-error> Please provide a proper name</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          placeholder="Username"
+          [(ngModel)]="username"
+          name="username"
+          required
+        />
+        <mat-error> Please provide a proper username</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          type="email"
+          placeholder="Email"
+          [(ngModel)]="email"
+          name="email"
+          required
+        />
+        <mat-error> Please provide a proper email</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          type="password"
+          placeholder="Password"
+          [(ngModel)]="password"
+          name="password"
+          required
+        />
+        <mat-error> Please provide a valid password</mat-error>
+      </mat-form-field>
+
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!registerForm.form.valid"
+        >
+          Register
+        </button>
+        <a mat-button [routerLink]="['/auth/login']">Back to Login</a>
+      </mat-card-actions>
+    </form>
+  </mat-card-content>
+</mat-card>

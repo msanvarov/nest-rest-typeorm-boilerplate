@@ -14,7 +14,7 @@ export class Store {
     return this.subject.value;
   }
 
-  select<R>(name: string): Observable<R> {
+  get<R>(name: string): Observable<R> {
     return this.store.pipe(map((x) => x[name] as R));
   }
 

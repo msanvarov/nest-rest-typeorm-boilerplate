@@ -1,0 +1,26 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/dashboard/src",
+  "prefix": "starter",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/dashboard"],
+      "options": {
+        "jestConfig": "libs/dashboard/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/dashboard/**/*.ts",
+          "libs/dashboard/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

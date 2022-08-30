@@ -46,8 +46,8 @@ export class AuthService {
     email,
   }: User): Promise<IJWTResponseBody> {
     return {
-      expiresIn: this.expiration,
-      expiresInFormatted: moment()
+      expiration: this.expiration,
+      expirationFormatted: moment()
         .add(this.expiration, 'seconds')
         .format('LLL'),
       token: this.jwtService.sign({

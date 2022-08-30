@@ -1,0 +1,46 @@
+<mat-card>
+  <mat-card-content>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+      <h2>Log In</h2>
+      <mat-error *ngIf="!isLoginFormValid">
+        The username and password were not correct. Please try again!
+      </mat-error>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Username"
+          [(ngModel)]="username"
+          name="username"
+          required
+        />
+        <mat-error> Please provide a proper username</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          type="password"
+          placeholder="Password"
+          [(ngModel)]="password"
+          name="password"
+          required
+        />
+        <mat-error> Please provide a proper password</mat-error>
+      </mat-form-field>
+
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!loginForm.form.valid"
+        >
+          Login
+        </button>
+
+        <a mat-button [routerLink]="['/auth/register']">Create an account</a>
+      </mat-card-actions>
+    </form>
+  </mat-card-content>
+
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+</mat-card>
