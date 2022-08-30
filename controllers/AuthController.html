@@ -190,7 +190,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;ITokenReturnBody&gt;</code>
+                        <b>Returns : </b>    <code>Promise&lt;IJWTResponseBody&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -292,7 +292,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Post } from &#x27;@nestjs/common&#x27;;
 import { ApiResponse, ApiTags } from &#x27;@nestjs/swagger&#x27;;
 
-import { ITokenReturnBody } from &#x27;@starter/api-types&#x27;;
+import { IJWTResponseBody } from &#x27;@starter/api-types&#x27;;
 
 import { UsersService } from &#x27;../users/users.service&#x27;;
 import { AuthService } from &#x27;./auth.service&#x27;;
@@ -325,7 +325,7 @@ export class AuthController {
   @ApiResponse({ status: 201, description: &#x27;Login Completed&#x27; })
   @ApiResponse({ status: 400, description: &#x27;Bad Request&#x27; })
   @ApiResponse({ status: 401, description: &#x27;Unauthorized&#x27; })
-  async login(@Body() payload: LoginDto): Promise&lt;ITokenReturnBody&gt; {
+  async login(@Body() payload: LoginDto): Promise&lt;IJWTResponseBody&gt; {
     const user &#x3D; await this.authService.validateUser(payload);
     return await this.authService.createToken(user);
   }

@@ -200,9 +200,11 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Module } from &#x27;@nestjs/common&#x27;;
 import { ConfigModule, ConfigService } from &#x27;@nestjs/config&#x27;;
+import { ServeStaticModule } from &#x27;@nestjs/serve-static&#x27;;
 import { TypeOrmModule, TypeOrmModuleAsyncOptions } from &#x27;@nestjs/typeorm&#x27;;
 import * as joi from &#x27;joi&#x27;;
 import { WinstonModule } from &#x27;nest-winston&#x27;;
+import { join } from &#x27;path&#x27;;
 import * as winston from &#x27;winston&#x27;;
 import * as winstonFileRotator from &#x27;winston-daily-rotate-file&#x27;;
 
@@ -229,6 +231,18 @@ import { UsersModule } from &#x27;./users/users.module&#x27;;
         DB_PORT: joi.number().default(&#x27;3306&#x27;),
         DB_DATABASE: joi.string().default(&#x27;nest&#x27;),
       }),
+    }),
+    ServeStaticModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) &#x3D;&gt;
+        config.get(&#x27;APP_ENV&#x27;) &#x3D;&#x3D;&#x3D; &#x27;production&#x27;
+          ? [
+              {
+                rootPath: join(__dirname, &#x27;..&#x27;, &#x27;ui&#x27;),
+              },
+            ]
+          : [],
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],

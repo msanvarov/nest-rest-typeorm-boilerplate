@@ -107,7 +107,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(reflector: Reflector, caslAbilityFactory: <a href="../injectables/CaslAbilityFactory.html" target="_self">CaslAbilityFactory</a>)</code>
+<code>constructor(reflector: Reflector, CaslFactory: <a href="../injectables/CaslFactory.html" target="_self">CaslFactory</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -142,10 +142,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>caslAbilityFactory</td>
+                                                        <td>CaslFactory</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/CaslAbilityFactory.html" target="_self" >CaslAbilityFactory</a></code>
+                                                                        <code><a href="../injectables/CaslFactory.html" target="_self" >CaslFactory</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -189,8 +189,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="15"
-                            class="link-to-prism">apps/api/src/casl/policies.guard.ts:15</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="12"
+                            class="link-to-prism">apps/api/src/casl/policies.guard.ts:12</a></div>
                 </td>
             </tr>
 
@@ -260,8 +260,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="30"
-                            class="link-to-prism">apps/api/src/casl/policies.guard.ts:30</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="27"
+                            class="link-to-prism">apps/api/src/casl/policies.guard.ts:27</a></div>
                 </td>
             </tr>
 
@@ -329,16 +329,13 @@
             <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CanActivate, ExecutionContext, Injectable } from &#x27;@nestjs/common&#x27;;
 import { Reflector } from &#x27;@nestjs/core&#x27;;
 
-import { AppAbility, CaslAbilityFactory } from &#x27;./casl-ability.factory&#x27;;
+import { AppAbility, CaslFactory } from &#x27;./casl.factory&#x27;;
 import { CHECK_POLICIES_KEY } from &#x27;./check-policies.decorator&#x27;;
 import { PolicyHandler } from &#x27;./policy-handlers&#x27;;
 
 @Injectable()
 export class PoliciesGuard implements CanActivate {
-  constructor(
-    private reflector: Reflector,
-    private caslAbilityFactory: CaslAbilityFactory,
-  ) {}
+  constructor(private reflector: Reflector, private CaslFactory: CaslFactory) {}
 
   async canActivate(context: ExecutionContext): Promise&lt;boolean&gt; {
     const policyHandlers &#x3D;
@@ -348,7 +345,7 @@ export class PoliciesGuard implements CanActivate {
       ) || [];
 
     const { user } &#x3D; context.switchToHttp().getRequest();
-    const ability &#x3D; this.caslAbilityFactory.createForUser(user);
+    const ability &#x3D; this.CaslFactory.createForUser(user);
 
     return policyHandlers.every((handler) &#x3D;&gt;
       this.execPolicyHandler(handler, ability),

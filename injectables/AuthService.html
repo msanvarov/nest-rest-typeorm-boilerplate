@@ -274,7 +274,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;ITokenReturnBody&gt;</code>
+                        <b>Returns : </b>    <code>Promise&lt;IJWTResponseBody&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -409,7 +409,7 @@ import { ConfigService } from &#x27;@nestjs/config&#x27;;
 import { JwtService } from &#x27;@nestjs/jwt&#x27;;
 import * as moment from &#x27;moment&#x27;;
 
-import { ITokenReturnBody } from &#x27;@starter/api-types&#x27;;
+import { IJWTResponseBody } from &#x27;@starter/api-types&#x27;;
 
 import { User } from &#x27;../users/user.entity&#x27;;
 import { UsersService } from &#x27;../users/users.service&#x27;;
@@ -442,7 +442,7 @@ export class AuthService {
   /**
    * Creates a signed jwt token based on User payload
    * @param {User} param dto to generate token from
-   * @returns {Promise&lt;ITokenReturnBody&gt;} token body
+   * @returns {Promise&lt;IJWTResponseBody&gt;} token body
    */
   async createToken({
     id,
@@ -450,10 +450,10 @@ export class AuthService {
     name,
     roles,
     email,
-  }: User): Promise&lt;ITokenReturnBody&gt; {
+  }: User): Promise&lt;IJWTResponseBody&gt; {
     return {
-      expiresIn: this.expiration,
-      expiresInFormatted: moment()
+      expiration: this.expiration,
+      expirationFormatted: moment()
         .add(this.expiration, &#x27;seconds&#x27;)
         .format(&#x27;LLL&#x27;),
       token: this.jwtService.sign({

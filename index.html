@@ -83,9 +83,25 @@
 </li>
 <li><p>Create a <strong>.env file</strong> via the <code>cp .env.example .env</code> command and replace the existing environment variable placeholders with valid responses.</p>
 </li>
-<li><p>Start the app in development mode by using <code>npm run start</code> (the app will be exposed on <a href="http://localhost:4200">http://localhost:4200</a>; not to conflict with React, Angular, or Vue ports).</p>
+<li><p>Start the api in development mode by using <code>npm run start</code> (the app will be exposed on <a href="http://localhost:3333">http://localhost:3333</a>; not to conflict with React, Angular, or Vue ports).</p>
 </li>
 </ul>
+<details open>
+<summary>Optional deployment of the UI</summary>
+<br>
+
+<ul>
+<li><p>This repo comes with a UI built with <a href="https://angular.io/">Angular</a> - that can be accessed via <code>http://localhost:4200</code>.</p>
+</li>
+<li><p>To start the UI, start a new terminal window and run <code>npm run start --project ui</code>.</p>
+</li>
+</ul>
+<blockquote>
+<p>Remark: In the docker deployment, the UI is automatically started and served by the API.</p>
+</blockquote>
+</details>
+<br/>
+
 <h4 id="deploying-with-docker-🐳">Deploying with Docker 🐳</h4>
 <ul>
 <li>Execute the following command in-app directory:</li>
@@ -97,14 +113,13 @@ $ docker-compose up -d</code></pre></div><ul>
 <hr>
 <h3 id="🔒-environment-configuration">🔒 Environment Configuration</h3>
 <p>By default, the application comes with a config module that can read in every environment variable from the <code>.env</code> file.</p>
-<p><strong>APP_ENV</strong> - the application environment to execute as, either in development or production. Determines the type of logging options to utilize. Options: <code>dev</code> or <code>prod</code>.</p>
-<p><strong>APP_URL</strong> - the base URL for the application. Made mainly to showcase the power of <code>ConfigService</code> and can be removed as it doesn&#39;t serve any other purpose</p>
+<p><strong>APP_ENV</strong> - the application environment to execute as, either in development or production. Determines the type of logging options to utilize. Options: <code>development</code> or <code>production</code>.</p>
 <p><strong>WEBTOKEN_ENCRYPTION_KEY</strong> - the key to encrypt/decrypt web tokens with. Make sure to generate a random alphanumeric string for this.</p>
-<p><strong>WEBTOKEN_EXPIRATION_TIME</strong> - <strong>the time in seconds</strong> indicating when the web token will expire; by default, it&#39;s 2400 seconds which is 40 mins.</p>
+<p><strong>WEBTOKEN_EXPIRATION_TIME</strong> - <strong>the time in seconds</strong> when the web token will expire; by default, it&#39;s 2400 seconds which is 40 mins.</p>
 <p><strong>DB_TYPE</strong> - the type of <a href="https://github.com/typeorm/typeorm/blob/master/docs/connection-options.md">database connection to use</a>.</p>
 <p><strong>DB_USERNAME</strong> - username for authenticating against the database.</p>
-<p><strong>DB_PASSWORD</strong> - password for authenticating against the database, can be left empty if a password is not needed (not recommended).</p>
-<p><strong>DB_HOST</strong> - the endpoint where this database sits (usually localhost but can be a static address).</p>
+<p><strong>DB_PASSWORD</strong> - password for authenticating against the database, can be left empty if a password is not needed (<strong>not safe</strong>).</p>
+<p><strong>DB_HOST</strong> - the endpoint where this database sits (default is localhost but can be set explicitly).</p>
 <p><strong>DB_PORT</strong> - default ports for different types of database connections.</p>
 <p><strong>DB_DATABASE</strong> - the actual database name to perform operations on.</p>
 <hr>
@@ -120,27 +135,22 @@ $ docker-compose up -d</code></pre></div><ul>
 <hr>
 <h3 id="✅-testing">✅ Testing</h3>
 <h4 id="docker-🐳-1">Docker 🐳</h4>
-<div><pre class="line-numbers"><code class="language-bash"># unit tests
-$ docker exec -it nest yarn test
+<div><pre class="line-numbers"><code class="language-bash"># Start the docker container if it&#39;s not running
+$ docker start nest-rest-typeorm-api
 
-# e2e tests
-$ docker exec -it nest yarn test:e2e
-
-# test coverage
-$ docker exec -it nest yarn test:cov</code></pre></div><h4 id="non-docker-1">Non-Docker</h4>
-<div><pre class="line-numbers"><code class="language-bash"># unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov</code></pre></div><hr>
+# unit tests
+$ docker exec -it nest-rest-typeorm-api npm run test
+</code></pre></div><h4 id="non-docker-1">Non-Docker</h4>
+<div><pre class="line-numbers"><code class="language-bash"># execute test
+$ npm run test</code></pre></div><hr>
 <h3 id="💡-typedocs">💡 TypeDocs</h3>
 <p>The documentation for this boilerplate can be found <a href="https://msanvarov.github.io/nest-rest-typeorm-boilerplate/">on Github pages</a>.</p>
-<p>The docs can be generated on-demand, simply, by typing <code>npm run typedocs</code>. This will produce a <strong>docs</strong> folder with the required front-end files and <strong>start hosting on <a href="http://localhost:8080/">localhost</a></strong>.</p>
-<div><pre class="line-numbers"><code class="language-bash"># generate docs for code
-$ npm run typedocs</code></pre></div><hr>
+<p>The docs can be generated on-demand, by typing <code>npm run typedocs:api:start</code>. This will produce a <strong>docs/api</strong> folder with the required front-end files and <strong>start hosting on <a href="http://localhost:8080/">localhost</a></strong>.</p>
+<blockquote>
+<p>Remark: The docs for the ui are generated on-demand, by typing <code>npm run typedocs:ui:start</code>. This will produce a <strong>docs/ui</strong> folder with the required front-end files and <strong>start hosting on <a href="http://localhost:8080/">localhost</a></strong>.</p>
+</blockquote>
+<div><pre class="line-numbers"><code class="language-bash"># generate docs for api code
+$ npm run typedocs:api:start</code></pre></div><hr>
 <h3 id="📝-open-api">📝 Open API</h3>
 <p>Out of the box, the web app comes with Swagger; an <a href="https://swagger.io/specification/">open api specification</a>, that is used to describe RESTful APIs. Nest provides a <a href="https://docs.nestjs.com/openapi/introduction">dedicated module to work with it</a>.</p>
 <p>The configuration for Swagger can be found at this <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/apps/api/src/main.ts">location</a>.</p>
