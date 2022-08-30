@@ -79,4 +79,11 @@ const materialModules = [
   exports: [...materialModules],
   declarations: [LoginComponent, RegisterComponent, DashboardComponent],
 })
-export class MaterialModule {}
+export class MaterialModule {
+  forRoot() {
+    return {
+      ngModule: MaterialModule,
+      providers: [],
+    };
+  }
+}
