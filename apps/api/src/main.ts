@@ -1,4 +1,4 @@
-import headers from '@fastify/helmet';
+import helmet from '@fastify/helmet';
 import fastifyRateLimiter from '@fastify/rate-limit';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
@@ -46,7 +46,13 @@ async function bootstrap() {
     .build();
 
   app.enableCors();
-  app.register(headers);
+  app.register(helmet, {
+    contentSecurityPolicy: {
+      directives: {
+        'script-src-attr': ["'unsafe-inline'"],
+      },
+    },
+  });
   app.register(fastifyRateLimiter, {
     max: 100,
     timeWindow: '1 minute',

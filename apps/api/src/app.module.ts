@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
 import * as joi from 'joi';
 import { WinstonModule } from 'nest-winston';
+import { join } from 'path';
 import * as winston from 'winston';
 import * as winstonFileRotator from 'winston-daily-rotate-file';
 
@@ -29,6 +31,18 @@ import { UsersModule } from './users/users.module';
         DB_PORT: joi.number().default('3306'),
         DB_DATABASE: joi.string().default('nest'),
       }),
+    }),
+    ServeStaticModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) =>
+        config.get('APP_ENV') === 'production'
+          ? [
+              {
+                rootPath: join(__dirname, '..', 'ui'),
+              },
+            ]
+          : [],
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
