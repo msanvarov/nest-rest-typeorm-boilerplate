@@ -17,7 +17,7 @@ type Subjects = InferSubjects<typeof User> | 'all';
 export type AppAbility = Ability<[UserActionsEnum, Subjects]>;
 
 @Injectable()
-export class CaslAbilityFactory {
+export class CaslFactory {
   createForUser(user: User) {
     // Remark: the user is coming from the req.user.
     const { can, build } = new AbilityBuilder<

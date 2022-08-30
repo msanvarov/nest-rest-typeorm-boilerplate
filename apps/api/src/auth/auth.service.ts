@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import * as moment from 'moment';
 
-import { ITokenReturnBody } from '@starter/api-types';
+import { IJWTResponseBody } from '@starter/api-types';
 
 import { User } from '../users/user.entity';
 import { UsersService } from '../users/users.service';
@@ -36,7 +36,7 @@ export class AuthService {
   /**
    * Creates a signed jwt token based on User payload
    * @param {User} param dto to generate token from
-   * @returns {Promise<ITokenReturnBody>} token body
+   * @returns {Promise<IJWTResponseBody>} token body
    */
   async createToken({
     id,
@@ -44,10 +44,10 @@ export class AuthService {
     name,
     roles,
     email,
-  }: User): Promise<ITokenReturnBody> {
+  }: User): Promise<IJWTResponseBody> {
     return {
-      expiresIn: this.expiration,
-      expiresInFormatted: moment()
+      expiration: this.expiration,
+      expirationFormatted: moment()
         .add(this.expiration, 'seconds')
         .format('LLL'),
       token: this.jwtService.sign({

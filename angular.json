@@ -4,7 +4,12 @@
   "projects": {
     "api": "apps/api",
     "api-types": "libs/api-types",
+    "auth": "libs/auth",
+    "dashboard": "libs/dashboard",
+    "material-design": "libs/material-design",
+    "store": "libs/store",
     "ui": "apps/ui",
-    "ui-e2e": "apps/ui-e2e"
+    "ui-e2e": "apps/ui-e2e",
+    "users": "libs/users"
   }
 }

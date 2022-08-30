@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MockFunctionMetadata, ModuleMocker } from 'jest-mock';
 
-import { UserRolesEnum } from '@starter/api-types';
+import { IJWTResponseBody, UserRolesEnum } from '@starter/api-types';
 
 import { UsersService } from '../users/users.service';
 import { AuthController } from './auth.controller';
@@ -34,10 +34,10 @@ describe('AuthController', () => {
               ],
             }),
             createToken: jest.fn().mockResolvedValue({
-              expiresIn: 1800,
-              expiresInFormatted: 'in 30 minutes',
+              expiration: 1800,
+              expirationFormatted: 'in 30 minutes',
               token: 'JWT',
-            }),
+            } as IJWTResponseBody),
           };
         }
         if (token === UsersService) {

@@ -6,7 +6,7 @@ services:
     depends_on:
       - db
     environment:
-      APP_ENV: development
+      APP_ENV: production
       WEBTOKEN_ENCRYPTION_KEY: uAsBw6WxqD
       WEBTOKEN_EXPIRATION_TIME: 2400
       DB_TYPE: mysql

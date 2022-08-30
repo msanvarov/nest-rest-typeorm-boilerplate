@@ -58,7 +58,20 @@ This boilerplate is made to quickly prototype backend applications. It comes wit
 
 - Create a **.env file** via the `cp .env.example .env` command and replace the existing environment variable placeholders with valid responses.
 
-- Start the app in development mode by using `npm run start` (the app will be exposed on http://localhost:4200; not to conflict with React, Angular, or Vue ports).
+- Start the api in development mode by using `npm run start` (the app will be exposed on http://localhost:3333; not to conflict with React, Angular, or Vue ports).
+
+<details open>
+<summary>Optional deployment of the UI</summary>
+<br>
+
+- This repo comes with a UI built with [Angular](https://angular.io/) - that can be accessed via `http://localhost:4200`.
+
+- To start the UI, start a new terminal window and run `npm run start --project ui`.
+
+> Remark: In the docker deployment, the UI is automatically started and served by the API.
+
+</details>
+<br/>
 
 #### Deploying with Docker 🐳
 
