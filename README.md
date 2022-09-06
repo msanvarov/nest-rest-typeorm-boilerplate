@@ -16,15 +16,16 @@
 
 Table of Contents:
 
-[Description](#-description) |
-[Prerequisites](#%EF%B8%8F-prerequisites) |
-[Deployment](#-deployment) |
-[Environment Configuration](#-environment-configuration) |
-[Choosing a Web Framework](#-choosing-a-web-framework) |
-[Choosing a Database](#-choosing-a-database) |
-[Testing](#-testing) |
-[TypeDocs](#-typedocs) |
-[Logs](#-logs)
+1. [Description](#-description)
+2. [Prerequisites](#%EF%B8%8F-prerequisites)
+3. [Deployment](#-deployment)
+4. [Environment Configuration](#-environment-configuration)
+5. [Choosing a Web Framework](#-choosing-a-web-framework)
+6. [HTTP2](#-http2)
+7. [Choosing a Database](#-choosing-a-database)
+8. [Testing](#-testing)
+9. [TypeDocs](#-typedocs)
+10. [Logs](#-logs)
 
 🔎 This repo was created with [Nx](https://nx.dev/).
 
@@ -112,7 +113,7 @@ By default, the application comes with a config module that can read in every en
 
 ### 🏗 Choosing a Web Framework
 
-This boilerplate comes with [Fastify](https://github.com/fastify/fastify) out of the box as it offers [performance benefits](https://github.com/nestjs/nest/blob/master/benchmarks/all_output.txt) over Express. But the Express version is still accessible on a [different branch](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/tree/express).
+This boilerplate comes with [Fastify](https://github.com/fastify/fastify) out of the box as it offers [performance benefits](https://github.com/nestjs/nest/blob/master/benchmarks/all_output.txt) over Express. But the Express adapter is still accessible on a [different branch](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/tree/express).
 
 ---
 
@@ -123,6 +124,21 @@ By default **MYSQL/MariaDB** are the database of choice but TypeORM supports oth
 > Check https://typeorm.io/ for supported database types.
 
 **Remark: For MongoDB, TypeORM is not as feature-rich as Mongoose. Therefore I created another boilerplate for [Nest and Mongoose](https://github.com/msanvarov/nest-rest-mongo-boilerplate)**.
+
+---
+
+### 🦾 HTTP/2
+
+Luckily, Fastify can enable HTTP2 over either HTTPS (h2) or plaintext (h2c) out of the box. This boilerplate makes use of this on the [feat/http2 branch](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/tree/feat/http2) where a self-signed certificate was created for testing this capability. The certificate is located in the [certs folder](https://github.com/msanvarov/nest-rest-typeorm-boilerplate/tree/feat/http2/apps/api/src/assets/certs). **For production, please use a valid certificate.**
+
+The self signed certificate can be generated via OpenSSL:
+
+```bash
+$ openssl req -x509 -newkey rsa:4096 -keyout api-key.pem -out api-cert.pem -days 365 -nodes
+
+```
+
+> Remark: Express can be ran with HTTP/2 by employing the [spdy](https://www.npmjs.com/package/spdy) library.
 
 ---
 
