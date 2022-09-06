@@ -36,7 +36,7 @@ export class AuthController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async login(@Body() payload: LoginDto): Promise<IJWTResponseBody> {
     const user = await this.authService.validateUser(payload);
-    return await this.authService.createToken(user);
+    return this.authService.createToken(user);
   }
 
   /**
@@ -50,6 +50,6 @@ export class AuthController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async register(@Body() payload: RegisterDto) {
     const user = await this.usersService.create(payload);
-    return await this.authService.createToken(user);
+    return this.authService.createToken(user);
   }
 }

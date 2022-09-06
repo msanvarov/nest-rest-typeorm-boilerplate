@@ -69,7 +69,7 @@ export class UsersController {
   @ApiResponse({ status: 200, description: 'Patch User Request Received' })
   @ApiResponse({ status: 400, description: 'Patch User Request Failed' })
   async patchUser(@Body() payload: PatchUserDto): Promise<User> {
-    return await this.usersService.edit(payload);
+    return this.usersService.edit(payload);
   }
 
   /**
@@ -85,6 +85,6 @@ export class UsersController {
   async deleteUserByUsername(
     @Param('username') username: string,
   ): Promise<IGenericMessageBody> {
-    return await this.usersService.delete(username);
+    return this.usersService.delete(username);
   }
 }
