@@ -26,7 +26,7 @@ export class AppController {
   @Get('/')
   @ApiResponse({ status: 200, description: 'Root Request Completed' })
   @ApiResponse({ status: 400, description: 'Root Request Failed' })
-  getStartingMessage(): IMessage {
+  async getStartingMessage(): Promise<IMessage> {
     return this.appService.startingMessage();
   }
 }
