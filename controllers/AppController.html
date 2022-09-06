@@ -85,6 +85,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#getStartingMessage" >getStartingMessage</a>
                             </li>
                         </ul>
@@ -110,6 +111,7 @@
                 <td class="col-md-4">
                     <a name="getStartingMessage"></a>
                     <span class="name">
+                        <span class="modifier">Async</span>
                         <span ><b>getStartingMessage</b></span>
                         <a href="#getStartingMessage"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -117,7 +119,8 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>getStartingMessage()</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getStartingMessage()</code>
                 </td>
             </tr>
 
@@ -145,7 +148,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>IMessage</code>
+                        <b>Returns : </b>    <code>Promise&lt;IMessage&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -188,7 +191,7 @@ export class AppController {
   @Get(&#x27;/&#x27;)
   @ApiResponse({ status: 200, description: &#x27;Root Request Completed&#x27; })
   @ApiResponse({ status: 400, description: &#x27;Root Request Failed&#x27; })
-  getStartingMessage(): IMessage {
+  async getStartingMessage(): Promise&lt;IMessage&gt; {
     return this.appService.startingMessage();
   }
 }
