@@ -3,6 +3,7 @@ name: Deploy Typedocs to Github Pages on Merge
   push:
     branches:
       - main
+      - master
 permissions:
   contents: write
 jobs:
