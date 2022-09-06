@@ -7,6 +7,8 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as fs from 'fs';
+import * as path from 'path';
 
 import { AppModule } from './app.module';
 
@@ -34,7 +36,19 @@ export const OPEN_API_CURRENT_VERSION = '1.0';
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter({ logger: true }),
+    new FastifyAdapter({
+      logger: true,
+      http2: true,
+      https: {
+        allowHTTP1: true,
+        key: fs.readFileSync(
+          path.join(__dirname, 'assets', 'certs', 'api-key.pem'),
+        ),
+        cert: fs.readFileSync(
+          path.join(__dirname, 'assets', 'certs', 'api-cert.pem'),
+        ),
+      },
+    }),
   );
 
   const options = new DocumentBuilder()
@@ -69,7 +83,7 @@ async function bootstrap() {
 
   await app.listen(port, '0.0.0.0');
   Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`,
+    `🚀 Application is running on: https://localhost:${port}/${globalPrefix}`,
   );
 }
 
