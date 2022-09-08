@@ -15,8 +15,8 @@
     "test": "nx run-many --target=test",
     "typedocs:api": "compodoc -p apps/api/tsconfig.json -d docs/api",
     "typedocs:api:start": "compodoc -p apps/api/tsconfig.json -s -d docs/api",
-    "typedocs:ui": "compodoc -p apps/starter/tsconfig.json -d docs/ui",
-    "typedocs:ui:start": "compodoc -p apps/starter/tsconfig.json -s -d docs/ui"
+    "typedocs:ui": "compodoc -p apps/ui/tsconfig.json -d docs/ui",
+    "typedocs:ui:start": "compodoc -p apps/ui/tsconfig.json -s -d docs/ui"
   },
   "private": true,
   "dependencies": {
