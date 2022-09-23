@@ -5,7 +5,7 @@ import { AuthService } from '@starter/auth';
 @Component({
   selector: 'starter-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+  styleUrls: [],
 })
 export class DashboardComponent {
   user$ = this.authService.user;
