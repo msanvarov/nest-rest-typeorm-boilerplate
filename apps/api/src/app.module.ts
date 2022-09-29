@@ -71,7 +71,7 @@ import { UsersModule } from './users/users.module';
           ? {
               level: 'info',
               format: winston.format.json(),
-              defaultMeta: { service: 'user-service' },
+              defaultMeta: { service: 'nest-typeorm-service' },
               transports: [
                 new winston.transports.Console({
                   format: winston.format.simple(),
@@ -81,7 +81,7 @@ import { UsersModule } from './users/users.module';
           : {
               level: 'info',
               format: winston.format.json(),
-              defaultMeta: { service: 'user-service' },
+              defaultMeta: { service: 'nest-typeorm-service' },
               transports: [
                 new winston.transports.File({
                   filename: 'logs/error.log',
