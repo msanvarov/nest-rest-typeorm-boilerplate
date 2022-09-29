@@ -123,7 +123,7 @@ By default **MYSQL/MariaDB** are the database of choice but TypeORM supports oth
 
 > Check https://typeorm.io/ for supported database types.
 
-**Remark: For MongoDB, TypeORM is not as feature-rich as Mongoose. Therefore I created another boilerplate for [Nest and Mongoose](https://github.com/msanvarov/nest-rest-mongo-boilerplate)**.
+**Remark: For MongoDB, TypeORM is not as feature-rich as Mongoose. Thus, I created a boilerplate for [Nest and Mongoose](https://github.com/msanvarov/nest-rest-mongo-boilerplate)**.
 
 ---
 
