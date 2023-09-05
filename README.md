@@ -212,7 +212,7 @@ This boilerplate comes with a Winston module for **extensive logging**, the conf
 
 ---
 
-### 👥 Support
+### 👥 Help
 
 PRs are appreciated, I fully rely on the passion ❤️ of the OS developers.
 
