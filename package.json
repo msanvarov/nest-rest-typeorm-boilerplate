@@ -44,7 +44,7 @@
     "@nestjs/serve-static": "^3.0.0",
     "@nestjs/swagger": "^6.0.5",
     "@nestjs/typeorm": "^9.0.1",
-    "@nrwl/angular": "14.5.10",
+    "@nrwl/angular": "14.8.6",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "gravatar": "^1.8.2",
@@ -62,7 +62,7 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~14.1.1",
+    "@angular-devkit/build-angular": "~14.2.10",
     "@angular-eslint/eslint-plugin": "~14.0.0",
     "@angular-eslint/eslint-plugin-template": "~14.0.0",
     "@angular-eslint/template-parser": "~14.0.0",
