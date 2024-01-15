@@ -211,7 +211,7 @@ This boilerplate comes with a Winston module for **extensive logging**, the conf
 
 ---
 
-### 👥 Help
+### 👥 Contribution
 
 PRs are appreciated, I fully rely on the passion ❤️ of the OS developers.
 
@@ -219,6 +219,7 @@ PRs are appreciated, I fully rely on the passion ❤️ of the OS developers.
 
 ## License
 
-This starter API is [MIT licensed](LICENSE).
+Nest is [MIT licensed](LICENSE).
 
-[Author](https://sal-anvarov.tech/)
+[Author](https://sal-anvarov.com/)
+
