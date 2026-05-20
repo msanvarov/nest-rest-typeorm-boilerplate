@@ -1,8 +1,25 @@
-html,
-body {
-    height: 100%;
+.starter-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+
+.starter-toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.starter-toolbar-actions {
+  display: none;
+
+  @media (min-width: 600px) {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+.starter-toolbar-menu {
+  @media (min-width: 600px) {
+    display: none;
+  }
 }

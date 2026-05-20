@@ -10,6 +10,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import type { FastifyRequest } from 'fastify';
 
 import { IGenericMessageBody } from '@starter/api-types';
 
@@ -20,33 +21,19 @@ import { PatchUserDto } from './dto/patch-user.dto';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
 
-/**
- * Users Controller
- */
+type AuthedRequest = FastifyRequest & { user: User };
+
 @ApiBearerAuth()
 @ApiTags('users')
 @Controller('v1/users')
 export class UsersController {
-  /**
-   * Constructor
-   * @param usersService
-   */
   constructor(private readonly usersService: UsersService) {}
 
-  /**
-   * Retrieves current authenticated user
-   * @returns {Promise<User>} queried user data
-   */
   @Get('user')
-  getUser(@Request() req) {
+  getUser(@Request() req: AuthedRequest): User {
     return req.user;
   }
 
-  /**
-   * Retrieves a particular user
-   * @param username the user given username to fetch
-   * @returns {Promise<User>} queried user data
-   */
   @Get(':username')
   @ApiResponse({ status: 200, description: 'Fetch User Request Received' })
   @ApiResponse({ status: 400, description: 'Fetch User Request Failed' })
@@ -60,11 +47,6 @@ export class UsersController {
     return user;
   }
 
-  /**
-   * Edit a user
-   * @param {RegisterPayload} payload
-   * @returns {Promise<User>} mutated user data
-   */
   @Patch()
   @ApiResponse({ status: 200, description: 'Patch User Request Received' })
   @ApiResponse({ status: 400, description: 'Patch User Request Failed' })
@@ -72,11 +54,6 @@ export class UsersController {
     return this.usersService.edit(payload);
   }
 
-  /**
-   * Removes a user from the database
-   * @param {string} username the username to remove
-   * @returns {Promise<IGenericMessageBody>} whether or not the user has been deleted
-   */
   @Delete(':username')
   @UseGuards(PoliciesGuard)
   @CheckPolicies(new DeleteUserPolicyHandler())

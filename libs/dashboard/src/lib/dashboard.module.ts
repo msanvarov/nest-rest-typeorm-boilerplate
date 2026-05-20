@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { AuthGuard } from '@starter/auth';
+import { authGuard } from '@starter/auth';
 import { UsersService } from '@starter/users';
 
 import { DashboardComponent } from './dashboard.component';
@@ -13,11 +13,11 @@ import { DashboardComponent } from './dashboard.component';
     RouterModule.forChild([
       {
         path: 'dashboard',
-        canActivate: [AuthGuard],
+        canActivate: [authGuard],
         component: DashboardComponent,
       },
     ]),
   ],
-  providers: [AuthGuard, UsersService],
+  providers: [UsersService],
 })
 export class DashboardModule {}

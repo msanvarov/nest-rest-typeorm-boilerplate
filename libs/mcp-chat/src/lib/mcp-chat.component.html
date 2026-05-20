@@ -1,0 +1,123 @@
+<div class="mcp-chat">
+  <mat-card class="mcp-chat__sidebar">
+    <mat-card-header>
+      <mat-card-title>MCP servers</mat-card-title>
+      <mat-card-subtitle>
+        {{ inventory()?.servers?.length ?? 0 }} connected
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item *ngFor="let s of inventory()?.servers ?? []">
+          <mat-icon matListItemIcon>
+            {{ s.kind === 'local' ? 'computer' : 'cloud' }}
+          </mat-icon>
+          <div matListItemTitle>{{ s.name }}</div>
+          <div matListItemLine>
+            {{ s.kind }} ·
+            <span [class.mcp-chat__ok]="s.connected" [class.mcp-chat__bad]="!s.connected">
+              {{ s.connected ? 'connected' : 'offline' }}
+            </span>
+          </div>
+        </mat-list-item>
+      </mat-list>
+
+      <mat-divider></mat-divider>
+
+      <h3>Tools</h3>
+      <mat-chip-set>
+        <mat-chip
+          *ngFor="let t of inventory()?.tools ?? []; trackBy: trackTool"
+          (click)="runTool(t)"
+          [disabled]="busy()"
+        >
+          <mat-icon matChipAvatar>build</mat-icon>
+          {{ t.name }}
+        </mat-chip>
+      </mat-chip-set>
+
+      <h3 *ngIf="(inventory()?.resources?.length ?? 0) > 0">Resources</h3>
+      <mat-list dense>
+        <mat-list-item *ngFor="let r of inventory()?.resources ?? []">
+          <mat-icon matListItemIcon>description</mat-icon>
+          <div matListItemTitle>{{ r.name ?? r.uri }}</div>
+          <div matListItemLine class="mcp-chat__muted">{{ r.uri }}</div>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="refreshInventory()">
+        <mat-icon>refresh</mat-icon>
+        Refresh
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card class="mcp-chat__thread">
+    <mat-card-header>
+      <mat-card-title>Chat preview</mat-card-title>
+      <mat-card-subtitle>
+        Talks to /api/v1/mcp · routes calls to local + remote servers
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-progress-bar *ngIf="busy()" mode="indeterminate"></mat-progress-bar>
+    <mat-card-content class="mcp-chat__messages">
+      <div
+        *ngFor="let m of messages(); trackBy: trackMessage"
+        class="mcp-chat__message"
+        [class.mcp-chat__message--user]="m.role === 'user'"
+        [class.mcp-chat__message--assistant]="m.role === 'assistant'"
+        [class.mcp-chat__message--tool]="m.role === 'tool'"
+      >
+        <div class="mcp-chat__message-role">
+          <mat-icon>
+            {{
+              m.role === 'user'
+                ? 'person'
+                : m.role === 'tool'
+                ? 'build_circle'
+                : 'smart_toy'
+            }}
+          </mat-icon>
+          <span>{{ m.role }}</span>
+        </div>
+        <pre class="mcp-chat__message-text">{{ m.text }}</pre>
+        <div *ngIf="m.toolCall" class="mcp-chat__tool-meta">
+          <mat-icon>info</mat-icon>
+          <span>
+            {{ m.toolCall.serverId }}/{{ m.toolCall.name }}
+          </span>
+        </div>
+      </div>
+      <div *ngIf="messages().length === 0" class="mcp-chat__empty">
+        Try "list users", "get user alice", or click a tool chip.
+      </div>
+      <div *ngIf="error()" class="mcp-chat__error">{{ error() }}</div>
+    </mat-card-content>
+    <mat-card-actions class="mcp-chat__composer">
+      <mat-form-field appearance="outline" class="mcp-chat__input">
+        <mat-label>Message</mat-label>
+        <input
+          matInput
+          [(ngModel)]="draft"
+          (keyup.enter)="send()"
+          [disabled]="busy()"
+          placeholder="Ask something or type /list-users"
+        />
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="send()"
+        [disabled]="busy() || !draft.trim()"
+      >
+        <mat-icon>send</mat-icon>
+        Send
+      </button>
+      <button mat-button (click)="clear()" [disabled]="busy()">
+        <mat-icon>delete_sweep</mat-icon>
+        Clear
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

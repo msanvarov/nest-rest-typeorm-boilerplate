@@ -1,0 +1,25 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "mcp-chat",
+  "sourceRoot": "libs/mcp-chat/src",
+  "projectType": "library",
+  "prefix": "starter",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/mcp-chat/**/*.ts", "libs/mcp-chat/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/mcp-chat"],
+      "options": {
+        "jestConfig": "libs/mcp-chat/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

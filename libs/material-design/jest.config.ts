@@ -2,16 +2,14 @@
 export default {
   displayName: 'material-design',
   preset: '../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.test.json',
-      stringifyContentPathRegex: '\\.(html|svg)$',
-    },
-  },
+  setupFilesAfterEach: ['<rootDir>/src/test-setup.ts'],
+  globals: {},
   coverageDirectory: '../../coverage/libs/material-design',
   transform: {
-    '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
+    '^.+\\.(ts|mjs|js|html)$': [
+      'jest-preset-angular',
+      { tsconfig: '<rootDir>/tsconfig.test.json', stringifyContentPathRegex: '\\.(html|svg)$' },
+    ],
   },
   transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
   snapshotSerializers: [

@@ -1,18 +1,24 @@
 name: Lint and Test on PR
-'on': pull_request
+on: pull_request
 jobs:
   build_and_preview:
-    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Download Deps 🔧
-        run: npm i
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
 
-      - name: Lint 🚨
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Lint
         run: npm run lint
 
-      - name: Test ✅
+      - name: Test
         run: npm run test

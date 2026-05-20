@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
 import { AuthModule, AuthService } from '@starter/auth';
@@ -21,15 +23,15 @@ import { GlobalRoutes } from './routes';
     RouterModule.forRoot(GlobalRoutes, {
       initialNavigation: 'enabledBlocking',
     }),
-
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    HttpClientModule,
     AuthModule,
     DashboardModule,
     MaterialModule,
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    provideHttpClient(withInterceptorsFromDi()),
+    provideAnimations(),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

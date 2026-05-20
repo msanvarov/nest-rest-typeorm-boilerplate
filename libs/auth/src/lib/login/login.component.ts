@@ -7,6 +7,7 @@ import { AuthService } from '../auth.service';
   selector: 'starter-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  standalone: false,
 })
 export class LoginComponent {
   isLoginFormValid = true;
@@ -14,13 +15,16 @@ export class LoginComponent {
   password = '';
   loading = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router,
+  ) {}
 
   onSubmit(): void {
     this.loading = true;
     this.isLoginFormValid = true;
     this.authService.loginUser(this.username, this.password).subscribe({
-      next: (_) => {
+      next: () => {
         this.loading = false;
         this.isLoginFormValid = true;
         this.router.navigate(['/']);
@@ -28,7 +32,6 @@ export class LoginComponent {
       error: (err) => {
         this.loading = false;
         console.error(err);
-        alert(err.message);
         this.isLoginFormValid = false;
       },
     });

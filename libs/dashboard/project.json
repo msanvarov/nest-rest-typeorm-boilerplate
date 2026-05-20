@@ -1,19 +1,21 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "dashboard",
   "projectType": "library",
   "sourceRoot": "libs/dashboard/src",
   "prefix": "starter",
+  "tags": [],
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/dashboard"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/dashboard"],
       "options": {
         "jestConfig": "libs/dashboard/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": [
           "libs/dashboard/**/*.ts",
@@ -21,6 +23,5 @@
         ]
       }
     }
-  },
-  "tags": []
+  }
 }
