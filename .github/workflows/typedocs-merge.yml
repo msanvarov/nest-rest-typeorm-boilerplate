@@ -22,9 +22,9 @@ jobs:
           cache: npm
 
       - name: Install Dependencies and Build Typedocs
-        run: npm i --legacy-peer-deps && npm run typedocs:api
+        run: npm i --legacy-peer-deps && npm run typedocs
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: docs/api
+          folder: docs

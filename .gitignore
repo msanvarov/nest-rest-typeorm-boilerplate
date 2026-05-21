@@ -51,8 +51,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
-.angular
-
 # dotenv environment variable files
 .env
 .env.development.local
@@ -67,8 +65,3 @@ Thumbs.db
 .yarn/install-state.gz
 .pnp.*
 
-### Node Patch ###
-# Webpack directories
-.webpack/
-# Nx cache
-.nx/

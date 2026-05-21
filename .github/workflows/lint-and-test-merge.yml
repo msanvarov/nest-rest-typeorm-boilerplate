@@ -25,7 +25,7 @@ jobs:
       - name: Lint
         env:
           ESLINT_USE_FLAT_CONFIG: 'false'
-        run: npx eslint "apps/**/*.{ts,html}" "libs/**/*.{ts,html}"
+        run: npx eslint "src/**/*.ts"
 
       - name: Test
         run: npx jest --passWithNoTests

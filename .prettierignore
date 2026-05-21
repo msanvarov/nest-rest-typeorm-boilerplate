@@ -1,4 +1,5 @@
-# Add files here to ignore them from prettier formatting
-
-/dist
-/coverage
+dist
+coverage
+docs
+node_modules
+package-lock.json
