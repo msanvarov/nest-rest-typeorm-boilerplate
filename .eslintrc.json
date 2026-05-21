@@ -3,7 +3,6 @@
   "ignorePatterns": [
     "dist/**",
     "coverage/**",
-    "tmp/**",
     "docs/**",
     "node_modules/**",
     "**/*.min.js",
@@ -29,15 +28,9 @@
         "@typescript-eslint/no-unused-vars": [
           "warn",
           { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }
-        ]
+        ],
+        "@typescript-eslint/no-namespace": "off"
       }
-    },
-    {
-      "files": ["*.html"],
-      "parser": "@angular-eslint/template-parser",
-      "plugins": ["@angular-eslint/template"],
-      "extends": ["plugin:@angular-eslint/template/recommended"],
-      "rules": {}
     },
     {
       "files": ["*.js", "*.cjs", "*.mjs"],
@@ -45,8 +38,7 @@
         "ecmaVersion": 2022,
         "sourceType": "module"
       },
-      "extends": ["eslint:recommended"],
-      "rules": {}
+      "extends": ["eslint:recommended"]
     }
   ]
 }

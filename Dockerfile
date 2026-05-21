@@ -3,11 +3,10 @@ FROM node:20-alpine AS build
 WORKDIR /usr/local/app
 
 COPY package*.json ./
-RUN npm ci
+RUN npm i --legacy-peer-deps
 
 COPY . .
-
-RUN npx nx build api --configuration=production
+RUN npm run build
 
 FROM node:20-alpine AS runtime
 
@@ -18,13 +17,14 @@ ENV PORT=3333
 
 RUN addgroup -S app && adduser -S -G app app
 
-COPY --from=build --chown=app:app /usr/local/app/dist/apps/api ./
+COPY --from=build --chown=app:app /usr/local/app/dist ./dist
 COPY --chown=app:app package*.json ./
-RUN npm ci --omit=dev && npm cache clean --force \
+RUN npm i --omit=dev --legacy-peer-deps \
+  && npm cache clean --force \
   && chown -R app:app /usr/local/app
 
 USER app
 
 EXPOSE 3333
 
-CMD ["node", "main.js"]
+CMD ["node", "dist/main.js"]
