@@ -1,96 +1,95 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { TypeOrmModule, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as joi from 'joi';
 import { WinstonModule } from 'nest-winston';
 import { join } from 'path';
 import * as winston from 'winston';
-import * as winstonFileRotator from 'winston-daily-rotate-file';
+import DailyRotateFile from 'winston-daily-rotate-file';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { CaslModule } from './casl/casl.module';
+import { McpModule } from './mcp/mcp.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
+      isGlobal: true,
+      cache: true,
       validationSchema: joi.object({
         APP_ENV: joi
           .string()
           .valid('development', 'production')
           .default('development'),
+        PORT: joi.number().default(3333),
         WEBTOKEN_ENCRYPTION_KEY: joi.string().required(),
         WEBTOKEN_EXPIRATION_TIME: joi.number().default(1800),
-        DB_TYPE: joi.string().default('mariadb'),
+        DB_TYPE: joi
+          .string()
+          .valid('mysql', 'mariadb', 'postgres')
+          .default('mysql'),
         DB_USERNAME: joi.string().default('root'),
         DB_PASSWORD: joi.string().allow('').default(''),
         DB_HOST: joi.string().default('localhost'),
-        DB_PORT: joi.number().default('3306'),
+        DB_PORT: joi.number().default(3306),
         DB_DATABASE: joi.string().default('nest'),
+        MCP_SERVER_NAME: joi.string().default('nest-rest-typeorm-mcp'),
+        MCP_SERVER_VERSION: joi.string().default('1.0.0'),
+        MCP_CLIENT_REMOTES: joi.string().allow('').default(''),
       }),
     }),
     ServeStaticModule.forRootAsync({
-      imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService) =>
         config.get('APP_ENV') === 'production'
-          ? [
-              {
-                rootPath: join(__dirname, '..', 'ui'),
-              },
-            ]
+          ? [{ rootPath: join(__dirname, '..', 'ui') }]
           : [],
     }),
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => {
-        return {
-          type: configService.get('DB_TYPE'),
-          host: configService.get('DB_HOST'),
-          port: configService.get('DB_PORT'),
-          username: configService.get('DB_USERNAME'),
-          password: configService.get('DB_PASSWORD'),
-          database: configService.get('DB_DATABASE'),
-          entities: [__dirname + '/**/**.entity{.ts,.js}'],
-          synchronize: configService.get('APP_ENV') === 'development',
-          autoLoadEntities: true,
-          logging: true,
-          keepConnectionAlive: true,
-        } as TypeOrmModuleAsyncOptions;
-      },
+      useFactory: (configService: ConfigService): TypeOrmModuleOptions => ({
+        type: configService.get<'mysql' | 'mariadb' | 'postgres'>('DB_TYPE'),
+        host: configService.get<string>('DB_HOST'),
+        port: configService.get<number>('DB_PORT'),
+        username: configService.get<string>('DB_USERNAME'),
+        password: configService.get<string>('DB_PASSWORD'),
+        database: configService.get<string>('DB_DATABASE'),
+        synchronize: configService.get('APP_ENV') === 'development',
+        autoLoadEntities: true,
+        logging: configService.get('APP_ENV') === 'development',
+      }),
     }),
     WinstonModule.forRootAsync({
-      imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => {
-        return configService.get('APP_ENV') === 'development'
+      useFactory: (configService: ConfigService) =>
+        configService.get('APP_ENV') === 'development'
           ? {
               level: 'info',
-              format: winston.format.json(),
+              format: winston.format.combine(
+                winston.format.timestamp(),
+                winston.format.simple(),
+              ),
               defaultMeta: { service: 'nest-typeorm-service' },
-              transports: [
-                new winston.transports.Console({
-                  format: winston.format.simple(),
-                }),
-              ],
+              transports: [new winston.transports.Console()],
             }
           : {
               level: 'info',
-              format: winston.format.json(),
+              format: winston.format.combine(
+                winston.format.timestamp(),
+                winston.format.json(),
+              ),
               defaultMeta: { service: 'nest-typeorm-service' },
               transports: [
+                new winston.transports.Console(),
                 new winston.transports.File({
                   filename: 'logs/error.log',
                   level: 'error',
                 }),
-                new winston.transports.Console({
-                  format: winston.format.simple(),
-                }),
-                new winstonFileRotator({
+                new DailyRotateFile({
                   filename: 'logs/application-%DATE%.log',
                   datePattern: 'YYYY-MM-DD',
                   zippedArchive: true,
@@ -98,12 +97,12 @@ import { UsersModule } from './users/users.module';
                   maxFiles: '14d',
                 }),
               ],
-            };
-      },
+            },
     }),
     AuthModule,
     UsersModule,
     CaslModule,
+    McpModule,
   ],
   controllers: [AppController],
   providers: [AppService],

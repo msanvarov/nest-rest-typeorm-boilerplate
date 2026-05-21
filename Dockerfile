@@ -1,18 +1,30 @@
-FROM node:lts-alpine as build
+FROM node:20-alpine AS build
 
 WORKDIR /usr/local/app
 
-# Copy application code to working directory
-COPY package*.json .
+COPY package*.json ./
+RUN npm ci
+
 COPY . .
 
-# Download dependencies
-RUN npm install
+RUN npx nx build api --configuration=production
 
-# Generate build artifacts
-RUN npm run build
+FROM node:20-alpine AS runtime
 
-#Expose port and begin application
+WORKDIR /usr/local/app
+
+ENV NODE_ENV=production
+ENV PORT=3333
+
+RUN addgroup -S app && adduser -S -G app app
+
+COPY --from=build --chown=app:app /usr/local/app/dist/apps/api ./
+COPY --chown=app:app package*.json ./
+RUN npm ci --omit=dev && npm cache clean --force \
+  && chown -R app:app /usr/local/app
+
+USER app
+
 EXPOSE 3333
 
-CMD ["node", "dist/apps/api/main.js"]
+CMD ["node", "main.js"]

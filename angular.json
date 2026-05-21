@@ -7,6 +7,8 @@
     "auth": "libs/auth",
     "dashboard": "libs/dashboard",
     "material-design": "libs/material-design",
+    "mcp-chat": "libs/mcp-chat",
+    "mcp-types": "libs/mcp-types",
     "store": "libs/store",
     "ui": "apps/ui",
     "ui-e2e": "apps/ui-e2e",

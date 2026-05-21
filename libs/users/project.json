@@ -1,22 +1,24 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "users",
   "projectType": "library",
   "sourceRoot": "libs/users/src",
   "prefix": "starter",
+  "tags": [],
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/users"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/users"],
       "options": {
         "jestConfig": "libs/users/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": ["libs/users/**/*.ts", "libs/users/**/*.html"]
       }
     }
-  },
-  "tags": []
+  }
 }

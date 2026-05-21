@@ -15,16 +15,8 @@ import { PatchUserDto } from './dto/patch-user.dto';
 import { UserRoles } from './user-role.entity';
 import { User } from './user.entity';
 
-/**
- * Users Service
- */
 @Injectable()
 export class UsersService {
-  /**
-   * Constructor
-   * @param {Repository<User>} userRepository
-   * @param {Repository<UserRoles>} rolesRepository
-   */
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
@@ -32,47 +24,38 @@ export class UsersService {
     private readonly userRolesRepository: Repository<UserRoles>,
   ) {}
 
-  /**
-   * Fetches user from database by UUID
-   * @param {number} id
-   * @returns {Promise<User>} data from queried user
-   */
-  get(id: number): Promise<User> {
+  get(id: number): Promise<User | null> {
     return this.userRepository.findOne({ where: { id }, relations: ['roles'] });
   }
 
-  /**
-   * Fetches user from database by username
-   * @param {string} username
-   * @returns {Promise<User>} data from queried user
-   */
-  getByUsername(username: string): Promise<User> {
-    return this.userRepository.findOneBy({ username });
+  getByUsername(username: string): Promise<User | null> {
+    return this.userRepository.findOne({
+      where: { username },
+      relations: ['roles'],
+    });
   }
 
-  /**
-   * Fetches user by username and hashed password
-   * @param {string} username
-   * @param {string} password
-   * @returns {Promise<User>} data from queried user
-   */
-  getByUsernameAndPass(username: string, password: string): Promise<User> {
+  getByUsernameAndPass(
+    username: string,
+    password: string,
+  ): Promise<User | null> {
     return this.userRepository
       .createQueryBuilder('users')
-      .where('users.username = :username and users.password = :password')
-      .setParameter('username', username)
-      .setParameter(
-        'password',
-        crypto.createHmac('sha256', password).digest('hex'),
-      )
+      .leftJoinAndSelect('users.roles', 'roles')
+      .where('users.username = :username and users.password = :password', {
+        username,
+        password: crypto.createHmac('sha256', password).digest('hex'),
+      })
       .getOne();
   }
 
-  /**
-   * Create a user with RegisterPayload fields
-   * @param {RegisterDto} payload user payload
-   * @returns {Promise<User>} data from the created user
-   */
+  list(limit = 50): Promise<User[]> {
+    return this.userRepository.find({
+      take: limit,
+      relations: ['roles'],
+    });
+  }
+
   async create(payload: RegisterDto): Promise<User> {
     const user = await this.getByUsername(payload.username);
 
@@ -82,7 +65,6 @@ export class UsersService {
       );
     }
 
-    // Remark: Default role is set to sudo
     const roles: UserRoles[] = [new UserRoles()];
     await this.userRolesRepository.save(roles);
 
@@ -100,42 +82,36 @@ export class UsersService {
     );
   }
 
-  /**
-   * Edit user data
-   * @param {PatchUserDto} payload
-   * @returns {Promise<User>} mutated user data
-   */
   async edit(payload: PatchUserDto): Promise<User> {
     const { username } = payload;
     const user = await this.getByUsername(username);
-    if (user) {
-      Object.keys(payload).forEach((key) => {
-        if (key === 'password') {
-          key = crypto.createHmac('sha256', key).digest('hex');
-        }
-        user[key] = payload[key];
-      });
-      return this.userRepository.save(user);
-    } else {
+    if (!user) {
       throw new BadRequestException(
         'The user with that username does not exist in the system. Please try another username.',
       );
     }
+    for (const key of Object.keys(payload) as Array<keyof PatchUserDto>) {
+      const value = payload[key];
+      if (key === 'password') {
+        if (typeof value === 'string' && value.length > 0) {
+          user.password = crypto.createHmac('sha256', value).digest('hex');
+        }
+        continue;
+      }
+      if (value !== undefined) {
+        (user as unknown as Record<string, unknown>)[key] = value;
+      }
+    }
+    return this.userRepository.save(user);
   }
 
-  /**
-   * Delete user given a username
-   * @param {string} username
-   * @returns {Promise<IGenericMessageBody>} whether or not the delete operation was completed
-   */
   async delete(username: string): Promise<IGenericMessageBody> {
     const deleted = await this.userRepository.delete({ username });
     if (deleted.affected === 1) {
       return { message: `Deleted ${username} from records` };
-    } else {
-      throw new BadRequestException(
-        `Failed to delete a user by the name of ${username}.`,
-      );
     }
+    throw new BadRequestException(
+      `Failed to delete a user by the name of ${username}.`,
+    );
   }
 }

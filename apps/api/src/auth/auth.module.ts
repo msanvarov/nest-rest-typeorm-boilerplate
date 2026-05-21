@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -13,26 +13,18 @@ import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
-    ConfigModule,
     TypeOrmModule.forFeature([User, UserRoles]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
-      imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => {
-        return {
-          secret: configService.get('WEBTOKEN_ENCRYPTION_KEY'),
-          signOptions: {
-            ...(configService.get('WEBTOKEN_EXPIRATION_TIME')
-              ? {
-                  expiresIn: Number(
-                    configService.get('WEBTOKEN_EXPIRATION_TIME'),
-                  ),
-                }
-              : {}),
-          },
-        };
-      },
       inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.get<string>('WEBTOKEN_ENCRYPTION_KEY'),
+        signOptions: {
+          expiresIn: Number(
+            configService.get<number>('WEBTOKEN_EXPIRATION_TIME') ?? 1800,
+          ),
+        },
+      }),
     }),
   ],
   providers: [AuthService, JwtStrategy, UsersService],

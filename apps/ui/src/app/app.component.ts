@@ -1,21 +1,21 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
-import { IMessage } from '@starter/api-types';
 import { AuthService } from '@starter/auth';
 
 @Component({
   selector: 'starter-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: false,
 })
 export class AppComponent {
-  hello$ = this.http.get<IMessage>('/api/hello');
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private readonly authService: AuthService) {}
 
-  public isAuthenticated = this.authService.isAuthenticated;
+  get isAuthenticated(): boolean {
+    return this.authService.isAuthenticated;
+  }
 
-  public logout(): void {
+  logout(): void {
     this.authService.logoutUser();
   }
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { mergeMap, tap } from 'rxjs';
+import { Observable, mergeMap, tap } from 'rxjs';
 
 import {
   ApiAuthRoutesEnum,
@@ -17,52 +17,46 @@ import { UsersService } from '@starter/users';
 })
 export class AuthService {
   constructor(
-    private store: Store,
-    private http: HttpClient,
-    private router: Router,
-    private usersService: UsersService,
+    private readonly store: Store,
+    private readonly http: HttpClient,
+    private readonly router: Router,
+    private readonly usersService: UsersService,
   ) {}
 
-  get user() {
+  get user(): Observable<IUser | undefined> {
     return this.store.get<IUser>('user');
   }
 
-  get isAuthenticated() {
-    return this.user !== undefined;
+  get isAuthenticated(): boolean {
+    return Boolean((this.store.value as { user?: IUser }).user);
   }
 
-  loginUser(username: string, password: string) {
+  loginUser(
+    username: string,
+    password: string,
+  ): Observable<IUser> {
     return this.http
-      .post(ApiAuthRoutesEnum.LOGIN, {
-        username,
-        password,
-      })
+      .post<IJWTResponseBody>(ApiAuthRoutesEnum.LOGIN, { username, password })
       .pipe(
-        mergeMap((user) =>
-          this.usersService.getAuthenticatedUserDetails(
-            (user as IJWTResponseBody).token,
-          ),
+        mergeMap((res) =>
+          this.usersService.getAuthenticatedUserDetails(res.token),
         ),
-        tap((user) => {
-          this.store.set('user', user);
-        }),
+        tap((user) => this.store.set('user', user)),
       );
   }
 
-  registerUser(registerPayload: IAuthRegisterPayload) {
-    return this.http.post(ApiAuthRoutesEnum.REGISTER, registerPayload).pipe(
-      mergeMap((user) =>
-        this.usersService.getAuthenticatedUserDetails(
-          (user as IJWTResponseBody).token,
+  registerUser(payload: IAuthRegisterPayload): Observable<IUser> {
+    return this.http
+      .post<IJWTResponseBody>(ApiAuthRoutesEnum.REGISTER, payload)
+      .pipe(
+        mergeMap((res) =>
+          this.usersService.getAuthenticatedUserDetails(res.token),
         ),
-      ),
-      tap((user) => {
-        this.store.set('user', user);
-      }),
-    );
+        tap((user) => this.store.set('user', user)),
+      );
   }
 
-  logoutUser() {
+  logoutUser(): Promise<boolean> {
     this.store.set('user', undefined);
     return this.router.navigate(['/auth/login']);
   }

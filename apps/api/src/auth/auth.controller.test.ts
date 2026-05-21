@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { MockFunctionMetadata, ModuleMocker } from 'jest-mock';
+import { ModuleMocker } from 'jest-mock';
 
 import { IJWTResponseBody, UserRolesEnum } from '@starter/api-types';
 
@@ -44,12 +44,14 @@ describe('AuthController', () => {
           return {};
         }
         if (typeof token === 'function') {
-          const mockMetadata = moduleMocker.getMetadata(
-            token,
-          ) as MockFunctionMetadata<unknown, unknown[]>;
-          const Mock = moduleMocker.generateFromMetadata(mockMetadata);
+          const mockMetadata = moduleMocker.getMetadata(token);
+          if (!mockMetadata) return undefined;
+          const Mock = moduleMocker.generateFromMetadata(
+            mockMetadata,
+          ) as new () => unknown;
           return new Mock();
         }
+        return undefined;
       })
       .compile();
 

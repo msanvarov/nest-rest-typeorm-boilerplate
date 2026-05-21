@@ -7,6 +7,7 @@ import { AuthService } from '../auth.service';
   selector: 'starter-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
+  standalone: false,
 })
 export class RegisterComponent {
   isRegisterFormValid = true;
@@ -15,7 +16,10 @@ export class RegisterComponent {
   name = '';
   password = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router,
+  ) {}
 
   onSubmit(): void {
     this.isRegisterFormValid = true;
@@ -27,13 +31,12 @@ export class RegisterComponent {
         password: this.password,
       })
       .subscribe({
-        next: (_) => {
+        next: () => {
           this.isRegisterFormValid = true;
           this.router.navigate(['/']);
         },
         error: (err) => {
           console.error(err);
-          alert(err.message);
           this.isRegisterFormValid = false;
         },
       });

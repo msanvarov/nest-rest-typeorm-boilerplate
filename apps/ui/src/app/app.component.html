@@ -1,13 +1,14 @@
-<mat-toolbar
-  color="primary"
-  fxLayout="row"
-  fxLayoutAlign="space-between center"
->
+<mat-toolbar color="primary" class="starter-toolbar">
   <span>
     <button mat-button routerLink="/">UI Starter</button>
     <button mat-button routerLink="/"><mat-icon>home</mat-icon></button>
+    <button mat-button routerLink="/mcp">
+      <mat-icon>smart_toy</mat-icon>
+      MCP
+    </button>
   </span>
-  <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+  <span class="starter-toolbar-spacer"></span>
+  <div class="starter-toolbar-actions">
     <button mat-button routerLink="/auth/login" *ngIf="!isAuthenticated">
       <mat-icon>login</mat-icon>
       Login
@@ -17,16 +18,20 @@
       Logout
     </button>
   </div>
-  <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+  <button mat-button [matMenuTriggerFor]="menu" class="starter-toolbar-menu">
     <mat-icon>menu</mat-icon>
   </button>
 </mat-toolbar>
-<mat-menu x-position="before" #menu="matMenu">
+<mat-menu xPosition="before" #menu="matMenu">
   <button mat-menu-item routerLink="/">
     <mat-icon>home</mat-icon>
     Home
   </button>
-  <button mat-menu-item routerLink="/login" *ngIf="!isAuthenticated">
+  <button mat-menu-item routerLink="/mcp">
+    <mat-icon>smart_toy</mat-icon>
+    MCP Chat
+  </button>
+  <button mat-menu-item routerLink="/auth/login" *ngIf="!isAuthenticated">
     <mat-icon>login</mat-icon>
     Login
   </button>

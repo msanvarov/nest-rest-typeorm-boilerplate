@@ -1,7 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import * as moment from 'moment';
 
 import { IJWTResponseBody } from '@starter/api-types';
 
@@ -9,35 +8,25 @@ import { User } from '../users/user.entity';
 import { UsersService } from '../users/users.service';
 import { LoginDto } from './dto/login.dto';
 
-/**
- * Authentication Service
- */
+const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  dateStyle: 'long',
+  timeStyle: 'short',
+});
+
 @Injectable()
 export class AuthService {
-  /**
-   * Time in seconds when the token is to expire
-   * @type {number}
-   */
   private readonly expiration: number;
 
-  /**
-   * Constructor
-   * @param {JwtService} jwtService jwt service
-   * @param {UsersService} usersService users service
-   */
   constructor(
     private readonly jwtService: JwtService,
     private readonly usersService: UsersService,
     private readonly configService: ConfigService,
   ) {
-    this.expiration = this.configService.get('WEBTOKEN_EXPIRATION_TIME');
+    this.expiration = Number(
+      this.configService.get<number>('WEBTOKEN_EXPIRATION_TIME'),
+    );
   }
 
-  /**
-   * Creates a signed jwt token based on User payload
-   * @param {User} param dto to generate token from
-   * @returns {Promise<IJWTResponseBody>} token body
-   */
   async createToken({
     id,
     username,
@@ -45,12 +34,11 @@ export class AuthService {
     roles,
     email,
   }: User): Promise<IJWTResponseBody> {
+    const expiresAt = new Date(Date.now() + this.expiration * 1000);
     return {
       expiration: this.expiration,
-      expirationFormatted: moment()
-        .add(this.expiration, 'seconds')
-        .format('LLL'),
-      token: this.jwtService.sign({
+      expirationFormatted: dateFormatter.format(expiresAt),
+      token: await this.jwtService.signAsync({
         id,
         username,
         name,
@@ -60,11 +48,6 @@ export class AuthService {
     };
   }
 
-  /**
-   * Validates whether or not the user exists in the database
-   * @param {LoginDto} param login payload to authenticate with
-   * @returns {Promise<User>} registered user
-   */
   async validateUser({ username, password }: LoginDto): Promise<User> {
     const user = await this.usersService.getByUsernameAndPass(
       username,
