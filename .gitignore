@@ -70,3 +70,5 @@ Thumbs.db
 ### Node Patch ###
 # Webpack directories
 .webpack/
+# Nx cache
+.nx/

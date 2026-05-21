@@ -99,7 +99,7 @@ export class UsersService {
         continue;
       }
       if (value !== undefined) {
-        (user as Record<string, unknown>)[key] = value;
+        (user as unknown as Record<string, unknown>)[key] = value;
       }
     }
     return this.userRepository.save(user);
