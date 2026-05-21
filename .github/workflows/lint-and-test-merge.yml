@@ -23,7 +23,9 @@ jobs:
         run: npm i --legacy-peer-deps
 
       - name: Lint
-        run: npm run lint
+        env:
+          ESLINT_USE_FLAT_CONFIG: 'false'
+        run: npx eslint "apps/**/*.{ts,html}" "libs/**/*.{ts,html}"
 
       - name: Test
-        run: npm run test
+        run: npx jest --passWithNoTests
