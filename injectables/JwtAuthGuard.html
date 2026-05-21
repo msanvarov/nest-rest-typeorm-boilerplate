@@ -167,6 +167,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier"></span>
                                 <a href="#canActivate" >canActivate</a>
                             </li>
                         </ul>
@@ -241,6 +242,7 @@
                 <td class="col-md-4">
                     <a name="canActivate"></a>
                     <span class="name">
+                            <span class="modifier"></span>
                         <span ><b>canActivate</b></span>
                         <a href="#canActivate"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -248,7 +250,8 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>canActivate(context: ExecutionContext)</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>canActivate(context: ExecutionContext)</code>
                 </td>
             </tr>
 
@@ -323,7 +326,7 @@ export class JwtAuthGuard extends AuthGuard(&#x27;jwt&#x27;) {
     super();
   }
 
-  canActivate(context: ExecutionContext) {
+  override canActivate(context: ExecutionContext) {
     const isPublic &#x3D; this.reflector.getAllAndOverride&lt;boolean&gt;(IS_PUBLIC_KEY, [
       context.getHandler(),
       context.getClass(),

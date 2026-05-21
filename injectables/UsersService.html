@@ -853,7 +853,7 @@ export class UsersService {
         continue;
       }
       if (value !&#x3D;&#x3D; undefined) {
-        (user as Record&lt;string, unknown&gt;)[key] &#x3D; value;
+        (user as unknown as Record&lt;string, unknown&gt;)[key] &#x3D; value;
       }
     }
     return this.userRepository.save(user);
