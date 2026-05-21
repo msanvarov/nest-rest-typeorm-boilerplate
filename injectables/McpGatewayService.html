@@ -1,0 +1,1181 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>nx-nest-angular-starter documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">nx-nest-angular-starter documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >McpGatewayService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>apps/api/src/mcp/mcp-gateway.service.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Aggregates the local in-process MCP server with any remote MCP servers
+the client connected to, presents a single inventory to the Angular UI,
+routes tool invocations to the correct backing server, and runs the
+chat-preview heuristic that turns a user message into a tool call when
+it can.</p>
+
+            </p>
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#logger" >logger</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#chat" >chat</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#extractArgs" >extractArgs</a>
+                            </li>
+                            <li>
+                                <a href="#inventory" >inventory</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#invokeTool" >invokeTool</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#matchTool" >matchTool</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#readResource" >readResource</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#toolMessage" >toolMessage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#uuid" >uuid</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(local: <a href="../injectables/McpServerService.html" target="_self">McpServerService</a>, client: <a href="../injectables/McpClientService.html" target="_self">McpClientService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">apps/api/src/mcp/mcp-gateway.service.ts:27</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>local</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/McpServerService.html" target="_self" >McpServerService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>client</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/McpClientService.html" target="_self" >McpClientService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="chat"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>chat</b></span>
+                        <a href="#chat"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>chat(request: McpChatRequest)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">apps/api/src/mcp/mcp-gateway.service.ts:102</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Lightweight chat handler. If the message looks like a direct tool
+invocation (or one was supplied explicitly) we run it; otherwise we
+answer with a list of suggested tools so the UI can render buttons.
+This is intentionally NOT a full LLM loop — it&#39;s a deterministic
+preview that any frontend can drive without an API key.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>request</td>
+                                            <td>
+                                                        <code>McpChatRequest</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;McpChatResponse&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="extractArgs"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>extractArgs</b></span>
+                        <a href="#extractArgs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>extractArgs(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, tool: McpToolSummary)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="168"
+                                    class="link-to-prism">apps/api/src/mcp/mcp-gateway.service.ts:168</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>tool</td>
+                                            <td>
+                                                        <code>McpToolSummary</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Record&lt;string, unknown&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="inventory"></a>
+                    <span class="name">
+                        <span ><b>inventory</b></span>
+                        <a href="#inventory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>inventory()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="34"
+                                    class="link-to-prism">apps/api/src/mcp/mcp-gateway.service.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>McpInventory</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="invokeTool"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>invokeTool</b></span>
+                        <a href="#invokeTool"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>invokeTool(request: McpToolInvocationRequest)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="54"
+                                    class="link-to-prism">apps/api/src/mcp/mcp-gateway.service.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>request</td>
+                                            <td>
+                                                        <code>McpToolInvocationRequest</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;McpToolInvocationResponse&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="matchTool"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>matchTool</b></span>
+                        <a href="#matchTool"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>matchTool(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, tools: McpToolSummary[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="150"
+                                    class="link-to-prism">apps/api/src/mcp/mcp-gateway.service.ts:150</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>tools</td>
+                                            <td>
+                                                        <code>McpToolSummary[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>McpToolSummary | undefined</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="readResource"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>readResource</b></span>
+                        <a href="#readResource"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>readResource(serverId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, uri: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="84"
+                                    class="link-to-prism">apps/api/src/mcp/mcp-gateway.service.ts:84</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>serverId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>uri</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;McpContentBlock[]&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toolMessage"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>toolMessage</b></span>
+                        <a href="#toolMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>toolMessage(call: McpToolInvocationRequest, result: McpToolInvocationResponse)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="187"
+                                    class="link-to-prism">apps/api/src/mcp/mcp-gateway.service.ts:187</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>call</td>
+                                            <td>
+                                                        <code>McpToolInvocationRequest</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>result</td>
+                                            <td>
+                                                        <code>McpToolInvocationResponse</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>McpChatMessage</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uuid"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>uuid</b></span>
+                        <a href="#uuid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>uuid()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="208"
+                                    class="link-to-prism">apps/api/src/mcp/mcp-gateway.service.ts:208</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logger"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>logger</b></span>
+                        <a href="#logger"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Logger(McpGatewayService.name)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">apps/api/src/mcp/mcp-gateway.service.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Logger } from &#x27;@nestjs/common&#x27;;
+
+import {
+  McpChatMessage,
+  McpChatRequest,
+  McpChatResponse,
+  McpContentBlock,
+  McpInventory,
+  McpServerInfo,
+  McpToolInvocationRequest,
+  McpToolInvocationResponse,
+  McpToolSummary,
+} from &#x27;@starter/mcp-types&#x27;;
+
+import { McpClientService } from &#x27;./mcp-client.service&#x27;;
+import { McpServerService } from &#x27;./mcp-server.service&#x27;;
+
+/**
+ * Aggregates the local in-process MCP server with any remote MCP servers
+ * the client connected to, presents a single inventory to the Angular UI,
+ * routes tool invocations to the correct backing server, and runs the
+ * chat-preview heuristic that turns a user message into a tool call when
+ * it can.
+ */
+@Injectable()
+export class McpGatewayService {
+  private readonly logger &#x3D; new Logger(McpGatewayService.name);
+
+  constructor(
+    private readonly local: McpServerService,
+    private readonly client: McpClientService,
+  ) {}
+
+  inventory(): McpInventory {
+    const localInfo: McpServerInfo &#x3D; {
+      id: this.local.id,
+      name: this.local.name,
+      version: this.local.version,
+      kind: &#x27;local&#x27;,
+      connected: true,
+    };
+
+    return {
+      servers: [localInfo, ...this.client.listConnections()],
+      tools: [...this.local.listTools(), ...this.client.listTools()],
+      resources: [
+        ...this.local.listResources(),
+        ...this.client.listResources(),
+      ],
+      prompts: this.client.listPrompts(),
+    };
+  }
+
+  async invokeTool(
+    request: McpToolInvocationRequest,
+  ): Promise&lt;McpToolInvocationResponse&gt; {
+    try {
+      if (request.serverId &#x3D;&#x3D;&#x3D; this.local.id) {
+        const text &#x3D; await this.local.invokeTool(
+          request.name,
+          request.arguments ?? {},
+        );
+        return { content: [{ type: &#x27;text&#x27;, text }] };
+      }
+      const content &#x3D; await this.client.invokeTool(
+        request.serverId,
+        request.name,
+        request.arguments ?? {},
+      );
+      return { content };
+    } catch (err) {
+      this.logger.warn(
+        &#x60;MCP tool ${request.serverId}/${request.name} failed: ${
+          err instanceof Error ? err.stack ?? err.message : String(err)
+        }&#x60;,
+      );
+      return {
+        isError: true,
+        content: [{ type: &#x27;text&#x27;, text: &#x27;MCP tool execution failed.&#x27; }],
+      };
+    }
+  }
+
+  async readResource(
+    serverId: string,
+    uri: string,
+  ): Promise&lt;McpContentBlock[]&gt; {
+    if (serverId &#x3D;&#x3D;&#x3D; this.local.id) {
+      const { text, mimeType } &#x3D; await this.local.readResource(uri);
+      return [{ type: &#x27;resource&#x27;, resource: { uri, mimeType, text } }];
+    }
+    return this.client.readResource(serverId, uri);
+  }
+
+  /**
+   * Lightweight chat handler. If the message looks like a direct tool
+   * invocation (or one was supplied explicitly) we run it; otherwise we
+   * answer with a list of suggested tools so the UI can render buttons.
+   * This is intentionally NOT a full LLM loop — it&#x27;s a deterministic
+   * preview that any frontend can drive without an API key.
+   */
+  async chat(request: McpChatRequest): Promise&lt;McpChatResponse&gt; {
+    const inventory &#x3D; this.inventory();
+    const message &#x3D; request.message?.trim() ?? &#x27;&#x27;;
+
+    if (request.toolCall) {
+      const tool &#x3D; inventory.tools.find(
+        (t) &#x3D;&gt;
+          t.serverId &#x3D;&#x3D;&#x3D; request.toolCall!.serverId &amp;&amp;
+          t.name &#x3D;&#x3D;&#x3D; request.toolCall!.name,
+      );
+      const inferredArgs &#x3D;
+        tool &amp;&amp; message ? this.extractArgs(message, tool) : {};
+      const enriched: McpToolInvocationRequest &#x3D; {
+        ...request.toolCall,
+        arguments: {
+          ...inferredArgs,
+          ...(request.toolCall.arguments ?? {}),
+        },
+      };
+      const result &#x3D; await this.invokeTool(enriched);
+      return { reply: this.toolMessage(enriched, result) };
+    }
+
+    const matchedTool &#x3D; this.matchTool(message, inventory.tools);
+    if (matchedTool) {
+      const call: McpToolInvocationRequest &#x3D; {
+        serverId: matchedTool.serverId,
+        name: matchedTool.name,
+        arguments: this.extractArgs(message, matchedTool),
+      };
+      const result &#x3D; await this.invokeTool(call);
+      return { reply: this.toolMessage(call, result) };
+    }
+
+    return {
+      reply: {
+        id: this.uuid(),
+        role: &#x27;assistant&#x27;,
+        text:
+          inventory.tools.length &#x3D;&#x3D;&#x3D; 0
+            ? &#x27;No MCP tools are registered yet. Configure MCP_CLIENT_REMOTES or add tools to the local server.&#x27;
+            : &#x60;I can run ${inventory.tools.length} MCP tool(s). Try one of the suggestions below.&#x60;,
+        createdAt: new Date().toISOString(),
+      },
+      suggestedTools: inventory.tools.slice(0, 5),
+    };
+  }
+
+  private matchTool(
+    message: string,
+    tools: McpToolSummary[],
+  ): McpToolSummary | undefined {
+    if (!message) return undefined;
+    const lower &#x3D; message.toLowerCase();
+    const exact &#x3D; tools.find((t) &#x3D;&gt; lower.startsWith(&#x60;/${t.name}&#x60;));
+    if (exact) return exact;
+
+    if (/\b(list|all)\b.*\busers?\b/.test(lower)) {
+      return tools.find((t) &#x3D;&gt; t.name &#x3D;&#x3D;&#x3D; &#x27;list-users&#x27;);
+    }
+    if (/\b(get|find|show|lookup)\b.*\buser\b/.test(lower)) {
+      return tools.find((t) &#x3D;&gt; t.name &#x3D;&#x3D;&#x3D; &#x27;get-user&#x27;);
+    }
+    return undefined;
+  }
+
+  private extractArgs(
+    message: string,
+    tool: McpToolSummary,
+  ): Record&lt;string, unknown&gt; {
+    if (tool.name &#x3D;&#x3D;&#x3D; &#x27;list-users&#x27;) {
+      const m &#x3D; message.match(/\b(\d{1,3})\b/);
+      return m ? { limit: Number(m[1]) } : {};
+    }
+    if (tool.name &#x3D;&#x3D;&#x3D; &#x27;get-user&#x27;) {
+      const slash &#x3D; message.match(/^\/get-user\s+(\S+)/i);
+      if (slash) return { username: slash[1] };
+      const named &#x3D; message.match(/user(?:name)?\s+(?:is\s+)?([A-Za-z0-9_]+)/i);
+      if (named) return { username: named[1] };
+      const trailing &#x3D; message.match(/([A-Za-z0-9_]{2,})\s*$/);
+      if (trailing) return { username: trailing[1] };
+    }
+    return {};
+  }
+
+  private toolMessage(
+    call: McpToolInvocationRequest,
+    result: McpToolInvocationResponse,
+  ): McpChatMessage {
+    const text &#x3D; result.content
+      .map((c) &#x3D;&gt; {
+        if (c.type &#x3D;&#x3D;&#x3D; &#x27;text&#x27;) return c.text;
+        if (c.type &#x3D;&#x3D;&#x3D; &#x27;resource&#x27;) return c.resource.text ?? c.resource.uri;
+        return &#x27;[non-text content]&#x27;;
+      })
+      .join(&#x27;\n&#x27;);
+    return {
+      id: this.uuid(),
+      role: &#x27;tool&#x27;,
+      text: result.isError ? &#x60;Tool error: ${text}&#x60; : text,
+      toolCall: call,
+      toolResult: result,
+      createdAt: new Date().toISOString(),
+    };
+  }
+
+  private uuid(): string {
+    return (
+      globalThis.crypto?.randomUUID?.() ?? Math.random().toString(36).slice(2)
+    );
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'McpGatewayService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,1742 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>nx-nest-angular-starter documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">nx-nest-angular-starter documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >McpServerService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>apps/api/src/mcp/mcp-server.service.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Runs an in-process MCP server that exposes a curated slice of the API
+(users + auth metadata) over the Model Context Protocol. The same server
+instance powers two surfaces:</p>
+<ul>
+<li>The native MCP Streamable HTTP transport at /api/v1/mcp/transport so
+Claude Desktop / Code and other MCP clients can connect directly.</li>
+<li>The internal <code>invokeTool</code> / <code>readResource</code> API used by the gateway
+service to power the Angular chat preview.</li>
+</ul>
+
+            </p>
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#logger" >logger</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#resourceHandlers" >resourceHandlers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#resources" >resources</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#server" >server</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#serverName" >serverName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#serverVersion" >serverVersion</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#toolHandlers" >toolHandlers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#tools" >tools</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#transport" >transport</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#handleTransportRequest" >handleTransportRequest</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#invokeTool" >invokeTool</a>
+                            </li>
+                            <li>
+                                <a href="#listResources" >listResources</a>
+                            </li>
+                            <li>
+                                <a href="#listTools" >listTools</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#onModuleDestroy" >onModuleDestroy</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#onModuleInit" >onModuleInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#readResource" >readResource</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#registerGetUserTool" >registerGetUserTool</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#registerListUsersTool" >registerListUsersTool</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#registerSchemaResource" >registerSchemaResource</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#registerServerInfoResource" >registerServerInfoResource</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#id" >id</a>
+                                </li>
+                                <li>
+                                    <a href="#name" >name</a>
+                                </li>
+                                <li>
+                                    <a href="#version" >version</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(configService: ConfigService, usersService: <a href="../injectables/UsersService.html" target="_self">UsersService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:46</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>configService</td>
+                                                  
+                                                        <td>
+                                                                    <code>ConfigService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>usersService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UsersService.html" target="_self" >UsersService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleTransportRequest"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>handleTransportRequest</b></span>
+                        <a href="#handleTransportRequest"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleTransportRequest(req: IncomingMessage, res: ServerResponse, body: unknown)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="134"
+                                    class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:134</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Bridges a Fastify request into the MCP Streamable HTTP transport. The
+controller pulls <code>req.raw</code> / <code>reply.raw</code> because the SDK works with the
+underlying Node IncomingMessage / ServerResponse.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                        <code>IncomingMessage</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>res</td>
+                                            <td>
+                                                        <code>ServerResponse</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>body</td>
+                                            <td>
+                                                        <code>unknown</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="invokeTool"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>invokeTool</b></span>
+                        <a href="#invokeTool"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>invokeTool(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, args: Record<string | unknown>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="110"
+                                    class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:110</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>name</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>args</td>
+                                            <td>
+                                                        <code>Record&lt;string | unknown&gt;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>{}</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;string&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="listResources"></a>
+                    <span class="name">
+                        <span ><b>listResources</b></span>
+                        <a href="#listResources"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>listResources()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:106</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>McpResourceSummary[]</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="listTools"></a>
+                    <span class="name">
+                        <span ><b>listTools</b></span>
+                        <a href="#listTools"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>listTools()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:102</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>McpToolSummary[]</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onModuleDestroy"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>onModuleDestroy</b></span>
+                        <a href="#onModuleDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onModuleDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="82"
+                                    class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:82</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onModuleInit"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>onModuleInit</b></span>
+                        <a href="#onModuleInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onModuleInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="59"
+                                    class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="readResource"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>readResource</b></span>
+                        <a href="#readResource"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>readResource(uri: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:121</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>uri</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;literal type&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerGetUserTool"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>registerGetUserTool</b></span>
+                        <a href="#registerGetUserTool"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>registerGetUserTool()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="201"
+                                    class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:201</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerListUsersTool"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>registerListUsersTool</b></span>
+                        <a href="#registerListUsersTool"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>registerListUsersTool()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="147"
+                                    class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:147</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerSchemaResource"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>registerSchemaResource</b></span>
+                        <a href="#registerSchemaResource"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>registerSchemaResource()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="270"
+                                    class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:270</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerServerInfoResource"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>registerServerInfoResource</b></span>
+                        <a href="#registerServerInfoResource"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>registerServerInfoResource()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="314"
+                                    class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:314</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logger"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>logger</b></span>
+                        <a href="#logger"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Logger(McpServerService.name)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resourceHandlers"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>resourceHandlers</b></span>
+                        <a href="#resourceHandlers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Map&lt;
+    string,
+    (uri: URL) &#x3D;&gt; Promise&lt;{ text: string; mimeType?: string }&gt;
+  &gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resources"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>resources</b></span>
+                        <a href="#resources"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>McpResourceSummary[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="server"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>server</b></span>
+                        <a href="#server"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>McpServer</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="serverName"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>serverName</b></span>
+                        <a href="#serverName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="serverVersion"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>serverVersion</b></span>
+                        <a href="#serverVersion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toolHandlers"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>toolHandlers</b></span>
+                        <a href="#toolHandlers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Map&lt;
+    string,
+    (args: Record&lt;string, unknown&gt;) &#x3D;&gt; Promise&lt;string&gt;
+  &gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tools"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>tools</b></span>
+                        <a href="#tools"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>McpToolSummary[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="transport"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>transport</b></span>
+                        <a href="#transport"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>StreamableHTTPServerTransport</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="id"></a>
+                        <span class="name"><b>id</b><a href="#id"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>id()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:90</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="name"></a>
+                        <span class="name"><b>name</b><a href="#name"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>name()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:94</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="version"></a>
+                        <span class="name"><b>version</b><a href="#version"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>version()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">apps/api/src/mcp/mcp-server.service.ts:98</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Injectable,
+  Logger,
+  OnModuleDestroy,
+  OnModuleInit,
+} from &#x27;@nestjs/common&#x27;;
+import { ConfigService } from &#x27;@nestjs/config&#x27;;
+import { McpServer } from &#x27;@modelcontextprotocol/sdk/server/mcp.js&#x27;;
+import { StreamableHTTPServerTransport } from &#x27;@modelcontextprotocol/sdk/server/streamableHttp.js&#x27;;
+import type { IncomingMessage, ServerResponse } from &#x27;http&#x27;;
+import { z } from &#x27;zod&#x27;;
+
+import { McpToolSummary, McpResourceSummary } from &#x27;@starter/mcp-types&#x27;;
+
+import { UsersService } from &#x27;../users/users.service&#x27;;
+
+const LOCAL_SERVER_ID &#x3D; &#x27;local&#x27;;
+
+/**
+ * Runs an in-process MCP server that exposes a curated slice of the API
+ * (users + auth metadata) over the Model Context Protocol. The same server
+ * instance powers two surfaces:
+ *
+ *   - The native MCP Streamable HTTP transport at /api/v1/mcp/transport so
+ *     Claude Desktop / Code and other MCP clients can connect directly.
+ *   - The internal &#x60;invokeTool&#x60; / &#x60;readResource&#x60; API used by the gateway
+ *     service to power the Angular chat preview.
+ */
+@Injectable()
+export class McpServerService implements OnModuleInit, OnModuleDestroy {
+  private readonly logger &#x3D; new Logger(McpServerService.name);
+  private readonly serverName: string;
+  private readonly serverVersion: string;
+
+  private server!: McpServer;
+  private transport?: StreamableHTTPServerTransport;
+  private readonly tools: McpToolSummary[] &#x3D; [];
+  private readonly resources: McpResourceSummary[] &#x3D; [];
+  private readonly toolHandlers &#x3D; new Map&lt;
+    string,
+    (args: Record&lt;string, unknown&gt;) &#x3D;&gt; Promise&lt;string&gt;
+  &gt;();
+  private readonly resourceHandlers &#x3D; new Map&lt;
+    string,
+    (uri: URL) &#x3D;&gt; Promise&lt;{ text: string; mimeType?: string }&gt;
+  &gt;();
+
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly usersService: UsersService,
+  ) {
+    this.serverName &#x3D;
+      this.configService.get&lt;string&gt;(&#x27;MCP_SERVER_NAME&#x27;) ??
+      &#x27;nest-rest-typeorm-mcp&#x27;;
+    this.serverVersion &#x3D;
+      this.configService.get&lt;string&gt;(&#x27;MCP_SERVER_VERSION&#x27;) ?? &#x27;1.0.0&#x27;;
+  }
+
+  async onModuleInit(): Promise&lt;void&gt; {
+    this.server &#x3D; new McpServer({
+      name: this.serverName,
+      version: this.serverVersion,
+    });
+
+    this.registerListUsersTool();
+    this.registerGetUserTool();
+    this.registerSchemaResource();
+    this.registerServerInfoResource();
+
+    this.transport &#x3D; new StreamableHTTPServerTransport({
+      sessionIdGenerator: () &#x3D;&gt;
+        globalThis.crypto?.randomUUID?.() ??
+        Math.random().toString(36).slice(2),
+    });
+    await this.server.connect(this.transport);
+
+    this.logger.log(
+      &#x60;Local MCP server &quot;${this.serverName}@${this.serverVersion}&quot; ready with ${this.tools.length} tools and ${this.resources.length} resources&#x60;,
+    );
+  }
+
+  async onModuleDestroy(): Promise&lt;void&gt; {
+    try {
+      await this.transport?.close();
+    } catch (err) {
+      this.logger.warn(&#x60;Failed to close MCP transport cleanly: ${err}&#x60;);
+    }
+  }
+
+  get id(): string {
+    return LOCAL_SERVER_ID;
+  }
+
+  get name(): string {
+    return this.serverName;
+  }
+
+  get version(): string {
+    return this.serverVersion;
+  }
+
+  listTools(): McpToolSummary[] {
+    return this.tools;
+  }
+
+  listResources(): McpResourceSummary[] {
+    return this.resources;
+  }
+
+  async invokeTool(
+    name: string,
+    args: Record&lt;string, unknown&gt; &#x3D; {},
+  ): Promise&lt;string&gt; {
+    const handler &#x3D; this.toolHandlers.get(name);
+    if (!handler) {
+      throw new Error(&#x60;Unknown MCP tool: ${name}&#x60;);
+    }
+    return handler(args);
+  }
+
+  async readResource(uri: string): Promise&lt;{ text: string; mimeType?: string }&gt; {
+    const handler &#x3D; this.resourceHandlers.get(uri);
+    if (!handler) {
+      throw new Error(&#x60;Unknown MCP resource: ${uri}&#x60;);
+    }
+    return handler(new URL(uri));
+  }
+
+  /**
+   * Bridges a Fastify request into the MCP Streamable HTTP transport. The
+   * controller pulls &#x60;req.raw&#x60; / &#x60;reply.raw&#x60; because the SDK works with the
+   * underlying Node IncomingMessage / ServerResponse.
+   */
+  async handleTransportRequest(
+    req: IncomingMessage,
+    res: ServerResponse,
+    body: unknown,
+  ): Promise&lt;void&gt; {
+    if (!this.transport) {
+      res.statusCode &#x3D; 503;
+      res.end(JSON.stringify({ error: &#x27;MCP transport not initialised yet&#x27; }));
+      return;
+    }
+    await this.transport.handleRequest(req, res, body);
+  }
+
+  private registerListUsersTool(): void {
+    const description &#x3D; &#x27;List up to N users from the database.&#x27;;
+    const inputSchema &#x3D; { limit: z.number().int().min(1).max(200).optional() };
+
+    this.server.registerTool(
+      &#x27;list-users&#x27;,
+      { description, inputSchema },
+      async ({ limit }) &#x3D;&gt; {
+        const users &#x3D; await this.usersService.list(limit ?? 25);
+        const rows &#x3D; users.map((u) &#x3D;&gt; ({
+          id: u.id,
+          username: u.username,
+          name: u.name,
+          email: u.email,
+          roles: u.roles?.map((r) &#x3D;&gt; r.role) ?? [],
+        }));
+        return {
+          content: [
+            { type: &#x27;text&#x27;, text: JSON.stringify(rows, null, 2) },
+          ],
+        };
+      },
+    );
+
+    this.tools.push({
+      name: &#x27;list-users&#x27;,
+      description,
+      serverId: LOCAL_SERVER_ID,
+      inputSchema: {
+        type: &#x27;object&#x27;,
+        properties: {
+          limit: { type: &#x27;integer&#x27;, minimum: 1, maximum: 200 },
+        },
+      },
+    });
+    this.toolHandlers.set(&#x27;list-users&#x27;, async (args) &#x3D;&gt; {
+      const raw &#x3D; Number(args.limit);
+      const parsed &#x3D; Number.isFinite(raw) ? Math.trunc(raw) : 25;
+      const limit &#x3D; Math.max(1, Math.min(parsed || 25, 200));
+      const users &#x3D; await this.usersService.list(limit);
+      return JSON.stringify(
+        users.map((u) &#x3D;&gt; ({
+          id: u.id,
+          username: u.username,
+          name: u.name,
+          email: u.email,
+          roles: u.roles?.map((r) &#x3D;&gt; r.role) ?? [],
+        })),
+        null,
+        2,
+      );
+    });
+  }
+
+  private registerGetUserTool(): void {
+    const description &#x3D; &#x27;Look up a single user by username.&#x27;;
+    const inputSchema &#x3D; { username: z.string().min(1) };
+
+    this.server.registerTool(
+      &#x27;get-user&#x27;,
+      { description, inputSchema },
+      async ({ username }) &#x3D;&gt; {
+        const user &#x3D; await this.usersService.getByUsername(username);
+        if (!user) {
+          return {
+            isError: true,
+            content: [{ type: &#x27;text&#x27;, text: &#x60;No user named &quot;${username}&quot;&#x60; }],
+          };
+        }
+        return {
+          content: [
+            {
+              type: &#x27;text&#x27;,
+              text: JSON.stringify(
+                {
+                  id: user.id,
+                  username: user.username,
+                  name: user.name,
+                  email: user.email,
+                  roles: user.roles?.map((r) &#x3D;&gt; r.role) ?? [],
+                },
+                null,
+                2,
+              ),
+            },
+          ],
+        };
+      },
+    );
+
+    this.tools.push({
+      name: &#x27;get-user&#x27;,
+      description,
+      serverId: LOCAL_SERVER_ID,
+      inputSchema: {
+        type: &#x27;object&#x27;,
+        required: [&#x27;username&#x27;],
+        properties: { username: { type: &#x27;string&#x27;, minLength: 1 } },
+      },
+    });
+    this.toolHandlers.set(&#x27;get-user&#x27;, async (args) &#x3D;&gt; {
+      const username &#x3D; String(args.username ?? &#x27;&#x27;);
+      if (!username) {
+        throw new Error(&#x27;username is required&#x27;);
+      }
+      const user &#x3D; await this.usersService.getByUsername(username);
+      if (!user) {
+        return &#x60;No user named &quot;${username}&quot;&#x60;;
+      }
+      return JSON.stringify(
+        {
+          id: user.id,
+          username: user.username,
+          name: user.name,
+          email: user.email,
+          roles: user.roles?.map((r) &#x3D;&gt; r.role) ?? [],
+        },
+        null,
+        2,
+      );
+    });
+  }
+
+  private registerSchemaResource(): void {
+    const uri &#x3D; &#x27;mcp://nest/schema/users&#x27;;
+    const text &#x3D; JSON.stringify(
+      {
+        entity: &#x27;User&#x27;,
+        columns: {
+          id: &#x27;number&#x27;,
+          username: &#x27;string (unique)&#x27;,
+          name: &#x27;string&#x27;,
+          email: &#x27;string&#x27;,
+          gravatar: &#x27;string (url)&#x27;,
+          roles: &#x27;UserRoles[] (one-to-many)&#x27;,
+        },
+      },
+      null,
+      2,
+    );
+
+    this.server.registerResource(
+      &#x27;users-schema&#x27;,
+      uri,
+      {
+        title: &#x27;Users table schema&#x27;,
+        description: &#x27;Static description of the User entity columns.&#x27;,
+        mimeType: &#x27;application/json&#x27;,
+      },
+      async () &#x3D;&gt; ({
+        contents: [{ uri, mimeType: &#x27;application/json&#x27;, text }],
+      }),
+    );
+
+    this.resources.push({
+      uri,
+      name: &#x27;Users table schema&#x27;,
+      description: &#x27;Static description of the User entity columns.&#x27;,
+      mimeType: &#x27;application/json&#x27;,
+      serverId: LOCAL_SERVER_ID,
+    });
+    this.resourceHandlers.set(uri, async () &#x3D;&gt; ({
+      text,
+      mimeType: &#x27;application/json&#x27;,
+    }));
+  }
+
+  private registerServerInfoResource(): void {
+    const uri &#x3D; &#x27;mcp://nest/server-info&#x27;;
+
+    this.server.registerResource(
+      &#x27;server-info&#x27;,
+      uri,
+      {
+        title: &#x27;Server info&#x27;,
+        description: &#x27;Name, version, and runtime info for this MCP server.&#x27;,
+        mimeType: &#x27;application/json&#x27;,
+      },
+      async () &#x3D;&gt; {
+        const text &#x3D; JSON.stringify(
+          {
+            name: this.serverName,
+            version: this.serverVersion,
+            node: process.version,
+            uptimeSeconds: Math.round(process.uptime()),
+          },
+          null,
+          2,
+        );
+        return {
+          contents: [{ uri, mimeType: &#x27;application/json&#x27;, text }],
+        };
+      },
+    );
+
+    this.resources.push({
+      uri,
+      name: &#x27;Server info&#x27;,
+      description: &#x27;Name, version, and runtime info for this MCP server.&#x27;,
+      mimeType: &#x27;application/json&#x27;,
+      serverId: LOCAL_SERVER_ID,
+    });
+    this.resourceHandlers.set(uri, async () &#x3D;&gt; ({
+      text: JSON.stringify(
+        {
+          name: this.serverName,
+          version: this.serverVersion,
+          node: process.version,
+          uptimeSeconds: Math.round(process.uptime()),
+        },
+        null,
+        2,
+      ),
+      mimeType: &#x27;application/json&#x27;,
+    }));
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'McpServerService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

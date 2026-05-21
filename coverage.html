@@ -12,10 +12,75 @@
         <link rel="stylesheet" href="./styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="./" class="navbar-brand">nx-nest-angular-starter documentation</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="./" class="navbar-brand">nx-nest-angular-starter documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,7 +89,7 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
@@ -49,8 +114,12 @@
 
 
 
+
+
+
+
 <ol class="breadcrumb">
-    <li>Documentation coverage</li>
+    <li class="breadcrumb-item">Documentation coverage</li>
 </ol>
 
 <div>
@@ -70,43 +139,43 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#moduleMocker">apps/api/src/app.controller.test.ts</a>
+                        <a href="./miscellaneous/variables.html#moduleMocker">apps/api/src/app.controller.test.ts</a>
             </td>
             <td>variable</td>
             <td>moduleMocker</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/1)</span>
-            </td>
-        </tr>
-        <tr class="very-good">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./controllers/AppController.html">apps/api/src/app.controller.ts</a>
-            </td>
-            <td>controller</td>
-            <td>AppController</td>
-            <td align="right" data-sort="100">
-                <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(2/2)</span>
-            </td>
-        </tr>
-        <tr class="very-good">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./injectables/AppService.html">apps/api/src/app.service.ts</a>
-            </td>
-            <td>injectable</td>
-            <td>AppService</td>
-            <td align="right" data-sort="100">
-                <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(3/3)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#moduleMocker">apps/api/src/auth/auth.controller.test.ts</a>
+                        <a href="./controllers/AppController.html">apps/api/src/app.controller.ts</a>
+            </td>
+            <td>controller</td>
+            <td>AppController</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./injectables/AppService.html">apps/api/src/app.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>AppService</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#moduleMocker">apps/api/src/auth/auth.controller.test.ts</a>
             </td>
             <td>variable</td>
             <td>moduleMocker</td>
@@ -118,7 +187,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./controllers/AuthController.html">apps/api/src/auth/auth.controller.ts</a>
+                        <a href="./controllers/AuthController.html">apps/api/src/auth/auth.controller.ts</a>
             </td>
             <td>controller</td>
             <td>AuthController</td>
@@ -130,7 +199,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#user">apps/api/src/auth/auth.service.test.ts</a>
+                        <a href="./miscellaneous/variables.html#user">apps/api/src/auth/auth.service.test.ts</a>
             </td>
             <td>variable</td>
             <td>user</td>
@@ -142,7 +211,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#userRole">apps/api/src/auth/auth.service.test.ts</a>
+                        <a href="./miscellaneous/variables.html#userRole">apps/api/src/auth/auth.service.test.ts</a>
             </td>
             <td>variable</td>
             <td>userRole</td>
@@ -151,22 +220,34 @@
                 <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
-        <tr class="very-good">
+        <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/AuthService.html">apps/api/src/auth/auth.service.ts</a>
+                        <a href="./injectables/AuthService.html">apps/api/src/auth/auth.service.ts</a>
             </td>
             <td>injectable</td>
             <td>AuthService</td>
-            <td align="right" data-sort="100">
-                <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(5/5)</span>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#dateFormatter">apps/api/src/auth/auth.service.ts</a>
+            </td>
+            <td>variable</td>
+            <td>dateFormatter</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./classes/LoginDto.html">apps/api/src/auth/dto/login.dto.ts</a>
+                        <a href="./classes/LoginDto.html">apps/api/src/auth/dto/login.dto.ts</a>
             </td>
             <td>class</td>
             <td>LoginDto</td>
@@ -178,7 +259,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./classes/RegisterDto.html">apps/api/src/auth/dto/register.dto.ts</a>
+                        <a href="./classes/RegisterDto.html">apps/api/src/auth/dto/register.dto.ts</a>
             </td>
             <td>class</td>
             <td>RegisterDto</td>
@@ -190,7 +271,7 @@
         <tr class="medium">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/JwtAuthGuard.html">apps/api/src/auth/jwt-auth.guard.ts</a>
+                        <a href="./injectables/JwtAuthGuard.html">apps/api/src/auth/jwt-auth.guard.ts</a>
             </td>
             <td>injectable</td>
             <td>JwtAuthGuard</td>
@@ -199,22 +280,34 @@
                 <span class="coverage-count">(1/3)</span>
             </td>
         </tr>
-        <tr class="very-good">
+        <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/JwtStrategy.html">apps/api/src/auth/jwt.strategy.ts</a>
+                        <a href="./injectables/JwtStrategy.html">apps/api/src/auth/jwt.strategy.ts</a>
             </td>
             <td>injectable</td>
             <td>JwtStrategy</td>
-            <td align="right" data-sort="100">
-                <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(3/3)</span>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#IS_PUBLIC_KEY">apps/api/src/auth/public.decorator.ts</a>
+                        <a href="./interfaces/JwtPayload.html">apps/api/src/auth/jwt.strategy.ts</a>
+            </td>
+            <td>interface</td>
+            <td>JwtPayload</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/4)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#IS_PUBLIC_KEY">apps/api/src/auth/public.decorator.ts</a>
             </td>
             <td>variable</td>
             <td>IS_PUBLIC_KEY</td>
@@ -226,7 +319,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#Public">apps/api/src/auth/public.decorator.ts</a>
+                        <a href="./miscellaneous/variables.html#Public">apps/api/src/auth/public.decorator.ts</a>
             </td>
             <td>variable</td>
             <td>Public</td>
@@ -238,7 +331,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/CaslFactory.html">apps/api/src/casl/casl.factory.ts</a>
+                        <a href="./injectables/CaslFactory.html">apps/api/src/casl/casl.factory.ts</a>
             </td>
             <td>injectable</td>
             <td>CaslFactory</td>
@@ -250,7 +343,31 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#CHECK_POLICIES_KEY">apps/api/src/casl/check-policies.decorator.ts</a>
+                        <a href="./miscellaneous/typealiases.html#AppAbility">apps/api/src/casl/casl.factory.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>AppAbility</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#Subjects">apps/api/src/casl/casl.factory.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>Subjects</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#CHECK_POLICIES_KEY">apps/api/src/casl/check-policies.decorator.ts</a>
             </td>
             <td>variable</td>
             <td>CHECK_POLICIES_KEY</td>
@@ -262,7 +379,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#CheckPolicies">apps/api/src/casl/check-policies.decorator.ts</a>
+                        <a href="./miscellaneous/variables.html#CheckPolicies">apps/api/src/casl/check-policies.decorator.ts</a>
             </td>
             <td>variable</td>
             <td>CheckPolicies</td>
@@ -274,7 +391,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./guards/PoliciesGuard.html">apps/api/src/casl/policies.guard.ts</a>
+                        <a href="./guards/PoliciesGuard.html">apps/api/src/casl/policies.guard.ts</a>
             </td>
             <td>guard</td>
             <td>PoliciesGuard</td>
@@ -286,7 +403,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./classes/DeleteUserPolicyHandler.html">apps/api/src/casl/policy-handlers.ts</a>
+                        <a href="./classes/DeleteUserPolicyHandler.html">apps/api/src/casl/policy-handlers.ts</a>
             </td>
             <td>class</td>
             <td>DeleteUserPolicyHandler</td>
@@ -298,7 +415,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/IPolicyHandler.html">apps/api/src/casl/policy-handlers.ts</a>
+                        <a href="./interfaces/IPolicyHandler.html">apps/api/src/casl/policy-handlers.ts</a>
             </td>
             <td>interface</td>
             <td>IPolicyHandler</td>
@@ -310,7 +427,31 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#environment">apps/api/src/environments/environment.prod.ts</a>
+                        <a href="./miscellaneous/typealiases.html#PolicyHandler">apps/api/src/casl/policy-handlers.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>PolicyHandler</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#PolicyHandlerCallback">apps/api/src/casl/policy-handlers.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>PolicyHandlerCallback</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#environment">apps/api/src/environments/environment.prod.ts</a>
             </td>
             <td>variable</td>
             <td>environment</td>
@@ -322,7 +463,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#environment">apps/api/src/environments/environment.ts</a>
+                        <a href="./miscellaneous/variables.html#environment">apps/api/src/environments/environment.ts</a>
             </td>
             <td>variable</td>
             <td>environment</td>
@@ -334,7 +475,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#bootstrap">apps/api/src/main.ts</a>
+                        <a href="./miscellaneous/functions.html#bootstrap">apps/api/src/main.ts</a>
             </td>
             <td>function</td>
             <td>bootstrap</td>
@@ -343,58 +484,130 @@
                 <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
-        <tr class="very-good">
+        <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#OPEN_API_CURRENT_VERSION">apps/api/src/main.ts</a>
+                        <a href="./miscellaneous/variables.html#OPEN_API_CURRENT_VERSION">apps/api/src/main.ts</a>
             </td>
             <td>variable</td>
             <td>OPEN_API_CURRENT_VERSION</td>
-            <td align="right" data-sort="100">
-                <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(1/1)</span>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
-        <tr class="very-good">
+        <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#OPEN_API_DESCRIPTION">apps/api/src/main.ts</a>
+                        <a href="./miscellaneous/variables.html#OPEN_API_DESCRIPTION">apps/api/src/main.ts</a>
             </td>
             <td>variable</td>
             <td>OPEN_API_DESCRIPTION</td>
-            <td align="right" data-sort="100">
-                <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(1/1)</span>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
-        <tr class="very-good">
+        <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#OPEN_API_NAME">apps/api/src/main.ts</a>
+                        <a href="./miscellaneous/variables.html#OPEN_API_NAME">apps/api/src/main.ts</a>
             </td>
             <td>variable</td>
             <td>OPEN_API_NAME</td>
-            <td align="right" data-sort="100">
-                <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(1/1)</span>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
-        <tr class="very-good">
+        <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#OPEN_API_ROOT">apps/api/src/main.ts</a>
+                        <a href="./miscellaneous/variables.html#OPEN_API_ROOT">apps/api/src/main.ts</a>
             </td>
             <td>variable</td>
             <td>OPEN_API_ROOT</td>
-            <td align="right" data-sort="100">
-                <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(1/1)</span>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./injectables/McpClientService.html">apps/api/src/mcp/mcp-client.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>McpClientService</td>
+            <td align="right" data-sort="7">
+                <span class="coverage-percent">7 %</span>
+                <span class="coverage-count">(1/13)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./interfaces/RemoteConnection.html">apps/api/src/mcp/mcp-client.service.ts</a>
+            </td>
+            <td>interface</td>
+            <td>RemoteConnection</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/8)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./injectables/McpGatewayService.html">apps/api/src/mcp/mcp-gateway.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>McpGatewayService</td>
+            <td align="right" data-sort="18">
+                <span class="coverage-percent">18 %</span>
+                <span class="coverage-count">(2/11)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./injectables/McpServerService.html">apps/api/src/mcp/mcp-server.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>McpServerService</td>
+            <td align="right" data-sort="9">
+                <span class="coverage-percent">9 %</span>
+                <span class="coverage-count">(2/22)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#LOCAL_SERVER_ID">apps/api/src/mcp/mcp-server.service.ts</a>
+            </td>
+            <td>variable</td>
+            <td>LOCAL_SERVER_ID</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./controllers/McpController.html">apps/api/src/mcp/mcp.controller.ts</a>
+            </td>
+            <td>controller</td>
+            <td>McpController</td>
+            <td align="right" data-sort="16">
+                <span class="coverage-percent">16 %</span>
+                <span class="coverage-count">(1/6)</span>
             </td>
         </tr>
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./classes/PatchUserDto.html">apps/api/src/users/dto/patch-user.dto.ts</a>
+                        <a href="./classes/PatchUserDto.html">apps/api/src/users/dto/patch-user.dto.ts</a>
             </td>
             <td>class</td>
             <td>PatchUserDto</td>
@@ -406,7 +619,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./classes/PasswordTransformer.html">apps/api/src/users/password.transformer.ts</a>
+                        <a href="./classes/PasswordTransformer.html">apps/api/src/users/password.transformer.ts</a>
             </td>
             <td>class</td>
             <td>PasswordTransformer</td>
@@ -418,7 +631,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./entitys/UserRoles.html">apps/api/src/users/user-role.entity.ts</a>
+                        <a href="./entities/UserRoles.html">apps/api/src/users/user-role.entity.ts</a>
             </td>
             <td>entity</td>
             <td>UserRoles</td>
@@ -430,7 +643,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./entitys/User.html">apps/api/src/users/user.entity.ts</a>
+                        <a href="./entities/User.html">apps/api/src/users/user.entity.ts</a>
             </td>
             <td>entity</td>
             <td>User</td>
@@ -439,28 +652,40 @@
                 <span class="coverage-count">(1/1)</span>
             </td>
         </tr>
-        <tr class="very-good">
+        <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./controllers/UsersController.html">apps/api/src/users/users.controller.ts</a>
+                        <a href="./controllers/UsersController.html">apps/api/src/users/users.controller.ts</a>
             </td>
             <td>controller</td>
             <td>UsersController</td>
-            <td align="right" data-sort="100">
-                <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(5/5)</span>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
             </td>
         </tr>
-        <tr class="very-good">
+        <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/UsersService.html">apps/api/src/users/users.service.ts</a>
+                        <a href="./miscellaneous/typealiases.html#AuthedRequest">apps/api/src/users/users.controller.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>AuthedRequest</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./injectables/UsersService.html">apps/api/src/users/users.service.ts</a>
             </td>
             <td>injectable</td>
             <td>UsersService</td>
-            <td align="right" data-sort="100">
-                <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(8/8)</span>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/9)</span>
             </td>
         </tr>
     </tbody>
@@ -502,6 +727,19 @@
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
        <script src="./js/libs/custom-elements.min.js"></script>
        <script src="./js/libs/lit-html.js"></script>
 
@@ -513,7 +751,6 @@
        <script src="./js/libs/es6-shim.min.js"></script>
        <script src="./js/libs/EventDispatcher.js"></script>
        <script src="./js/libs/promise.min.js"></script>
-       <script src="./js/libs/zepto.min.js"></script>
 
        <script src="./js/compodoc.js"></script>
 

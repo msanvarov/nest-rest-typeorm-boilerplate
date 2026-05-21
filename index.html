@@ -12,10 +12,75 @@
         <link rel="stylesheet" href="./styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="./" class="navbar-brand">nx-nest-angular-starter documentation</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="./" class="navbar-brand">nx-nest-angular-starter documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,12 +89,13 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content getting-started">
+               <div class="content readme">
                    <div class="content-data">
+
 
 <h1 align="center">API Starter</h1>
 
@@ -37,142 +103,235 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
 
-<p align="center">A progressive <a href="http://nodejs.org" target="blank">Node.js</a> framework for building efficient and scalable server-side applications, heavily inspired by <a href="https://angular.io" target="blank">Angular</a>.</p>
+<p align="center">A progressive <a href="http://nodejs.org" target="blank">Node.js</a> framework for building efficient and scalable server-side applications, paired with an Angular workspace and a Model Context Protocol (MCP) module for AI workflows.</p>
 
 <p align="center">
-    <a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-    <a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-        <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/actions"><img src="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/actions/workflows/lint-and-test-merge.yml/badge.svg" alt="Github Actions" /></a>
-    <a href="https://twitter.com/nestframework"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+  <a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+  <a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+  <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/actions"><img src="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/actions/workflows/lint-and-test-merge.yml/badge.svg" alt="Github Actions" /></a>
 </p>
 
-<p>Table of Contents:</p>
+<h2>Table of Contents</h2>
 <ol>
-<li><a href="#-description">Description</a></li>
-<li><a href="#%EF%B8%8F-prerequisites">Prerequisites</a></li>
-<li><a href="#-deployment">Deployment</a></li>
-<li><a href="#-environment-configuration">Environment Configuration</a></li>
-<li><a href="#-choosing-a-web-framework">Choosing a Web Framework</a></li>
-<li><a href="#-http2">HTTP2</a></li>
-<li><a href="#-choosing-a-database">Choosing a Database</a></li>
-<li><a href="#-testing">Testing</a></li>
-<li><a href="#-typedocs">TypeDocs</a></li>
-<li><a href="#-logs">Logs</a></li>
+<li><a href="#description">Description</a></li>
+<li><a href="#stack">Stack</a></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#deployment">Deployment</a></li>
+<li><a href="#environment-configuration">Environment Configuration</a></li>
+<li><a href="#mcp-module">MCP Module</a></li>
+<li><a href="#web-framework">Web Framework</a></li>
+<li><a href="#http2">HTTP/2</a></li>
+<li><a href="#database">Database</a></li>
+<li><a href="#testing">Testing</a></li>
+<li><a href="#typedocs">TypeDocs</a></li>
+<li><a href="#open-api">Open API</a></li>
+<li><a href="#typeorm">TypeORM</a></li>
+<li><a href="#logs">Logs</a></li>
+<li><a href="#progress">Progress</a></li>
+<li><a href="#contribution">Contribution</a></li>
 </ol>
-<p>🔎 This repo was created with <a href="https://nx.dev/">Nx</a>.</p>
-<h3 id="📚-description">📚 Description</h3>
-<p>This boilerplate is made to quickly prototype backend applications. It comes with authentication/authorization, logging, crud features and database persistence out of the box.</p>
-<hr>
-<h3 id="🛠️-prerequisites">🛠️ Prerequisites</h3>
-<h4 id="non-docker">Non Docker</h4>
+<p>This repo was created with <a href="https://nx.dev/">Nx</a>.</p>
+<h2>Description</h2>
+<p>This boilerplate is made to quickly prototype backend applications. It comes with authentication, authorization, logging, CRUD features, database persistence, and a built-in Model Context Protocol (MCP) server + client out of the box. An Angular workspace ships alongside for a thin admin UI with an MCP chat preview.</p>
+<h2>Stack</h2>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>Layer</th>
+<th>Tech</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Runtime</td>
+<td>Node.js 20+</td>
+</tr>
+<tr>
+<td>Monorepo</td>
+<td>Nx 21</td>
+</tr>
+<tr>
+<td>API</td>
+<td>NestJS 11 (Fastify adapter), TypeORM 0.3, Passport JWT, Swagger</td>
+</tr>
+<tr>
+<td>AI / MCP</td>
+<td><code>@modelcontextprotocol/sdk</code> 1.x (server + client over Streamable HTTP)</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>MySQL / MariaDB (TypeORM supports Postgres, SQLite, MSSQL, MongoDB)</td>
+</tr>
+<tr>
+<td>UI</td>
+<td>Angular 19, Angular Material 19 (Material 3 theme), standalone components</td>
+</tr>
+<tr>
+<td>Tooling</td>
+<td>TypeScript 5.6, ESLint 9, Prettier 3, Jest 29, Cypress 13</td>
+</tr>
+</tbody>
+</table>
+<h2>Prerequisites</h2>
+<h3>Non-Docker</h3>
 <ul>
-<li><p>Please make sure to have <a href="https://nodejs.org/en/download/">Node.js</a> (16+) locally by downloading the Javascript runtime via <code>brew</code>, <code>choco</code>, or <code>apt-get</code>.</p>
-</li>
-<li><p>Please make sure to have MYSQL locally by deploying a web server stack like <a href="https://www.apachefriends.org/">XAMPP</a>. The control panel can then trigger MYSQL to start on localhost. MYSQL can be downloaded standalone via <code>brew</code>, <code>choco</code>, or <code>apt-get</code>.</p>
-</li>
+<li>Node.js 20+ (<code>brew</code>, <code>choco</code>, <code>apt-get</code>, or via <a href="https://nodejs.org/en/download/">nodejs.org</a>).</li>
+<li>MySQL/MariaDB available locally (XAMPP, Homebrew, Docker, etc.).</li>
 </ul>
-<h4 id="docker-🐳">Docker 🐳</h4>
+<h3>Docker</h3>
 <ul>
-<li>Please make sure to have <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a> operational to quickly compose the required dependencies. Then follow the docker procedure outlined below.</li>
+<li><a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a> installed and running.</li>
 </ul>
-<hr>
-<h3 id="🚀-deployment">🚀 Deployment</h3>
-<h4 id="manual-deployment-without-docker">Manual Deployment without Docker</h4>
+<h2>Deployment</h2>
+<h3>Manual Deployment without Docker</h3>
 <ul>
-<li><p>Clone the repo via <code>git clone https://github.com/msanvarov/nest-rest-typeorm-boilerplate</code>.</p>
-</li>
-<li><p>Download dependencies via <code>npm i</code> or <code>yarn</code>.</p>
-</li>
-<li><p>Create a <strong>.env file</strong> via the <code>cp .env.example .env</code> command and replace the existing environment variable placeholders with valid responses.</p>
-</li>
-<li><p>Start the api in development mode by using <code>npm run start</code> (the app will be exposed on <a href="http://localhost:3333">http://localhost:3333</a>; not to conflict with React, Angular, or Vue ports).</p>
-</li>
+<li>Clone the repo: <code>git clone https://github.com/msanvarov/nest-rest-typeorm-boilerplate</code>.</li>
+<li>Install dependencies: <code>npm install</code>.</li>
+<li>Copy the env template: <code>cp .env.example .env</code> and fill in valid values.</li>
+<li>Start the API: <code>npm run start</code> (served on <a href="http://localhost:3333">http://localhost:3333</a>).</li>
 </ul>
 <details open>
 <summary>Optional deployment of the UI</summary>
 <br>
 
 <ul>
-<li><p>This repo comes with a UI built with <a href="https://angular.io/">Angular</a> - that can be accessed via <code>http://localhost:4200</code>.</p>
-</li>
-<li><p>To start the UI, start a new terminal window and run <code>npm run start --project ui</code>.</p>
-</li>
+<li>The Angular UI is at <code>apps/ui</code> and ships with an MCP chat preview at <code>/mcp</code>.</li>
+<li>Start it in a separate terminal: <code>npm run start:ui</code> (served on <a href="http://localhost:4200">http://localhost:4200</a>).</li>
 </ul>
 <blockquote>
-<p>Remark: In the docker deployment, the UI is automatically started and served by the API.</p>
+<p>In the docker deployment, the UI is automatically built and served by the API.</p>
 </blockquote>
 </details>
-<br/>
 
-<h4 id="deploying-with-docker-🐳">Deploying with Docker 🐳</h4>
+<h3>Deploying with Docker</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">docker-compose up -d</code></pre></div><p>The compose stack brings up the API behind an Nginx reverse proxy on <a href="http://localhost:80">http://localhost:80</a>.</p>
+<h2>Environment Configuration</h2>
+<p>The API reads every env var from <code>.env</code>.</p>
 <ul>
-<li>Execute the following command in-app directory:</li>
+<li><strong>APP_ENV</strong> — <code>development</code> or <code>production</code>. Drives logging and <code>synchronize</code> behavior in TypeORM.</li>
+<li><strong>PORT</strong> — HTTP port; defaults to 3333.</li>
+<li><strong>WEBTOKEN_ENCRYPTION_KEY</strong> — random secret used to sign JWTs.</li>
+<li><strong>WEBTOKEN_EXPIRATION_TIME</strong> — seconds before a JWT expires (default 2400).</li>
+<li><strong>DB_TYPE</strong> — TypeORM connection type (<code>mysql</code>, <code>mariadb</code>, <code>postgres</code>, etc.).</li>
+<li><strong>DB_USERNAME / DB_PASSWORD / DB_HOST / DB_PORT / DB_DATABASE</strong> — standard database credentials.</li>
+<li><strong>MCP_SERVER_NAME / MCP_SERVER_VERSION</strong> — identity reported by the local MCP server.</li>
+<li><strong>MCP_CLIENT_REMOTES</strong> — comma-separated list of external MCP server endpoints to connect to as a client (Streamable HTTP URLs).</li>
 </ul>
-<div><pre class="line-numbers"><code class="language-bash"># creates and loads the docker container in detached mode with the required configuration
-$ docker-compose up -d</code></pre></div><ul>
-<li>The following command will download dependencies and execute the web application on <a href="http://localhost:80">http://localhost:80</a> (deployed behind a Nginx reverse proxy).</li>
-</ul>
-<hr>
-<h3 id="🔒-environment-configuration">🔒 Environment Configuration</h3>
-<p>By default, the application comes with a config module that can read in every environment variable from the <code>.env</code> file.</p>
-<p><strong>APP_ENV</strong> - the application environment to execute as, either in development or production. Determines the type of logging options to utilize. Options: <code>development</code> or <code>production</code>.</p>
-<p><strong>WEBTOKEN_ENCRYPTION_KEY</strong> - the key to encrypt/decrypt web tokens with. Make sure to generate a random alphanumeric string for this.</p>
-<p><strong>WEBTOKEN_EXPIRATION_TIME</strong> - <strong>the time in seconds</strong> when the web token will expire; by default, it&#39;s 2400 seconds which is 40 mins.</p>
-<p><strong>DB_TYPE</strong> - the type of <a href="https://github.com/typeorm/typeorm/blob/master/docs/connection-options.md">database connection to use</a>.</p>
-<p><strong>DB_USERNAME</strong> - username for authenticating against the database.</p>
-<p><strong>DB_PASSWORD</strong> - password for authenticating against the database, can be left empty if a password is not needed (<strong>not safe</strong>).</p>
-<p><strong>DB_HOST</strong> - the endpoint where this database sits (default is localhost but can be set explicitly).</p>
-<p><strong>DB_PORT</strong> - default ports for different types of database connections.</p>
-<p><strong>DB_DATABASE</strong> - the actual database name to perform operations on.</p>
-<hr>
-<h3 id="🏗-choosing-a-web-framework">🏗 Choosing a Web Framework</h3>
-<p>This boilerplate comes with <a href="https://github.com/fastify/fastify">Fastify</a> out of the box as it offers <a href="https://github.com/nestjs/nest/blob/master/benchmarks/all_output.txt">performance benefits</a> over Express. But the Express adapter is still accessible on a <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/tree/express">different branch</a>.</p>
-<hr>
-<h3 id="💾-choosing-a-database">💾 Choosing a Database</h3>
-<p>By default <strong>MYSQL/MariaDB</strong> are the database of choice but TypeORM supports other database types like SQLite, Postgres, MongoDB, and MSSQL. To use anything other than MYSQL/MariaDB, change the configuration in the <code>.env</code> file, and download the corresponding wrapper library, like <a href="https://www.npmjs.com/package/sqlite3">SQLite3</a>.</p>
+<h2>MCP Module</h2>
+<p>This project ships with a first-class Model Context Protocol integration so the API can both <strong>expose</strong> itself to AI clients and <strong>consume</strong> other MCP servers.</p>
+<h3>What&#39;s included</h3>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>Piece</th>
+<th>Path</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>McpServerService</code></td>
+<td><code>apps/api/src/mcp/mcp-server.service.ts</code></td>
+<td>In-process MCP server. Registers <code>list-users</code>, <code>get-user</code> tools and <code>mcp://nest/schema/users</code>, <code>mcp://nest/server-info</code> resources.</td>
+</tr>
+<tr>
+<td><code>McpClientService</code></td>
+<td><code>apps/api/src/mcp/mcp-client.service.ts</code></td>
+<td>Connects to every endpoint in <code>MCP_CLIENT_REMOTES</code> on startup and mirrors their tools/resources/prompts.</td>
+</tr>
+<tr>
+<td><code>McpGatewayService</code></td>
+<td><code>apps/api/src/mcp/mcp-gateway.service.ts</code></td>
+<td>Aggregates local + remote inventory, routes tool calls, and runs the deterministic chat preview.</td>
+</tr>
+<tr>
+<td><code>McpController</code></td>
+<td><code>apps/api/src/mcp/mcp.controller.ts</code></td>
+<td>REST surface for the UI plus the native MCP Streamable HTTP transport.</td>
+</tr>
+<tr>
+<td><code>@starter/mcp-types</code></td>
+<td><code>libs/mcp-types</code></td>
+<td>TypeScript types shared with the Angular client.</td>
+</tr>
+<tr>
+<td><code>@starter/mcp-chat</code></td>
+<td><code>libs/mcp-chat</code></td>
+<td>Standalone Angular component, lazy-loaded under <code>/mcp</code> in the UI.</td>
+</tr>
+</tbody>
+</table>
+<h3>Endpoints</h3>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/mcp/inventory</code></td>
+<td>Returns servers + tools + resources + prompts as JSON.</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/v1/mcp/invoke</code></td>
+<td>Body: <code>{ serverId, name, arguments }</code> — invokes a tool.</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/mcp/resource</code></td>
+<td>Query: <code>serverId</code>, <code>uri</code> — reads a resource.</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/v1/mcp/chat</code></td>
+<td>Body: <code>{ message, toolCall?, history? }</code> — chat preview entry point.</td>
+</tr>
+<tr>
+<td>ANY</td>
+<td><code>/api/v1/mcp/transport</code></td>
+<td>Native MCP Streamable HTTP endpoint for AI clients (Claude Desktop, Claude Code, mcp-cli, etc.).</td>
+</tr>
+</tbody>
+</table>
+<h3>Connecting an external MCP client</h3>
+<p>Point a Streamable-HTTP-aware MCP client at <code>http://localhost:3333/api/v1/mcp/transport</code>. The server advertises <code>MCP_SERVER_NAME@MCP_SERVER_VERSION</code> and exposes the registered tools and resources.</p>
+<h3>Consuming external MCP servers</h3>
+<p>Set <code>MCP_CLIENT_REMOTES</code> to a comma-separated list of Streamable HTTP URLs. On startup, the API connects to each, mirrors their inventory into <code>/api/v1/mcp/inventory</code>, and routes invocations through the same chat endpoint.</p>
+<h3>Chat preview</h3>
+<p>Visit <code>http://localhost:4200/mcp</code> in the UI. The preview lists every connected server, surfaces tools as chips, and lets you trigger them or chat in natural language. Built-in heuristics route phrases like &quot;list users&quot; or &quot;get user alice&quot; to the right tool — wire in your own LLM if you want full reasoning.</p>
+<h2>Web Framework</h2>
+<p>The API uses <a href="https://github.com/fastify/fastify">Fastify</a> via <code>@nestjs/platform-fastify</code> for its performance characteristics. An Express variant lives on a <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/tree/express">separate branch</a>.</p>
+<h2>HTTP/2</h2>
+<p>Fastify supports HTTP/2 over HTTPS (h2) or plaintext (h2c). A working example with a self-signed certificate is on the <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/tree/feat/http2">feat/http2 branch</a>.</p>
+<p>Generate a self-signed cert with OpenSSL:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">openssl req -x509 -newkey rsa:4096 -keyout api-key.pem -out api-cert.pem -days 365 -nodes</code></pre></div><blockquote>
+<p>Express can do HTTP/2 via the <a href="https://www.npmjs.com/package/spdy">spdy</a> library.</p>
+</blockquote>
+<h2>Database</h2>
+<p>The boilerplate defaults to <strong>MySQL/MariaDB</strong>. TypeORM supports SQLite, Postgres, MongoDB, and MSSQL — change <code>DB_TYPE</code> and install the matching driver (e.g. <a href="https://www.npmjs.com/package/pg">pg</a> for Postgres).</p>
 <blockquote>
-<p>Check <a href="https://typeorm.io/">https://typeorm.io/</a> for supported database types.</p>
+<p>For MongoDB, mongoose tends to be a better fit. See the <a href="https://github.com/msanvarov/nest-rest-mongo-boilerplate">Nest + Mongoose boilerplate</a>.</p>
 </blockquote>
-<p><strong>Remark: For MongoDB, TypeORM is not as feature-rich as Mongoose. Thus, I created a boilerplate for <a href="https://github.com/msanvarov/nest-rest-mongo-boilerplate">Nest and Mongoose</a></strong>.</p>
-<hr>
-<h3 id="🦾-http2">🦾 HTTP/2</h3>
-<p>Luckily, Fastify can enable HTTP2 over either HTTPS (h2) or plaintext (h2c) out of the box. This boilerplate makes use of this on the <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/tree/feat/http2">feat/http2 branch</a> where a self-signed certificate was created for testing this capability. The certificate is located in the <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/tree/feat/http2/apps/api/src/assets/certs">certs folder</a>. <strong>For production, please use a valid certificate.</strong></p>
-<p>The self signed certificate can be generated via OpenSSL:</p>
-<div><pre class="line-numbers"><code class="language-bash">$ openssl req -x509 -newkey rsa:4096 -keyout api-key.pem -out api-cert.pem -days 365 -nodes
-</code></pre></div><blockquote>
-<p>Remark: Express can be ran with HTTP/2 by employing the <a href="https://www.npmjs.com/package/spdy">spdy</a> library.</p>
-</blockquote>
-<hr>
-<h3 id="✅-testing">✅ Testing</h3>
-<h4 id="docker-🐳-1">Docker 🐳</h4>
-<div><pre class="line-numbers"><code class="language-bash"># Start the docker container if it&#39;s not running
-$ docker start nest-rest-typeorm-api
-
-# unit tests
-$ docker exec -it nest-rest-typeorm-api npm run test
-</code></pre></div><h4 id="non-docker-1">Non-Docker</h4>
-<div><pre class="line-numbers"><code class="language-bash"># execute test
-$ npm run test</code></pre></div><hr>
-<h3 id="💡-typedocs">💡 TypeDocs</h3>
-<p>The documentation for this boilerplate can be found <a href="https://msanvarov.github.io/nest-rest-typeorm-boilerplate/">on Github pages</a>.</p>
-<p>The docs can be generated on-demand, by typing <code>npm run typedocs:api:start</code>. This will produce a <strong>docs/api</strong> folder with the required front-end files and <strong>start hosting on <a href="http://localhost:8080/">localhost</a></strong>.</p>
-<blockquote>
-<p>Remark: The docs for the ui are generated on-demand, by typing <code>npm run typedocs:ui:start</code>. This will produce a <strong>docs/ui</strong> folder with the required front-end files and <strong>start hosting on <a href="http://localhost:8080/">localhost</a></strong>.</p>
-</blockquote>
-<div><pre class="line-numbers"><code class="language-bash"># generate docs for api code
-$ npm run typedocs:api:start</code></pre></div><hr>
-<h3 id="📝-open-api">📝 Open API</h3>
-<p>Out of the box, the web app comes with Swagger; an <a href="https://swagger.io/specification/">open api specification</a>, that is used to describe RESTful APIs. Nest provides a <a href="https://docs.nestjs.com/openapi/introduction">dedicated module to work with it</a>.</p>
-<p>The configuration for Swagger can be found at this <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/apps/api/src/main.ts">location</a>.</p>
-<hr>
-<h3 id="✨-typeorm">✨ TypeORM</h3>
-<p>TypeORM is an object-relational mapping that acts as an abstraction layer over operations on databases. Please view the <a href="https://typeorm.io/#/">documentation</a> for further details.</p>
-<p>The configuration for TypeORM can be found in the <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/apps/api/src/app.module.ts#L33-L51">app module</a>.</p>
-<hr>
-<h3 id="🔊-logs">🔊 Logs</h3>
-<p>This boilerplate comes with a Winston module for <strong>extensive logging</strong>, the configurations for Winston can be found in the <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/blob/master/apps/api/src/app.module.ts#L52-L89">app module</a>.</p>
-<hr>
-<h3 id="🏗️-progress">🏗️ Progress</h3>
+<h2>Testing</h2>
+<h3>Docker</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">docker start nest-rest-typeorm-api
+docker exec -it nest-rest-typeorm-api npm run test</code></pre></div><h3>Non-Docker</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm run test</code></pre></div><h2>TypeDocs</h2>
+<p>The documentation site is published on <a href="https://msanvarov.github.io/nest-rest-typeorm-boilerplate/">GitHub Pages</a>.</p>
+<p>Generate locally with <code>npm run typedocs:api:start</code> (API) or <code>npm run typedocs:ui:start</code> (UI).</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm run typedocs:api:start</code></pre></div><h2>Open API</h2>
+<p>Swagger UI is served at <code>/api/v1/docs</code>. Configuration lives in <code>apps/api/src/main.ts</code>.</p>
+<h2>TypeORM</h2>
+<p>TypeORM is the persistence layer. See the <a href="https://typeorm.io/">official docs</a> for advanced usage.</p>
+<p>Connection config lives in <code>apps/api/src/app.module.ts</code>.</p>
+<h2>Logs</h2>
+<p>Winston is wired up via <code>nest-winston</code>. In development the API logs to the console with timestamps; in production it adds a JSON error file at <code>logs/error.log</code> and a daily-rotated archive under <code>logs/application-YYYY-MM-DD.log</code>.</p>
+<h2>Progress</h2>
 <table class="table table-bordered compodoc-table">
 <thead>
 <tr>
@@ -183,23 +342,22 @@ $ npm run typedocs:api:start</code></pre></div><hr>
 <tbody>
 <tr>
 <td align="right"><a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate">main</a></td>
-<td align="left">✅</td>
+<td align="left">stable</td>
 </tr>
 <tr>
 <td align="right"><a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/branches">feat/*</a></td>
-<td align="left">🚧</td>
+<td align="left">wip</td>
 </tr>
 </tbody>
 </table>
-<!-- > Remark: This template was employed to create a [Real World example app](https://github.com/gothinkster/realworld) on [Github](). -->
-
-<hr>
-<h3 id="👥-contribution">👥 Contribution</h3>
-<p>PRs are appreciated, I fully rely on the passion ❤️ of the OS developers.</p>
-<hr>
-<h2 id="license">License</h2>
+<h2>Contribution</h2>
+<p>PRs are appreciated.</p>
+<h2>License</h2>
 <p>Nest is <a href="LICENSE">MIT licensed</a>.</p>
 <p><a href="https://sal-anvarov.com/">Author</a></p>
+
+
+
 
 
 
@@ -246,10 +404,23 @@ $ npm run typedocs:api:start</code></pre></div><hr>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 0;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'readme';
             var COMPODOC_CURRENT_PAGE_URL = 'index.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
 
        <script src="./js/libs/custom-elements.min.js"></script>
        <script src="./js/libs/lit-html.js"></script>
@@ -262,7 +433,6 @@ $ npm run typedocs:api:start</code></pre></div><hr>
        <script src="./js/libs/es6-shim.min.js"></script>
        <script src="./js/libs/EventDispatcher.js"></script>
        <script src="./js/libs/promise.min.js"></script>
-       <script src="./js/libs/zepto.min.js"></script>
 
        <script src="./js/compodoc.js"></script>
 
