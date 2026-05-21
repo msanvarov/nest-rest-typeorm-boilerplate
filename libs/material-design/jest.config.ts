@@ -2,7 +2,7 @@
 export default {
   displayName: 'material-design',
   preset: '../../jest.preset.js',
-  setupFilesAfterEach: ['<rootDir>/src/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {},
   coverageDirectory: '../../coverage/libs/material-design',
   transform: {

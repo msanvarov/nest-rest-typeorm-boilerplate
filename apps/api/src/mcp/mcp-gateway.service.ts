@@ -70,16 +70,13 @@ export class McpGatewayService {
       return { content };
     } catch (err) {
       this.logger.warn(
-        `MCP tool ${request.serverId}/${request.name} failed: ${err}`,
+        `MCP tool ${request.serverId}/${request.name} failed: ${
+          err instanceof Error ? err.stack ?? err.message : String(err)
+        }`,
       );
       return {
         isError: true,
-        content: [
-          {
-            type: 'text',
-            text: err instanceof Error ? err.message : String(err),
-          },
-        ],
+        content: [{ type: 'text', text: 'MCP tool execution failed.' }],
       };
     }
   }
@@ -107,10 +104,22 @@ export class McpGatewayService {
     const message = request.message?.trim() ?? '';
 
     if (request.toolCall) {
-      const result = await this.invokeTool(request.toolCall);
-      return {
-        reply: this.toolMessage(request.toolCall, result),
+      const tool = inventory.tools.find(
+        (t) =>
+          t.serverId === request.toolCall!.serverId &&
+          t.name === request.toolCall!.name,
+      );
+      const inferredArgs =
+        tool && message ? this.extractArgs(message, tool) : {};
+      const enriched: McpToolInvocationRequest = {
+        ...request.toolCall,
+        arguments: {
+          ...inferredArgs,
+          ...(request.toolCall.arguments ?? {}),
+        },
       };
+      const result = await this.invokeTool(enriched);
+      return { reply: this.toolMessage(enriched, result) };
     }
 
     const matchedTool = this.matchTool(message, inventory.tools);

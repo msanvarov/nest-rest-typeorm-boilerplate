@@ -70,7 +70,8 @@
   &__message-text {
     margin: 0;
     white-space: pre-wrap;
-    word-break: break-word;
+    overflow-wrap: anywhere;
+    word-break: normal;
     font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
     font-size: 13px;
     line-height: 1.5;

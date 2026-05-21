@@ -92,9 +92,13 @@ export class UsersService {
     }
     for (const key of Object.keys(payload) as Array<keyof PatchUserDto>) {
       const value = payload[key];
-      if (key === 'password' && value) {
-        user.password = crypto.createHmac('sha256', value).digest('hex');
-      } else if (value !== undefined) {
+      if (key === 'password') {
+        if (typeof value === 'string' && value.length > 0) {
+          user.password = crypto.createHmac('sha256', value).digest('hex');
+        }
+        continue;
+      }
+      if (value !== undefined) {
         (user as Record<string, unknown>)[key] = value;
       }
     }

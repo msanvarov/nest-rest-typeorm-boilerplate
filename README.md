@@ -51,7 +51,7 @@ This boilerplate is made to quickly prototype backend applications. It comes wit
 
 ## Prerequisites
 
-### Non Docker
+### Non-Docker
 
 - Node.js 20+ (`brew`, `choco`, `apt-get`, or via [nodejs.org](https://nodejs.org/en/download/)).
 - MySQL/MariaDB available locally (XAMPP, Homebrew, Docker, etc.).

@@ -28,7 +28,10 @@ import { UsersModule } from './users/users.module';
         PORT: joi.number().default(3333),
         WEBTOKEN_ENCRYPTION_KEY: joi.string().required(),
         WEBTOKEN_EXPIRATION_TIME: joi.number().default(1800),
-        DB_TYPE: joi.string().default('mysql'),
+        DB_TYPE: joi
+          .string()
+          .valid('mysql', 'mariadb', 'postgres')
+          .default('mysql'),
         DB_USERNAME: joi.string().default('root'),
         DB_PASSWORD: joi.string().allow('').default(''),
         DB_HOST: joi.string().default('localhost'),
@@ -55,7 +58,6 @@ import { UsersModule } from './users/users.module';
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
-        entities: [join(__dirname, '/**/*.entity{.ts,.js}')],
         synchronize: configService.get('APP_ENV') === 'development',
         autoLoadEntities: true,
         logging: configService.get('APP_ENV') === 'development',

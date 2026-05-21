@@ -16,9 +16,14 @@ WORKDIR /usr/local/app
 ENV NODE_ENV=production
 ENV PORT=3333
 
-COPY --from=build /usr/local/app/dist/apps/api ./
-COPY package*.json ./
-RUN npm ci --omit=dev && npm cache clean --force
+RUN addgroup -S app && adduser -S -G app app
+
+COPY --from=build --chown=app:app /usr/local/app/dist/apps/api ./
+COPY --chown=app:app package*.json ./
+RUN npm ci --omit=dev && npm cache clean --force \
+  && chown -R app:app /usr/local/app
+
+USER app
 
 EXPOSE 3333
 

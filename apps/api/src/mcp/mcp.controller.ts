@@ -1,9 +1,9 @@
 import {
   All,
+  BadRequestException,
   Body,
   Controller,
   Get,
-  Param,
   Post,
   Query,
   Req,
@@ -52,6 +52,11 @@ export class McpController {
     @Query('serverId') serverId: string,
     @Query('uri') uri: string,
   ): Promise<McpToolInvocationResponse> {
+    if (!serverId || !uri) {
+      throw new BadRequestException(
+        'Both "serverId" and "uri" query parameters are required.',
+      );
+    }
     return this.gateway
       .readResource(serverId, uri)
       .then((content) => ({ content }));
@@ -74,7 +79,6 @@ export class McpController {
   async transport(
     @Req() req: FastifyRequest,
     @Res() reply: FastifyReply,
-    @Param() _params: unknown,
   ): Promise<void> {
     await this.server.handleTransportRequest(
       req.raw,

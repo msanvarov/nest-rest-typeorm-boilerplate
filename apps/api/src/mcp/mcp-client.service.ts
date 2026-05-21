@@ -1,6 +1,7 @@
 import {
   Injectable,
   Logger,
+  NotFoundException,
   OnModuleDestroy,
   OnModuleInit,
 } from '@nestjs/common';
@@ -93,7 +94,7 @@ export class McpClientService implements OnModuleInit, OnModuleDestroy {
   ): Promise<McpContentBlock[]> {
     const conn = this.connections.get(serverId);
     if (!conn) {
-      throw new Error(`Unknown remote MCP server: ${serverId}`);
+      throw new NotFoundException(`Unknown remote MCP server: ${serverId}`);
     }
     const result = await conn.client.callTool({ name, arguments: args });
     return (result.content ?? []) as McpContentBlock[];
@@ -105,7 +106,7 @@ export class McpClientService implements OnModuleInit, OnModuleDestroy {
   ): Promise<McpContentBlock[]> {
     const conn = this.connections.get(serverId);
     if (!conn) {
-      throw new Error(`Unknown remote MCP server: ${serverId}`);
+      throw new NotFoundException(`Unknown remote MCP server: ${serverId}`);
     }
     const result = await conn.client.readResource({ uri });
     return (result.contents ?? []).map((c) => ({

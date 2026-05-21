@@ -19,6 +19,12 @@
         "webpackConfig": "apps/api/webpack.config.js"
       },
       "configurations": {
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "inspect": true,
+          "sourceMap": true
+        },
         "production": {
           "optimization": true,
           "extractLicenses": true,

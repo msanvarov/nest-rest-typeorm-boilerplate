@@ -180,8 +180,9 @@ export class McpServerService implements OnModuleInit, OnModuleDestroy {
       },
     });
     this.toolHandlers.set('list-users', async (args) => {
-      const limit =
-        typeof args.limit === 'number' ? (args.limit as number) : 25;
+      const raw = Number(args.limit);
+      const parsed = Number.isFinite(raw) ? Math.trunc(raw) : 25;
+      const limit = Math.max(1, Math.min(parsed || 25, 200));
       const users = await this.usersService.list(limit);
       return JSON.stringify(
         users.map((u) => ({

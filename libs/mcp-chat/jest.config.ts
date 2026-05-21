@@ -2,7 +2,7 @@
 export default {
   displayName: 'mcp-chat',
   preset: '../../jest.preset.js',
-  setupFilesAfterEach: ['<rootDir>/src/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {},
   coverageDirectory: '../../coverage/libs/mcp-chat',
   transform: {
