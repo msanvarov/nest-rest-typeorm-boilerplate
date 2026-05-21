@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>nx-nest-angular-starter documentation</title>
+        <title>nest-rest-typeorm-boilerplate documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -78,7 +78,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="./" class="navbar-brand">nx-nest-angular-starter documentation</a>
+                    <a href="./" class="navbar-brand">nest-rest-typeorm-boilerplate documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -103,7 +103,7 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
 
-<p align="center">A progressive <a href="http://nodejs.org" target="blank">Node.js</a> framework for building efficient and scalable server-side applications, paired with an Angular workspace and a Model Context Protocol (MCP) module for AI workflows.</p>
+<p align="center">A progressive <a href="http://nodejs.org" target="blank">Node.js</a> framework for building efficient and scalable server-side applications, paired with TypeORM and a built-in Model Context Protocol (MCP) module for AI workflows.</p>
 
 <p align="center">
   <a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
@@ -127,12 +127,11 @@
 <li><a href="#open-api">Open API</a></li>
 <li><a href="#typeorm">TypeORM</a></li>
 <li><a href="#logs">Logs</a></li>
-<li><a href="#progress">Progress</a></li>
 <li><a href="#contribution">Contribution</a></li>
 </ol>
-<p>This repo was created with <a href="https://nx.dev/">Nx</a>.</p>
 <h2>Description</h2>
-<p>This boilerplate is made to quickly prototype backend applications. It comes with authentication, authorization, logging, CRUD features, database persistence, and a built-in Model Context Protocol (MCP) server + client out of the box. An Angular workspace ships alongside for a thin admin UI with an MCP chat preview.</p>
+<p>This boilerplate is made to quickly prototype backend applications. It comes with authentication, authorization, logging, CRUD features, MySQL/MariaDB persistence via TypeORM, and a built-in Model Context Protocol server + client out of the box.</p>
+<p>This revision is a flat, single-project Nest CLI app. The previous Nx + Angular workspace has been collapsed — <code>apps/</code>, <code>libs/</code>, and every <code>@nx/*</code> package are gone.</p>
 <h2>Stack</h2>
 <table class="table table-bordered compodoc-table">
 <thead>
@@ -147,12 +146,8 @@
 <td>Node.js 20+</td>
 </tr>
 <tr>
-<td>Monorepo</td>
-<td>Nx 21</td>
-</tr>
-<tr>
 <td>API</td>
-<td>NestJS 11 (Fastify adapter), TypeORM 0.3, Passport JWT, Swagger</td>
+<td>NestJS 11 (Fastify adapter), TypeORM 0.3, Passport JWT, CASL, Swagger</td>
 </tr>
 <tr>
 <td>AI / MCP</td>
@@ -163,12 +158,8 @@
 <td>MySQL / MariaDB (TypeORM supports Postgres, SQLite, MSSQL, MongoDB)</td>
 </tr>
 <tr>
-<td>UI</td>
-<td>Angular 19, Angular Material 19 (Material 3 theme), standalone components</td>
-</tr>
-<tr>
 <td>Tooling</td>
-<td>TypeScript 5.6, ESLint 9, Prettier 3, Jest 29, Cypress 13</td>
+<td>TypeScript 5.6, ESLint 9, Prettier 3, Jest 29, Nest CLI</td>
 </tr>
 </tbody>
 </table>
@@ -176,7 +167,7 @@
 <h3>Non-Docker</h3>
 <ul>
 <li>Node.js 20+ (<code>brew</code>, <code>choco</code>, <code>apt-get</code>, or via <a href="https://nodejs.org/en/download/">nodejs.org</a>).</li>
-<li>MySQL/MariaDB available locally (XAMPP, Homebrew, Docker, etc.).</li>
+<li>MySQL or MariaDB available locally (XAMPP, Homebrew, Docker, etc.).</li>
 </ul>
 <h3>Docker</h3>
 <ul>
@@ -188,23 +179,10 @@
 <li>Clone the repo: <code>git clone https://github.com/msanvarov/nest-rest-typeorm-boilerplate</code>.</li>
 <li>Install dependencies: <code>npm install</code>.</li>
 <li>Copy the env template: <code>cp .env.example .env</code> and fill in valid values.</li>
-<li>Start the API: <code>npm run start</code> (served on <a href="http://localhost:3333">http://localhost:3333</a>).</li>
+<li>Start the API: <code>npm run start:dev</code> (served on <a href="http://localhost:3333">http://localhost:3333</a>).</li>
 </ul>
-<details open>
-<summary>Optional deployment of the UI</summary>
-<br>
-
-<ul>
-<li>The Angular UI is at <code>apps/ui</code> and ships with an MCP chat preview at <code>/mcp</code>.</li>
-<li>Start it in a separate terminal: <code>npm run start:ui</code> (served on <a href="http://localhost:4200">http://localhost:4200</a>).</li>
-</ul>
-<blockquote>
-<p>In the docker deployment, the UI is automatically built and served by the API.</p>
-</blockquote>
-</details>
-
 <h3>Deploying with Docker</h3>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">docker-compose up -d</code></pre></div><p>The compose stack brings up the API behind an Nginx reverse proxy on <a href="http://localhost:80">http://localhost:80</a>.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">docker compose up -d</code></pre></div><p>This brings up the API on <a href="http://localhost:3333">http://localhost:3333</a> alongside a MySQL 8 container.</p>
 <h2>Environment Configuration</h2>
 <p>The API reads every env var from <code>.env</code>.</p>
 <ul>
@@ -212,7 +190,7 @@
 <li><strong>PORT</strong> — HTTP port; defaults to 3333.</li>
 <li><strong>WEBTOKEN_ENCRYPTION_KEY</strong> — random secret used to sign JWTs.</li>
 <li><strong>WEBTOKEN_EXPIRATION_TIME</strong> — seconds before a JWT expires (default 2400).</li>
-<li><strong>DB_TYPE</strong> — TypeORM connection type (<code>mysql</code>, <code>mariadb</code>, <code>postgres</code>, etc.).</li>
+<li><strong>DB_TYPE</strong> — TypeORM connection type (<code>mysql</code>, <code>mariadb</code>, <code>postgres</code>).</li>
 <li><strong>DB_USERNAME / DB_PASSWORD / DB_HOST / DB_PORT / DB_DATABASE</strong> — standard database credentials.</li>
 <li><strong>MCP_SERVER_NAME / MCP_SERVER_VERSION</strong> — identity reported by the local MCP server.</li>
 <li><strong>MCP_CLIENT_REMOTES</strong> — comma-separated list of external MCP server endpoints to connect to as a client (Streamable HTTP URLs).</li>
@@ -231,33 +209,23 @@
 <tbody>
 <tr>
 <td><code>McpServerService</code></td>
-<td><code>apps/api/src/mcp/mcp-server.service.ts</code></td>
-<td>In-process MCP server. Registers <code>list-users</code>, <code>get-user</code> tools and <code>mcp://nest/schema/users</code>, <code>mcp://nest/server-info</code> resources.</td>
+<td><code>src/mcp/mcp-server.service.ts</code></td>
+<td>In-process MCP server with TypeORM-backed user tools and schema resources.</td>
 </tr>
 <tr>
 <td><code>McpClientService</code></td>
-<td><code>apps/api/src/mcp/mcp-client.service.ts</code></td>
-<td>Connects to every endpoint in <code>MCP_CLIENT_REMOTES</code> on startup and mirrors their tools/resources/prompts.</td>
+<td><code>src/mcp/mcp-client.service.ts</code></td>
+<td>Connects to every endpoint in <code>MCP_CLIENT_REMOTES</code> and mirrors their inventory.</td>
 </tr>
 <tr>
 <td><code>McpGatewayService</code></td>
-<td><code>apps/api/src/mcp/mcp-gateway.service.ts</code></td>
-<td>Aggregates local + remote inventory, routes tool calls, and runs the deterministic chat preview.</td>
+<td><code>src/mcp/mcp-gateway.service.ts</code></td>
+<td>Unifies the local + remote inventory, routes invocations, runs the chat preview.</td>
 </tr>
 <tr>
 <td><code>McpController</code></td>
-<td><code>apps/api/src/mcp/mcp.controller.ts</code></td>
-<td>REST surface for the UI plus the native MCP Streamable HTTP transport.</td>
-</tr>
-<tr>
-<td><code>@starter/mcp-types</code></td>
-<td><code>libs/mcp-types</code></td>
-<td>TypeScript types shared with the Angular client.</td>
-</tr>
-<tr>
-<td><code>@starter/mcp-chat</code></td>
-<td><code>libs/mcp-chat</code></td>
-<td>Standalone Angular component, lazy-loaded under <code>/mcp</code> in the UI.</td>
+<td><code>src/mcp/mcp.controller.ts</code></td>
+<td>REST surface plus the native Streamable HTTP transport.</td>
 </tr>
 </tbody>
 </table>
@@ -294,62 +262,35 @@
 <tr>
 <td>ANY</td>
 <td><code>/api/v1/mcp/transport</code></td>
-<td>Native MCP Streamable HTTP endpoint for AI clients (Claude Desktop, Claude Code, mcp-cli, etc.).</td>
+<td>Native MCP Streamable HTTP endpoint for AI clients.</td>
 </tr>
 </tbody>
 </table>
 <h3>Connecting an external MCP client</h3>
-<p>Point a Streamable-HTTP-aware MCP client at <code>http://localhost:3333/api/v1/mcp/transport</code>. The server advertises <code>MCP_SERVER_NAME@MCP_SERVER_VERSION</code> and exposes the registered tools and resources.</p>
+<p>Point a Streamable-HTTP-aware MCP client (Claude Desktop, Claude Code, mcp-cli, etc.) at <code>http://localhost:3333/api/v1/mcp/transport</code>. The server advertises <code>MCP_SERVER_NAME@MCP_SERVER_VERSION</code> and exposes the registered tools and resources.</p>
 <h3>Consuming external MCP servers</h3>
-<p>Set <code>MCP_CLIENT_REMOTES</code> to a comma-separated list of Streamable HTTP URLs. On startup, the API connects to each, mirrors their inventory into <code>/api/v1/mcp/inventory</code>, and routes invocations through the same chat endpoint.</p>
-<h3>Chat preview</h3>
-<p>Visit <code>http://localhost:4200/mcp</code> in the UI. The preview lists every connected server, surfaces tools as chips, and lets you trigger them or chat in natural language. Built-in heuristics route phrases like &quot;list users&quot; or &quot;get user alice&quot; to the right tool — wire in your own LLM if you want full reasoning.</p>
+<p>Set <code>MCP_CLIENT_REMOTES</code> to a comma-separated list of Streamable HTTP URLs. On startup the API connects to each, mirrors their inventory into <code>/api/v1/mcp/inventory</code>, and routes invocations through the same <code>/api/v1/mcp/invoke</code> and <code>/api/v1/mcp/chat</code> endpoints.</p>
 <h2>Web Framework</h2>
-<p>The API uses <a href="https://github.com/fastify/fastify">Fastify</a> via <code>@nestjs/platform-fastify</code> for its performance characteristics. An Express variant lives on a <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/tree/express">separate branch</a>.</p>
+<p>The API uses <a href="https://github.com/fastify/fastify">Fastify</a> via <code>@nestjs/platform-fastify</code>. An Express variant lives on a <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/tree/express">separate branch</a>.</p>
 <h2>HTTP/2</h2>
 <p>Fastify supports HTTP/2 over HTTPS (h2) or plaintext (h2c). A working example with a self-signed certificate is on the <a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/tree/feat/http2">feat/http2 branch</a>.</p>
-<p>Generate a self-signed cert with OpenSSL:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">openssl req -x509 -newkey rsa:4096 -keyout api-key.pem -out api-cert.pem -days 365 -nodes</code></pre></div><blockquote>
-<p>Express can do HTTP/2 via the <a href="https://www.npmjs.com/package/spdy">spdy</a> library.</p>
-</blockquote>
-<h2>Database</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">openssl req -x509 -newkey rsa:4096 -keyout api-key.pem -out api-cert.pem -days 365 -nodes</code></pre></div><h2>Database</h2>
 <p>The boilerplate defaults to <strong>MySQL/MariaDB</strong>. TypeORM supports SQLite, Postgres, MongoDB, and MSSQL — change <code>DB_TYPE</code> and install the matching driver (e.g. <a href="https://www.npmjs.com/package/pg">pg</a> for Postgres).</p>
 <blockquote>
 <p>For MongoDB, mongoose tends to be a better fit. See the <a href="https://github.com/msanvarov/nest-rest-mongo-boilerplate">Nest + Mongoose boilerplate</a>.</p>
 </blockquote>
 <h2>Testing</h2>
 <h3>Docker</h3>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">docker start nest-rest-typeorm-api
-docker exec -it nest-rest-typeorm-api npm run test</code></pre></div><h3>Non-Docker</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">docker exec -it nest-rest-typeorm-api npm run test</code></pre></div><h3>Non-Docker</h3>
 <b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm run test</code></pre></div><h2>TypeDocs</h2>
 <p>The documentation site is published on <a href="https://msanvarov.github.io/nest-rest-typeorm-boilerplate/">GitHub Pages</a>.</p>
-<p>Generate locally with <code>npm run typedocs:api:start</code> (API) or <code>npm run typedocs:ui:start</code> (UI).</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm run typedocs:api:start</code></pre></div><h2>Open API</h2>
-<p>Swagger UI is served at <code>/api/v1/docs</code>. Configuration lives in <code>apps/api/src/main.ts</code>.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm run typedocs:start</code></pre></div><h2>Open API</h2>
+<p>Swagger UI is served at <code>/api/v1/docs</code>. Configuration lives in <code>src/main.ts</code>.</p>
 <h2>TypeORM</h2>
 <p>TypeORM is the persistence layer. See the <a href="https://typeorm.io/">official docs</a> for advanced usage.</p>
-<p>Connection config lives in <code>apps/api/src/app.module.ts</code>.</p>
+<p>Connection config lives in <code>src/app.module.ts</code>.</p>
 <h2>Logs</h2>
 <p>Winston is wired up via <code>nest-winston</code>. In development the API logs to the console with timestamps; in production it adds a JSON error file at <code>logs/error.log</code> and a daily-rotated archive under <code>logs/application-YYYY-MM-DD.log</code>.</p>
-<h2>Progress</h2>
-<table class="table table-bordered compodoc-table">
-<thead>
-<tr>
-<th align="right">Branches</th>
-<th align="left">Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="right"><a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate">main</a></td>
-<td align="left">stable</td>
-</tr>
-<tr>
-<td align="right"><a href="https://github.com/msanvarov/nest-rest-typeorm-boilerplate/branches">feat/*</a></td>
-<td align="left">wip</td>
-</tr>
-</tbody>
-</table>
 <h2>Contribution</h2>
 <p>PRs are appreciated.</p>
 <h2>License</h2>

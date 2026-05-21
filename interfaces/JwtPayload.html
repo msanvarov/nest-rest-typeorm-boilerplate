@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>nx-nest-angular-starter documentation</title>
+        <title>nest-rest-typeorm-boilerplate documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -78,7 +78,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">nx-nest-angular-starter documentation</a>
+                    <a href="../" class="navbar-brand">nest-rest-typeorm-boilerplate documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -140,7 +140,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>apps/api/src/auth/jwt.strategy.ts</code>
+            <code>src/auth/jwt.strategy.ts</code>
         </p>
 
 
@@ -311,10 +311,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     private readonly configService: ConfigService,
     private readonly usersService: UsersService,
   ) {
+    const secret &#x3D; configService.get&lt;string&gt;(&#x27;WEBTOKEN_ENCRYPTION_KEY&#x27;);
+    if (!secret) {
+      throw new Error(&#x27;WEBTOKEN_ENCRYPTION_KEY is not configured&#x27;);
+    }
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: configService.get&lt;string&gt;(&#x27;WEBTOKEN_ENCRYPTION_KEY&#x27;),
+      secretOrKey: secret,
     } satisfies StrategyOptionsWithoutRequest);
   }
 

@@ -116,7 +116,7 @@
   <li class="breadcrumb-item">Interfaces</li>
   <li class="breadcrumb-item"
   >
-  IPolicyHandler</li>
+  McpChatRequest</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -140,7 +140,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/casl/policy-handlers.ts</code>
+            <code>src/mcp/mcp.types.ts</code>
         </p>
 
 
@@ -152,17 +152,31 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <h6><b>Methods</b></h6>
+                            <h6><b>Properties</b></h6>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                    <a href="#handle" 
+                                            <span class="modifier">Optional</span>
+                                        <a href="#history" 
 >
-                                        handle
-                                    </a>
+                                            history
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#message" 
+>
+                                            message
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#toolCall" 
+>
+                                            toolCall
+                                        </a>
                                 </li>
                             </ul>
                         </td>
@@ -171,103 +185,203 @@
             </table>
         </section>
 
-            <section data-compodoc="block-methods">
-    
-    <h3 id="methods">
-        Methods
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="handle"></a>
-                    <span class="name">
-                        <span ><b>handle</b></span>
-                        <a href="#handle"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>handle(ability: <a href="../miscellaneous/typealiases.html#AppAbility" target="_self">AppAbility</a>)</code>
-                </td>
-            </tr>
 
 
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="7"
-                                    class="link-to-prism">src/casl/policy-handlers.ts:7</a></div>
-                        </td>
-                    </tr>
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="history"></a>
+                                        <span class="name "><b>history</b>
+                                            <a href="#history">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>history:         <code><a href="../interfaces/McpChatMessage.html" target="_self" >McpChatMessage[]</a></code>
+</code>
+                                    </td>
+                                </tr>
 
 
-            <tr>
-                <td class="col-md-4">
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/McpChatMessage.html" target="_self" >McpChatMessage[]</a></code>
 
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>ability</td>
-                                            <td>
-                                                            <code><a href="../miscellaneous/typealiases.html#AppAbility" target="_self" >AppAbility</a></code>
-                                            </td>
+                                        </td>
+                                    </tr>
 
-                                            <td>
-                                                    No
-                                            </td>
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
 
 
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
 
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="message"></a>
+                                        <span class="name "><b>message</b>
+                                            <a href="#message">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>message:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="toolCall"></a>
+                                        <span class="name "><b>toolCall</b>
+                                            <a href="#toolCall">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>toolCall:         <code><a href="../interfaces/McpToolInvocationRequest.html" target="_self" >McpToolInvocationRequest</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/McpToolInvocationRequest.html" target="_self" >McpToolInvocationRequest</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { UserActionsEnum } from &#x27;../shared/api-types&#x27;;
-
-import { User } from &#x27;../users/user.entity&#x27;;
-import { AppAbility } from &#x27;./casl.factory&#x27;;
-
-interface IPolicyHandler {
-  handle(ability: AppAbility): boolean;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface McpToolSummary {
+  name: string;
+  description?: string;
+  inputSchema?: Record&lt;string, unknown&gt;;
+  serverId: string;
 }
 
-type PolicyHandlerCallback &#x3D; (ability: AppAbility) &#x3D;&gt; boolean;
+export interface McpResourceSummary {
+  uri: string;
+  name?: string;
+  description?: string;
+  mimeType?: string;
+  serverId: string;
+}
 
-export type PolicyHandler &#x3D; IPolicyHandler | PolicyHandlerCallback;
+export interface McpPromptSummary {
+  name: string;
+  description?: string;
+  arguments?: Array&lt;{
+    name: string;
+    description?: string;
+    required?: boolean;
+  }&gt;;
+  serverId: string;
+}
 
-// Policy Handlers
+export interface McpServerInfo {
+  id: string;
+  name: string;
+  version?: string;
+  kind: &#x27;local&#x27; | &#x27;remote&#x27;;
+  endpoint?: string;
+  connected: boolean;
+}
 
-export class DeleteUserPolicyHandler implements IPolicyHandler {
-  handle(ability: AppAbility) {
-    return ability.can(UserActionsEnum.Delete, User);
-  }
+export interface McpInventory {
+  servers: McpServerInfo[];
+  tools: McpToolSummary[];
+  resources: McpResourceSummary[];
+  prompts: McpPromptSummary[];
+}
+
+export type McpContentBlock &#x3D;
+  | { type: &#x27;text&#x27;; text: string }
+  | { type: &#x27;image&#x27;; data: string; mimeType: string }
+  | {
+      type: &#x27;resource&#x27;;
+      resource: { uri: string; mimeType?: string; text?: string };
+    };
+
+export interface McpToolInvocationRequest {
+  serverId: string;
+  name: string;
+  arguments?: Record&lt;string, unknown&gt;;
+}
+
+export interface McpToolInvocationResponse {
+  isError?: boolean;
+  content: McpContentBlock[];
+}
+
+export interface McpChatMessage {
+  id: string;
+  role: &#x27;user&#x27; | &#x27;assistant&#x27; | &#x27;tool&#x27;;
+  text: string;
+  toolCall?: McpToolInvocationRequest;
+  toolResult?: McpToolInvocationResponse;
+  createdAt: string;
+}
+
+export interface McpChatRequest {
+  message: string;
+  toolCall?: McpToolInvocationRequest;
+  history?: McpChatMessage[];
+}
+
+export interface McpChatResponse {
+  reply: McpChatMessage;
+  suggestedTools?: McpToolSummary[];
 }
 </code></pre>
     </div>
@@ -306,7 +420,7 @@ export class DeleteUserPolicyHandler implements IPolicyHandler {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'IPolicyHandler.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'McpChatRequest.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

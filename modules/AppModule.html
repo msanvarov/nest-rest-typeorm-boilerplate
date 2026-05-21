@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>nx-nest-angular-starter documentation</title>
+        <title>nest-rest-typeorm-boilerplate documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -78,7 +78,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">nx-nest-angular-starter documentation</a>
+                    <a href="../" class="navbar-brand">nest-rest-typeorm-boilerplate documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -245,7 +245,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>apps/api/src/app.module.ts</code>
+            <code>src/app.module.ts</code>
         </p>
 
 
@@ -353,17 +353,18 @@ import { UsersModule } from &#x27;./users/users.module&#x27;;
     }),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
-      useFactory: (configService: ConfigService): TypeOrmModuleOptions &#x3D;&gt; ({
-        type: configService.get&lt;&#x27;mysql&#x27; | &#x27;mariadb&#x27; | &#x27;postgres&#x27;&gt;(&#x27;DB_TYPE&#x27;),
-        host: configService.get&lt;string&gt;(&#x27;DB_HOST&#x27;),
-        port: configService.get&lt;number&gt;(&#x27;DB_PORT&#x27;),
-        username: configService.get&lt;string&gt;(&#x27;DB_USERNAME&#x27;),
-        password: configService.get&lt;string&gt;(&#x27;DB_PASSWORD&#x27;),
-        database: configService.get&lt;string&gt;(&#x27;DB_DATABASE&#x27;),
-        synchronize: configService.get(&#x27;APP_ENV&#x27;) &#x3D;&#x3D;&#x3D; &#x27;development&#x27;,
-        autoLoadEntities: true,
-        logging: configService.get(&#x27;APP_ENV&#x27;) &#x3D;&#x3D;&#x3D; &#x27;development&#x27;,
-      }),
+      useFactory: (configService: ConfigService): TypeOrmModuleOptions &#x3D;&gt;
+        ({
+          type: configService.get&lt;string&gt;(&#x27;DB_TYPE&#x27;) as &#x27;mysql&#x27;,
+          host: configService.get&lt;string&gt;(&#x27;DB_HOST&#x27;),
+          port: configService.get&lt;number&gt;(&#x27;DB_PORT&#x27;),
+          username: configService.get&lt;string&gt;(&#x27;DB_USERNAME&#x27;),
+          password: configService.get&lt;string&gt;(&#x27;DB_PASSWORD&#x27;),
+          database: configService.get&lt;string&gt;(&#x27;DB_DATABASE&#x27;),
+          synchronize: configService.get(&#x27;APP_ENV&#x27;) &#x3D;&#x3D;&#x3D; &#x27;development&#x27;,
+          autoLoadEntities: true,
+          logging: configService.get(&#x27;APP_ENV&#x27;) &#x3D;&#x3D;&#x3D; &#x27;development&#x27;,
+        }) as TypeOrmModuleOptions,
     }),
     WinstonModule.forRootAsync({
       inject: [ConfigService],

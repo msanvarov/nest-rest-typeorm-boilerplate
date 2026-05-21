@@ -93,7 +93,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content entity">
+               <div class="content interface">
                    <div class="content-data">
 
 
@@ -105,9 +105,18 @@
 
 
 
+
+
+
+
+
+
+
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Entities</li>
-  <li class="breadcrumb-item" >UserRoles</li>
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  IMessage</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -131,239 +140,124 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/users/user-role.entity.ts</code>
+            <code>src/shared/api-types.ts</code>
         </p>
 
 
-            <p class="comment">
-                <h3>Description</h3>
-            </p>
-            <p class="comment">
-                <p>User Roles Entity Class</p>
-
-            </p>
 
 
-            <section data-compodoc="block-index">
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                    <span class="modifier"></span>
-                                <a href="#id" >id</a>
-                            </li>
-                            <li>
-                                    <span class="modifier"></span>
-                                <a href="#role" >role</a>
-                            </li>
-                            <li>
-                                    <span class="modifier"></span>
-                                <a href="#user" >user</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#message" 
+>
+                                            message
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
 
-
-
-
-
-        </tbody>
-    </table>
-</section>
 
             <section data-compodoc="block-properties">
-    
-    <h3 id="inputs">
-        Properties
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="id"></a>
-                    <span class="name">
-                            <span class="modifier"></span>
-                        <span ><b>id</b></span>
-                        <a href="#id"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="message"></a>
+                                        <span class="name "><b>message</b>
+                                            <a href="#message">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>message:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
 
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @PrimaryGeneratedColumn()<br />
-                        </code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/users/user-role.entity.ts:16</a></div>
-                        </td>
-                    </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>UUID column</p>
-</div>
-                </td>
-            </tr>
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="role"></a>
-                    <span class="name">
-                            <span class="modifier"></span>
-                        <span ><b>role</b></span>
-                        <a href="#role"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#UserRolesEnum" target="_self" >UserRolesEnum</a></code>
+                                        </td>
+                                    </tr>
 
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Column({type: &#x27;enum&#x27;, enum: UserRolesEnum, default: undefined})<br />
-                        </code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/users/user-role.entity.ts:27</a></div>
-                        </td>
-                    </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Column for role based access
-Beware this default app role will permit every created profile to delete other profiles</p>
-</div>
-                </td>
-            </tr>
 
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="user"></a>
-                    <span class="name">
-                            <span class="modifier"></span>
-                        <span ><b>user</b></span>
-                        <a href="#user"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../entitys/User.html" target="_self" >User</a></code>
 
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @ManyToOne(undefined, user &#x3D;&gt; user.roles, {onDelete: &#x27;CASCADE&#x27;})<br />
-                        </code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/users/user-role.entity.ts:35</a></div>
-                        </td>
-                    </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Column to represent a many to one relationship with the profile entity</p>
-</div>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
-</section>
+                        </tbody>
+                    </table>
+            </section>
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from &#x27;typeorm&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface IMessage {
+  message: string;
+}
 
-import { UserRolesEnum } from &#x27;../shared/api-types&#x27;;
+export interface IJWTResponseBody {
+  expiration: number;
+  expirationFormatted: string;
+  token: string;
+}
 
-import { User } from &#x27;./user.entity&#x27;;
+export interface IGenericMessageBody {
+  message: string;
+}
 
-/**
- * User Roles Entity Class
- */
-@Entity()
-export class UserRoles {
-  /**
-   * UUID column
-   */
-  @PrimaryGeneratedColumn()
-  id: number;
+export enum UserRolesEnum {
+  DEFAULT &#x3D; &#x27;DEFAULT&#x27;,
+  SUDO &#x3D; &#x27;SUDO&#x27;,
+}
 
-  /**
-   * Column for role based access
-   * Beware this default app role will permit every created profile to delete other profiles
-   */
-  @Column({
-    type: &#x27;enum&#x27;,
-    enum: UserRolesEnum,
-    default: UserRolesEnum.SUDO,
-  })
-  role: UserRolesEnum;
+export enum UserActionsEnum {
+  Manage &#x3D; &#x27;manage&#x27;,
+  Create &#x3D; &#x27;create&#x27;,
+  Read &#x3D; &#x27;read&#x27;,
+  Update &#x3D; &#x27;update&#x27;,
+  Delete &#x3D; &#x27;delete&#x27;,
+}
 
-  /**
-   * Column to represent a many to one relationship with the profile entity
-   */
-  @ManyToOne(() &#x3D;&gt; User, (user) &#x3D;&gt; user.roles, {
-    onDelete: &#x27;CASCADE&#x27;,
-  })
-  user: User;
+export interface IUser {
+  username: string;
+  gravatar?: string;
+  roles?: { role: UserRolesEnum }[];
+  name?: string;
+  authenticated: boolean;
+  token: string;
+}
+
+export interface IAuthRegisterPayload {
+  email: string;
+  username: string;
+  name: string;
+  password: string;
 }
 </code></pre>
     </div>
 </div>
-
-
-
-
-
-
-
 
 
 
@@ -397,8 +291,8 @@ export class UserRoles {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'entity';
-            var COMPODOC_CURRENT_PAGE_URL = 'UserRoles.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'IMessage.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
